@@ -1,0 +1,46 @@
+---
+import { firmData } from "../../data/firm";
+
+interface Props {
+  name: string;
+  title: string;
+  description: string;
+  image?: string;
+  url: string;
+  credentials: string[];
+}
+
+const { name, title, description, image, url, credentials } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name,
+  jobTitle: title,
+  description,
+  url,
+  ...(image && { image }),
+  worksFor: {
+    "@type": "Organization",
+    name: firmData.name,
+    url: firmData.url,
+  },
+  knowsAbout: [
+    "Employment Law",
+    "Unfair Dismissal",
+    "Workplace Discrimination",
+    "Fair Work Commission",
+    "Australian Employment Law",
+  ],
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "University of Sydney" },
+    { "@type": "CollegeOrUniversity", name: "University of Melbourne" },
+  ],
+  hasCredential: credentials.map((c) => ({
+    "@type": "EducationalOccupationalCredential",
+    name: c,
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

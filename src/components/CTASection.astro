@@ -1,0 +1,40 @@
+---
+import { firmData } from "../data/firm";
+
+interface Props {
+  heading: string;
+  subheading?: string;
+}
+
+const { heading, subheading } = Astro.props;
+---
+
+<section class="py-20 lg:py-28 border-t border-[var(--color-border)] bg-[var(--color-accent-subtle)] reveal">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 text-center">
+    <h2
+      class="text-3xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.1]"
+      style="font-family: var(--font-heading);"
+    >
+      {heading}
+    </h2>
+    {subheading && (
+      <p class="mt-5 text-[var(--color-text-secondary)] text-base lg:text-lg">
+        {subheading}
+      </p>
+    )}
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="/contact" class="btn btn-primary">
+        Book Free Consultation
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+      <a href={`tel:${firmData.secondaryPhoneClean}`} class="btn btn-outline">
+        {firmData.secondaryPhone}
+      </a>
+    </div>
+    <p class="mt-5 text-xs text-[var(--color-text-tertiary)]">
+      Free 30-minute consultation &middot; Response within 24 hours
+    </p>
+  </div>
+</section>

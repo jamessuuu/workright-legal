@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import PracticeAreaCard from "../../components/PracticeAreaCard.astro";
+import CTASection from "../../components/CTASection.astro";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
+import { firmData, practiceAreasList } from "../../data/firm";
+---
+
+<BaseLayout
+  title="Employment Law Services Sydney | WorkRight Legal"
+  description="Comprehensive employment law services in Sydney. Unfair dismissal, discrimination, contracts, bullying, redundancy, general protections. Free consultation."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Services", url: `${firmData.url}/services` },
+    ]}
+  />
+
+  <Hero
+    heading="Our services"
+    subheading="Specialist legal services dedicated exclusively to protecting employee rights across Greater Sydney."
+    variant="page"
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger-children">
+        {practiceAreasList.map((area, i) => (
+          <PracticeAreaCard
+            title={area.name}
+            description={area.shortDescription}
+            iconKey={area.iconKey}
+            slug={area.slug}
+            index={i}
+          />
+        ))}
+      </div>
+
+      <div class="mt-20 text-center reveal">
+        <p class="text-[var(--color-text-secondary)] max-w-lg mx-auto">
+          Not sure which service applies? Contact us for a free, confidential assessment.
+        </p>
+        <a href="/contact" class="btn btn-primary mt-6">Get Free Assessment</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Every case starts with a conversation" subheading="Tell us about your situation — no obligation." />
+</BaseLayout>

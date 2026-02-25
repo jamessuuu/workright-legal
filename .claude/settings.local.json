@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/james/sample-lawfirm\" && npx astro add tailwind react --yes 2>&1)",
+      "Bash(cd \"C:/Users/james/sample-lawfirm\" && npm install @astrojs/sitemap @astrojs/mdx motion gsap clsx 2>&1)",
+      "WebFetch(domain:law-firm-website-test-92bzcetc4-brian-hicks-projects.vercel.app)",
+      "Bash(cd \"C:/Users/james/sample-lawfirm\" && npm run build 2>&1)",
+      "Bash(cd \"C:/Users/james/sample-lawfirm\" && git init && git add -A && git status 2>&1)"
+    ]
+  }
+}

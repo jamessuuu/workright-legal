@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CTASection from "../components/CTASection.astro";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import PersonSchema from "../components/schema/PersonSchema.astro";
+import { firmData } from "../data/firm";
+import { getCollection } from "astro:content";
+
+const attorneys = await getCollection("attorneys");
+const sarah = attorneys[0];
+---
+
+<BaseLayout
+  title="About WorkRight Legal | Sydney Employment Lawyers"
+  description="Meet the team behind WorkRight Legal. Founded by Sarah Mitchell with 15+ years employment law experience."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "About", url: `${firmData.url}/about` },
+    ]}
+  />
+
+  <Hero
+    heading="A firm built on principle"
+    subheading="Founded to level the playing field between employees and employers."
+    variant="page"
+  />
+
+  <!-- Mission -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div class="reveal">
+          <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+            WorkRight Legal is a Sydney-based employment law firm exclusively dedicated to protecting employee rights. We don't represent employers — our entire focus is on ensuring workers are treated fairly, paid correctly, and have access to justice.
+          </p>
+          <p class="mt-5 text-lg text-[var(--color-text-secondary)] leading-relaxed">
+            Founded by Sarah Mitchell after dedicating her career to employee rights across New South Wales, WorkRight Legal was built on a simple belief: every worker deserves expert legal representation when they need it most.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 stagger-children">
+          {[
+            { title: "Client-Focused", desc: "Tailored approaches with your needs and wellbeing always the priority." },
+            { title: "Expert Knowledge", desc: "Deep Australian workplace law expertise from specialist practitioners." },
+            { title: "Results-Driven", desc: "Committed to optimal outcomes through strategic, thorough advocacy." },
+            { title: "Accessible", desc: "Free consultations, no win no fee, evening and weekend appointments." },
+          ].map((v) => (
+            <div class="p-6 rounded-xl border border-[var(--color-border)]">
+              <h3 class="font-semibold text-sm" style="font-family: var(--font-heading);">{v.title}</h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attorney -->
+  {sarah && (
+    <section class="py-20 lg:py-28 border-t border-[var(--color-border)]">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+        <PersonSchema
+          name={sarah.data.name}
+          title={sarah.data.title}
+          description={sarah.data.philosophy}
+          url={`${firmData.url}/about`}
+          credentials={sarah.data.credentials}
+        />
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+          <div class="reveal">
+            <div class="aspect-[3/4] rounded-xl overflow-hidden bg-[var(--color-surface-muted)]">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&q=80"
+                alt="Sarah Mitchell, Principal Lawyer at WorkRight Legal"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 reveal-delay-1">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+              <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">Principal Lawyer</span>
+            </div>
+
+            <h2 class="text-3xl lg:text-4xl font-bold tracking-tight" style="font-family: var(--font-heading);">
+              {sarah.data.name}
+            </h2>
+
+            <blockquote class="mt-6 text-lg text-[var(--color-text-secondary)] italic leading-relaxed border-l-2 border-[var(--color-accent)] pl-5">
+              &ldquo;{sarah.data.philosophy}&rdquo;
+            </blockquote>
+
+            <div class="mt-8">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--color-text-tertiary)] mb-4">Credentials</h3>
+              <ul class="space-y-2.5">
+                {sarah.data.credentials.map((c: string) => (
+                  <li class="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-1.5 shrink-0"></span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="/contact" class="btn btn-primary text-sm">Book Consultation</a>
+              <a href={`mailto:${firmData.email}`} class="btn btn-outline text-sm">Email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Features -->
+  <section class="py-20 lg:py-28 bg-[var(--color-surface-alt)]">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="max-w-xl mb-14 reveal">
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight" style="font-family: var(--font-heading);">
+          What sets us apart
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 stagger-children">
+        {[
+          { title: "Free initial consultations", desc: "Every case starts with a free, no-obligation discussion." },
+          { title: "No win, no fee", desc: "For eligible cases with strong prospects, so cost is never a barrier." },
+          { title: "Evening & weekend availability", desc: "Flexible appointment times because disputes don't stop at 5pm." },
+          { title: "Multilingual support", desc: "Interpreter services so language is never a barrier." },
+          { title: "CBD location", desc: "Level 12, 123 Pitt Street — easy access via public transport." },
+          { title: "Direct lawyer access", desc: "You work directly with your lawyer throughout your case." },
+        ].map((f) => (
+          <div>
+            <h3 class="font-semibold text-sm tracking-tight">{f.title}</h3>
+            <p class="mt-1.5 text-sm text-[var(--color-text-secondary)] leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Ready to discuss your case?"
+    subheading="Contact us today for a free, confidential consultation."
+  />
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import { firmData } from "../../data/firm";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": ["LegalService", "Organization"],
+  name: firmData.name,
+  description: firmData.tagline,
+  url: firmData.url,
+  telephone: firmData.phone,
+  email: firmData.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: firmData.address.street,
+    addressLocality: firmData.address.city,
+    addressRegion: firmData.address.state,
+    postalCode: firmData.address.postcode,
+    addressCountry: "AU",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: firmData.geo.lat,
+    longitude: firmData.geo.lng,
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "17:30",
+  },
+  areaServed: {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: firmData.geo.lat,
+      longitude: firmData.geo.lng,
+    },
+    geoRadius: "100000",
+  },
+  priceRange: "$$",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Employment Law Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Unfair Dismissal Claims" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Workplace Discrimination" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Employment Contract Review" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Workplace Bullying" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Redundancy & Severance" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "General Protections Claims" } },
+    ],
+  },
+  founder: {
+    "@type": "Person",
+    name: "Sarah Mitchell",
+    jobTitle: "Principal Lawyer",
+  },
+  foundingDate: String(firmData.foundedYear),
+  sameAs: [firmData.social.linkedin, firmData.social.facebook, firmData.social.twitter],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

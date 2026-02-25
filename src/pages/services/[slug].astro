@@ -1,0 +1,149 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import ProcessSteps from "../../components/ProcessSteps.astro";
+import FAQAccordion from "../../components/FAQAccordion.astro";
+import ServiceAreaGrid from "../../components/ServiceAreaGrid.astro";
+import CTASection from "../../components/CTASection.astro";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
+import LegalServiceSchema from "../../components/schema/LegalServiceSchema.astro";
+import FAQSchema from "../../components/schema/FAQSchema.astro";
+import { firmData } from "../../data/firm";
+import { getCollection, render } from "astro:content";
+
+const practiceImages: Record<string, string> = {
+  "unfair-dismissal-lawyers-sydney": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=500&fit=crop&q=80",
+  "workplace-discrimination-lawyers-sydney": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=500&fit=crop&q=80",
+  "employment-contract-lawyers-sydney": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=500&fit=crop&q=80",
+  "workplace-bullying-lawyers-sydney": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=500&fit=crop&q=80",
+  "redundancy-severance-lawyers-sydney": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=500&fit=crop&q=80",
+  "general-protections-lawyers-sydney": "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?w=1200&h=500&fit=crop&q=80",
+};
+
+export async function getStaticPaths() {
+  const areas = await getCollection("practiceAreas");
+  return areas.map((area) => ({
+    params: { slug: area.data.slug },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+const { data } = area;
+const { Content } = await render(area);
+---
+
+<BaseLayout title={data.metaTitle} description={data.metaDescription}>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Services", url: `${firmData.url}/services` },
+      { name: data.title, url: `${firmData.url}/services/${data.slug}` },
+    ]}
+  />
+  <LegalServiceSchema
+    name={`${data.title} - ${firmData.name}`}
+    description={data.description}
+    url={`${firmData.url}/services/${data.slug}`}
+  />
+  <FAQSchema faqs={data.faqs} />
+
+  <Hero
+    heading={data.heroHeading}
+    subheading={data.heroSubheading}
+    ctaText="Get Free Case Assessment"
+    ctaLink="/contact"
+    secondaryCtaText={`Call ${firmData.secondaryPhone}`}
+    secondaryCtaLink={`tel:${firmData.secondaryPhoneClean}`}
+    variant="practice"
+    showStats={true}
+    stats={data.stats}
+  />
+
+  <!-- Practice area image -->
+  <section class="py-10 lg:py-14">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="reveal-scale overflow-hidden rounded-xl aspect-[21/9] bg-[var(--color-surface-muted)]">
+        <img
+          src={practiceImages[data.slug] || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=500&fit=crop&q=80"}
+          alt={`${data.title} legal services in Sydney`}
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Facts -->
+  <section class="py-14 border-b border-[var(--color-border)]">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">Key Facts</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
+        {data.keyFacts.map((fact: string) => (
+          <li class="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-1.5 shrink-0"></span>
+            {fact}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="prose prose-neutral max-w-none reveal
+        prose-headings:font-[var(--font-heading)] prose-headings:tracking-tight prose-headings:font-semibold
+        prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+        prose-p:text-[var(--color-text-secondary)] prose-p:leading-relaxed
+        prose-li:text-[var(--color-text-secondary)]
+        prose-a:text-[var(--color-text)] prose-a:underline prose-a:underline-offset-4 prose-a:decoration-[var(--color-border)]"
+      >
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-16 lg:py-20 border-t border-[var(--color-border)]">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">Process</span>
+      </div>
+      <h2 class="text-2xl lg:text-3xl font-bold tracking-tight mb-10" style="font-family: var(--font-heading);">
+        Our {data.title.toLowerCase()} process
+      </h2>
+      <ProcessSteps steps={data.process} />
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="py-16 lg:py-20 bg-[var(--color-surface-alt)]">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">FAQ</span>
+      </div>
+      <h2 class="text-2xl lg:text-3xl font-bold tracking-tight mb-8" style="font-family: var(--font-heading);">
+        Frequently asked questions
+      </h2>
+      <FAQAccordion faqs={data.faqs} />
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="py-16 lg:py-20 border-t border-[var(--color-border)]">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
+      <h2 class="text-2xl lg:text-3xl font-bold tracking-tight mb-4" style="font-family: var(--font-heading);">
+        {data.title} lawyers across Sydney
+      </h2>
+      <p class="text-sm text-[var(--color-text-secondary)] mb-6">
+        Serving clients across Greater Sydney and surrounding areas within 100km of the CBD.
+      </p>
+      <ServiceAreaGrid areas={data.serviceAreas} />
+    </div>
+  </section>
+
+  <CTASection heading={data.ctaText} subheading="Contact us today for a free, confidential assessment of your case." />
+</BaseLayout>

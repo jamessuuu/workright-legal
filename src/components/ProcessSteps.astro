@@ -1,0 +1,43 @@
+---
+interface Props {
+  steps: {
+    step: number;
+    title: string;
+    description: string;
+    timeline: string;
+  }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="space-y-0 stagger-children">
+  {steps.map((step, i) => (
+    <div class="relative flex gap-6 lg:gap-8">
+      <!-- Timeline -->
+      <div class="flex flex-col items-center">
+        <div class="w-9 h-9 rounded-full border-2 border-[var(--color-text)] text-[var(--color-text)] flex items-center justify-center text-xs font-semibold shrink-0">
+          {String(step.step).padStart(2, "0")}
+        </div>
+        {i < steps.length - 1 && (
+          <div class="w-px flex-1 bg-[var(--color-border)] my-2"></div>
+        )}
+      </div>
+
+      <!-- Content -->
+      <div class="pb-10">
+        <div class="flex flex-wrap items-baseline gap-3">
+          <h3 class="text-base font-semibold" style="font-family: var(--font-heading);">
+            {step.title}
+          </h3>
+          <span class="text-xs text-[var(--color-text-tertiary)] font-medium">
+            {step.timeline}
+          </span>
+        </div>
+        <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
+          {step.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>

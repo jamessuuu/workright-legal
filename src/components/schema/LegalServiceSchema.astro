@@ -1,0 +1,38 @@
+---
+import { firmData } from "../../data/firm";
+
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+}
+
+const { name, description, url } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  name,
+  description,
+  url,
+  provider: {
+    "@type": "Organization",
+    name: firmData.name,
+    url: firmData.url,
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Sydney",
+    containedInPlace: { "@type": "State", name: "New South Wales" },
+  },
+  offers: {
+    "@type": "Offer",
+    name: "Free Initial Consultation",
+    price: "0",
+    priceCurrency: "AUD",
+    description: "Free 30-minute consultation to discuss your case",
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

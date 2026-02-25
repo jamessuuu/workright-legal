@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ContactForm from "../components/ContactForm";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import { firmData } from "../data/firm";
+---
+
+<BaseLayout
+  title="Contact WorkRight Legal | Free Consultation | Sydney Employment Lawyers"
+  description="Contact WorkRight Legal for a free 30-minute employment law consultation. Level 12, 123 Pitt Street, Sydney. Call (02) 9555 1234."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Contact", url: `${firmData.url}/contact` },
+    ]}
+  />
+
+  <Hero
+    heading="Get in touch"
+    subheading="Free 30-minute consultation to discuss your case and explore your options."
+    variant="page"
+  />
+
+  <section class="py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+        <!-- Form -->
+        <div class="lg:col-span-3 reveal">
+          <h2 class="text-xl font-semibold tracking-tight mb-6" style="font-family: var(--font-heading);">
+            Send us an enquiry
+          </h2>
+          <ContactForm client:visible />
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-2 reveal-delay-1">
+          <div class="rounded-xl border border-[var(--color-border)] p-7 space-y-5">
+            <h3 class="font-semibold text-sm">Contact information</h3>
+
+            <div class="space-y-4 text-sm">
+              <div>
+                <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Phone</p>
+                <a href={`tel:${firmData.phoneClean}`} class="font-medium" style="opacity: 1;">{firmData.phone}</a>
+                <br />
+                <a href={`tel:${firmData.secondaryPhoneClean}`} class="text-[var(--color-text-secondary)]" style="opacity: 1;">{firmData.secondaryPhone}</a>
+              </div>
+
+              <div>
+                <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Email</p>
+                <a href={`mailto:${firmData.email}`} class="text-[var(--color-text-secondary)]" style="opacity: 1;">{firmData.email}</a>
+              </div>
+
+              <div>
+                <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Address</p>
+                <p class="text-[var(--color-text-secondary)]">{firmData.address.full}</p>
+              </div>
+
+              <div>
+                <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Hours</p>
+                <p class="text-[var(--color-text-secondary)]">{firmData.hours}</p>
+                <p class="text-[var(--color-text-tertiary)] text-xs mt-1">Evening & weekend by arrangement</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 rounded-xl border border-[var(--color-border)] p-7">
+            <h4 class="font-semibold text-sm mb-2">Urgent matter?</h4>
+            <p class="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+              For time-sensitive matters (e.g., 21-day unfair dismissal deadline), call directly and mention urgency. We'll prioritise your consultation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

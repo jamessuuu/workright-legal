@@ -1,0 +1,98 @@
+---
+interface Props {
+  heading?: string;
+  subheading?: string;
+  videoId?: string;
+  posterUrl?: string;
+  variant?: "hero" | "inline" | "fullwidth";
+}
+
+const {
+  heading,
+  subheading,
+  videoId = "ntHRtf0GK8A",
+  posterUrl = "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1280&h=720&fit=crop&q=80",
+  variant = "inline",
+} = Astro.props;
+
+const isHero = variant === "hero";
+const isFullwidth = variant === "fullwidth";
+---
+
+<section class:list={[
+  "reveal",
+  isHero ? "py-0" : isFullwidth ? "py-16 lg:py-24" : "py-16 lg:py-24",
+]}>
+  <div class:list={[isFullwidth ? "" : "max-w-7xl mx-auto px-5 sm:px-8 lg:px-10"]}>
+    {(heading || subheading) && (
+      <div class="max-w-xl mb-10">
+        {heading && (
+          <h2
+            class="text-3xl lg:text-4xl font-bold tracking-tight"
+            style="font-family: var(--font-heading);"
+          >
+            {heading}
+          </h2>
+        )}
+        {subheading && (
+          <p class="mt-3 text-[var(--color-text-secondary)]">{subheading}</p>
+        )}
+      </div>
+    )}
+
+    <div class:list={[
+      "relative group cursor-pointer overflow-hidden bg-[var(--color-surface-muted)]",
+      isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl",
+    ]}
+      id="video-container"
+      data-video-id={videoId}
+    >
+      <!-- Poster image -->
+      <img
+        src={posterUrl}
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        loading="lazy"
+      />
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"></div>
+
+      <!-- Play button -->
+      <button
+        class="absolute inset-0 flex items-center justify-center z-10"
+        aria-label="Play video"
+        id="play-btn"
+      >
+        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <svg class="w-6 h-6 lg:w-7 lg:h-7 text-[var(--color-accent)] ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </div>
+      </button>
+
+      <!-- Video iframe (injected on click) -->
+      <div id="video-frame" class="absolute inset-0 hidden z-20"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const container = document.getElementById("video-container");
+  const playBtn = document.getElementById("play-btn");
+  const frameContainer = document.getElementById("video-frame");
+  const videoId = container?.dataset.videoId;
+
+  playBtn?.addEventListener("click", () => {
+    if (!frameContainer || !videoId) return;
+    frameContainer.innerHTML = `<iframe
+      src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
+      class="w-full h-full"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>`;
+    frameContainer.classList.remove("hidden");
+    playBtn.classList.add("hidden");
+  });
+</script>

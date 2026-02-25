@@ -1,0 +1,99 @@
+---
+import { firmData, practiceAreasList } from "../data/firm";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] mt-auto">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 lg:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="inline-flex items-baseline gap-0.5" style="opacity: 1;">
+          <span class="text-xl font-semibold tracking-tight" style="font-family: var(--font-heading);">
+            WorkRight
+          </span>
+          <span class="text-[var(--color-text-tertiary)] font-medium text-sm ml-1">Legal</span>
+        </a>
+        <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed mt-4 max-w-xs">
+          Specialist employment lawyers dedicated exclusively to protecting employee rights across Greater Sydney.
+        </p>
+      </div>
+
+      <!-- Practice Areas -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-5"
+          style="font-family: var(--font-body);"
+        >
+          Services
+        </h3>
+        <ul class="space-y-3">
+          {practiceAreasList.map((area) => (
+            <li>
+              <a href={`/services/${area.slug}`} class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200" style="opacity: 1;">
+                {area.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-5"
+          style="font-family: var(--font-body);"
+        >
+          Contact
+        </h3>
+        <div class="space-y-3 text-sm text-[var(--color-text-secondary)]">
+          <p>{firmData.address.full}</p>
+          <p>
+            <a href={`tel:${firmData.phoneClean}`} class="hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">
+              {firmData.phone}
+            </a>
+          </p>
+          <p>
+            <a href={`mailto:${firmData.email}`} class="hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">
+              {firmData.email}
+            </a>
+          </p>
+          <p class="text-[var(--color-text-tertiary)]">{firmData.hours}</p>
+        </div>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-5"
+          style="font-family: var(--font-body);"
+        >
+          Legal
+        </h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="/privacy-policy" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/terms-of-service" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">Terms of Service</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Disclaimer + Copyright -->
+    <div class="mt-16 pt-8 border-t border-[var(--color-border-subtle)]">
+      <p class="text-xs text-[var(--color-text-tertiary)] leading-relaxed max-w-3xl">
+        The information on this website is for general information purposes only.
+        Nothing on this site should be taken as legal advice for any individual case or situation.
+        This information is not intended to create, and receipt or viewing does not constitute,
+        a solicitor-client relationship.
+      </p>
+      <div class="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <p class="text-xs text-[var(--color-text-tertiary)]">
+          &copy; {year} {firmData.name}. All rights reserved.
+        </p>
+        <p class="text-xs text-[var(--color-text-tertiary)]">
+          ABN 00 000 000 000
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

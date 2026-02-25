@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  rating: number;
+  practiceArea: string;
+  content: string;
+}
+
+const { name, rating, practiceArea, content } = Astro.props;
+---
+
+<div class="relative p-7 rounded-xl border border-[var(--color-border)] bg-white">
+  <!-- Quote mark -->
+  <span class="text-5xl leading-none text-[var(--color-border)] font-serif absolute top-4 right-6" aria-hidden="true">
+    &ldquo;
+  </span>
+
+  <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed pr-8">
+    {content}
+  </p>
+
+  <div class="mt-6 pt-5 border-t border-[var(--color-border-subtle)] flex items-center justify-between">
+    <div>
+      <cite class="text-sm font-semibold text-[var(--color-text)] not-italic block">{name}</cite>
+      <span class="text-xs text-[var(--color-text-tertiary)]">{practiceArea}</span>
+    </div>
+    <div class="text-[var(--color-accent)] text-xs tracking-wider" aria-label={`${rating} out of 5 stars`}>
+      {"★".repeat(rating)}
+    </div>
+  </div>
+</div>
