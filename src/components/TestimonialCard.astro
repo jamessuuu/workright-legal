@@ -24,7 +24,7 @@ const { name, rating, practiceArea, content } = Astro.props;
       <cite class="text-sm font-semibold text-[var(--color-text)] not-italic block">{name}</cite>
       <span class="text-xs text-[var(--color-text-tertiary)]">{practiceArea}</span>
     </div>
-    <div class="text-[var(--color-accent)] text-xs tracking-wider" aria-label={`${rating} out of 5 stars`}>
+    <div class="text-[var(--color-accent)] text-xs tracking-wider" role="img" aria-label={`${rating} out of 5 stars`}>
       {"★".repeat(rating)}
     </div>
   </div>

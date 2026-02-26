@@ -8,9 +8,10 @@ interface Props {
   datePublished: string;
   authorName: string;
   image?: string;
+  wordCount?: number;
 }
 
-const { title, description, url, datePublished, authorName, image } = Astro.props;
+const { title, description, url, datePublished, authorName, image, wordCount } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
@@ -20,10 +21,12 @@ const schema = {
   url: url,
   datePublished: datePublished,
   dateModified: datePublished,
+  isAccessibleForFree: true,
+  ...(wordCount && { wordCount }),
   author: {
     "@type": "Person",
     name: authorName,
-    url: `${firmData.url}/about`,
+    url: `${firmData.url}/team/sarah-mitchell`,
   },
   publisher: {
     "@type": "Organization",

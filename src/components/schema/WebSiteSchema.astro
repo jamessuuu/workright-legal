@@ -13,6 +13,22 @@ const schema = {
     url: firmData.url,
   },
   inLanguage: "en-AU",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${firmData.url}/faq?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+  audience: {
+    "@type": "Audience",
+    audienceType: "Employees seeking employment law advice in Australia",
+    geographicArea: {
+      "@type": "AdministrativeArea",
+      name: "New South Wales, Australia",
+    },
+  },
 };
 ---
 

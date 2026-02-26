@@ -10,7 +10,7 @@ const avgRating = reviewCount > 0
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": ["LegalService", "Organization"],
+  "@type": ["LegalService", "LocalBusiness"],
   name: firmData.name,
   description: firmData.tagline,
   url: firmData.url,
@@ -18,6 +18,22 @@ const schema = {
   image: `${firmData.url}/og-default.svg`,
   telephone: firmData.phone,
   email: firmData.email,
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: firmData.phone,
+      contactType: "customer service",
+      availableLanguage: "English",
+      areaServed: "AU",
+    },
+    {
+      "@type": "ContactPoint",
+      email: firmData.email,
+      contactType: "customer service",
+    },
+  ],
+  paymentAccepted: "Cash, Credit Card, Bank Transfer, BPAY",
+  currenciesAccepted: "AUD",
   address: {
     "@type": "PostalAddress",
     streetAddress: firmData.address.street,

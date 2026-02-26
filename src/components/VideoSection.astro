@@ -62,7 +62,7 @@ const isFullwidth = variant === "fullwidth";
 
       <!-- Play button -->
       <button
-        class="absolute inset-0 flex items-center justify-center z-10"
+        class="absolute inset-0 flex items-center justify-center z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-xl"
         aria-label="Play video"
         id="play-btn"
       >
@@ -90,7 +90,7 @@ const isFullwidth = variant === "fullwidth";
     frameContainer.innerHTML = `<iframe
       src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
       class="w-full h-full border-0"
-      title="WorkRight Legal video"
+      title="${heading || 'WorkRight Legal'} video"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe>`;

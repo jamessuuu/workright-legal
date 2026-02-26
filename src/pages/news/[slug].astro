@@ -51,6 +51,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
     datePublished={data.date}
     authorName={data.author}
     image={data.image}
+    wordCount={wordCount}
   />
 
   <section class="pt-28 lg:pt-36 pb-10">
@@ -85,7 +86,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
         <div class="mt-6 flex items-center gap-3 pb-8 border-b border-[var(--color-border)]">
           <div>
-            <p class="text-sm font-medium">{data.author}</p>
+            <a href="/team/sarah-mitchell" class="text-sm font-medium hover:text-[var(--color-accent)] transition-colors">{data.author}</a>
             <p class="text-xs text-[var(--color-text-tertiary)]">Principal Lawyer</p>
           </div>
         </div>
@@ -99,7 +100,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
         <div class="overflow-hidden rounded-xl aspect-video bg-[var(--color-surface-muted)]">
           <img
             src={data.image}
-            alt=""
+            alt={data.title}
             class="w-full h-full object-cover"
             width="800"
             height="450"
@@ -148,7 +149,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
                   <div class="aspect-video overflow-hidden bg-[var(--color-surface-muted)]">
                     <img
                       src={related.data.image}
-                      alt=""
+                      alt={related.data.title}
                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       width="400"
                       height="225"

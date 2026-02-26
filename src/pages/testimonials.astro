@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
 import CTASection from "../components/CTASection.astro";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import ReviewSchema from "../components/schema/ReviewSchema.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
 import { firmData } from "../data/firm";
 import { getCollection } from "astro:content";
@@ -14,6 +15,13 @@ const featured = sorted[0];
 const rest = sorted.slice(1);
 
 const avgRating = (testimonials.reduce((sum, t) => sum + t.data.rating, 0) / testimonials.length).toFixed(1);
+
+const reviewData = testimonials.map((t) => ({
+  name: t.data.name,
+  rating: t.data.rating,
+  practiceArea: t.data.practiceArea,
+  content: t.body || "",
+}));
 ---
 
 <BaseLayout
@@ -26,6 +34,7 @@ const avgRating = (testimonials.reduce((sum, t) => sum + t.data.rating, 0) / tes
       { name: "Testimonials", url: `${firmData.url}/testimonials` },
     ]}
   />
+  <ReviewSchema reviews={reviewData} />
 
   <Hero
     heading="What our clients say"
