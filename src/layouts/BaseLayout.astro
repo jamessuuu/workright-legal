@@ -24,9 +24,10 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
+  hideMobileCTA?: boolean;
 }
 
-const { title, description, canonical, ogImage, noindex = false } = Astro.props;
+const { title, description, canonical, ogImage, noindex = false, hideMobileCTA = false } = Astro.props;
 const siteUrl = "https://workrightlegal.vercel.app";
 const pageUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
 const socialImage = ogImage || `${siteUrl}/og-default.svg`;
@@ -73,11 +74,12 @@ const socialImage = ogImage || `${siteUrl}/og-default.svg`;
       Skip to main content
     </a>
     <Header />
+    <div class="scroll-progress" aria-hidden="true"></div>
     <main id="main-content" class="flex-1" transition:animate="fade">
       <slot />
     </main>
     <Footer />
-    <StickyMobileCTA />
+    {!hideMobileCTA && <StickyMobileCTA />}
 
     <!-- Lenis smooth scroll -->
     <script>

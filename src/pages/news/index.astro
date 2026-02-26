@@ -70,6 +70,9 @@ const sortedPosts = posts.sort(
                     year: "numeric",
                   })}
                 </span>
+                <span class="text-xs text-[var(--color-text-tertiary)]">
+                  &middot; {Math.max(1, Math.ceil((post.body?.split(/\s+/).length || 0) / 200))} min read
+                </span>
               </div>
               <h2
                 class="text-lg font-semibold tracking-tight group-hover:text-[var(--color-accent)] transition-colors leading-snug"
@@ -77,7 +80,7 @@ const sortedPosts = posts.sort(
               >
                 {post.data.title}
               </h2>
-              <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed line-clamp-3">
+              <p class="mt-2 text-base text-[var(--color-text-secondary)] leading-relaxed line-clamp-3">
                 {post.data.description}
               </p>
               <div class="mt-4 flex items-center gap-2">

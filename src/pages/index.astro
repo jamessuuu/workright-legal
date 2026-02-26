@@ -8,6 +8,7 @@ import VideoSection from "../components/VideoSection.astro";
 import ImageSection from "../components/ImageSection.astro";
 import FAQAccordion from "../components/FAQAccordion.astro";
 import FAQSchema from "../components/schema/FAQSchema.astro";
+import AnimatedCounter from "../components/AnimatedCounter.astro";
 import { firmData, practiceAreasList } from "../data/firm";
 import { getCollection } from "astro:content";
 
@@ -54,14 +55,19 @@ const homeFaqs = [
     secondaryCtaText={`Call ${firmData.phone}`}
     secondaryCtaLink={`tel:${firmData.phoneClean}`}
     variant="home"
-    showStats={true}
-    stats={[
-      { value: "15+", label: "Years Experience" },
-      { value: "95%", label: "Success Rate" },
-      { value: "500+", label: "Clients Helped" },
-      { value: "$0", label: "Initial Consultation" },
-    ]}
   />
+
+  <!-- Animated stats -->
+  <section class="py-10 lg:py-14 border-b border-[var(--color-border)]">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <AnimatedCounter value="15+" label="Years Experience" />
+        <AnimatedCounter value="95%" label="Success Rate" />
+        <AnimatedCounter value="500+" label="Clients Helped" />
+        <AnimatedCounter value="$0" label="Initial Consultation" />
+      </div>
+    </div>
+  </section>
 
   <!-- Hero image -->
   <section class="py-12 lg:py-16">

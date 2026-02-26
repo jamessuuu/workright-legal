@@ -21,8 +21,12 @@ import { firmData, practiceAreasList } from "../data/firm";
 
       <!-- Desktop Nav -->
       <div class="hidden lg:flex items-center gap-10">
-        <a href="/about" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+        <a href="/about" class="nav-link text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
           About
+        </a>
+
+        <a href="/team" class="nav-link text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+          Team
         </a>
 
         <!-- Services Dropdown -->
@@ -58,11 +62,15 @@ import { firmData, practiceAreasList } from "../data/firm";
           </div>
         </div>
 
-        <a href="/news" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+        <a href="/news" class="nav-link text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
           News
         </a>
 
-        <a href="/contact" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+        <a href="/testimonials" class="nav-link text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+          Testimonials
+        </a>
+
+        <a href="/contact" class="nav-link text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
           Contact
         </a>
 
@@ -103,6 +111,7 @@ import { firmData, practiceAreasList } from "../data/firm";
     <div id="mobile-menu" class="lg:hidden hidden border-t border-[var(--color-border-subtle)] pb-6 pt-4">
       <div class="flex flex-col gap-0.5">
         <a href="/about" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">About</a>
+        <a href="/team" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Team</a>
         <a href="/services" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">All Services</a>
         {practiceAreasList.map((area) => (
           <a href={`/services/${area.slug}`} class="px-3 py-2 pl-7 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-muted)] rounded-lg text-sm transition-colors">
@@ -110,6 +119,7 @@ import { firmData, practiceAreasList } from "../data/firm";
           </a>
         ))}
         <a href="/news" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">News</a>
+        <a href="/testimonials" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Testimonials</a>
         <a href="/contact" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Contact</a>
         <div class="mt-4 px-3">
           <a href="/contact" class="btn btn-primary w-full text-center text-sm">Free Consultation</a>

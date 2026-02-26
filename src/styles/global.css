@@ -108,13 +108,40 @@ a {
   text-decoration: none;
 }
 
-/* Prose/body text links — subtle opacity hover */
+/* Nav/footer link underline animation */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Prose/body text links — animated underline */
 .prose a {
-  transition: opacity var(--duration-fast) var(--ease-in-out);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--duration-normal) var(--ease-out-expo);
 }
 
 .prose a:hover {
-  opacity: 0.7;
+  background-size: 100% 1px;
 }
 
 /* ==================
@@ -282,11 +309,27 @@ a {
   border-color: var(--color-primary);
 }
 
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+}
+
 .btn-primary:hover {
-  background-color: var(--color-accent);
+  background-color: transparent;
   border-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(139, 115, 85, 0.2);
+  box-shadow: 0 6px 24px rgba(139, 115, 85, 0.25);
   opacity: 1;
 }
 
@@ -353,11 +396,13 @@ details[open] .accordion-content {
 
 .card-hover {
   transition: all var(--duration-normal) var(--ease-out-expo);
+  border-left: 3px solid transparent;
 }
 
 .card-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+  border-left-color: var(--color-accent);
 }
 
 /* ==================
@@ -404,6 +449,45 @@ details[open] .accordion-content {
 }
 
 /* ==================
+   Scroll progress indicator
+   ================== */
+
+@keyframes scroll-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-muted) 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 49;
+  animation: scroll-progress 1s linear forwards;
+  animation-timeline: scroll();
+}
+
+@media (min-width: 1024px) {
+  .scroll-progress { top: 72px; }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress { display: none; }
+}
+
+/* ==================
+   Form focus enhancement
+   ================== */
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+/* ==================
    Reduced motion
    ================== */
 
@@ -414,6 +498,7 @@ details[open] .accordion-content {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .scroll-progress { display: none; }
   .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-fade, .reveal-scale,
   .hero-reveal, .stagger-children > * {
     opacity: 1 !important;

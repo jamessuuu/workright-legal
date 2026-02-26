@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import CTASection from "../components/CTASection.astro";
+import FAQSchema from "../components/schema/FAQSchema.astro";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import { firmData } from "../data/firm";
+import { getCollection } from "astro:content";
+
+const practiceAreas = await getCollection("practiceAreas");
+const sorted = practiceAreas.sort((a, b) => a.data.order - b.data.order);
+
+const generalFaqs = [
+  {
+    question: "Do I need an employment lawyer, or can I handle my case myself?",
+    answer: "While you can represent yourself at the Fair Work Commission, employment law is complex and employers almost always have legal representation. Having a specialist employment lawyer significantly improves your chances of a favourable outcome. At WorkRight Legal, we offer a free initial consultation so you can understand your options before deciding."
+  },
+  {
+    question: "How much does it cost to hire an employment lawyer in Sydney?",
+    answer: "At WorkRight Legal, your initial consultation is always free. For eligible unfair dismissal and general protections cases, we offer no win, no fee arrangements. For other matters such as contract review, we offer transparent fixed fees. We'll always discuss costs upfront so there are no surprises."
+  },
+  {
+    question: "What is the most common type of employment law case in Australia?",
+    answer: "Unfair dismissal is the most common employment law claim in Australia, with over 15,000 applications lodged with the Fair Work Commission each year. Other common cases include workplace bullying, discrimination, general protections claims, and disputes over redundancy and severance pay."
+  },
+  {
+    question: "How long does an employment law case typically take?",
+    answer: "Timelines vary depending on the type of case. Unfair dismissal claims typically resolve within 3 to 6 months. Workplace discrimination matters may take 6 to 12 months. Contract disputes can often be resolved within weeks. During your free consultation, we'll give you a realistic timeline for your specific situation."
+  },
+  {
+    question: "Can I make a claim if I've already resigned from my job?",
+    answer: "Yes, in some circumstances. If you were forced to resign due to intolerable working conditions, known as constructive dismissal, you may still be able to lodge an unfair dismissal claim. You may also have grounds for a general protections claim if your workplace rights were violated. Contact us within 21 days of your resignation for the best chance of success."
+  },
+];
+
+const allFaqs = [
+  ...generalFaqs,
+  ...sorted.flatMap((area) => area.data.faqs),
+];
+
+type FaqCategory = {
+  name: string;
+  slug?: string;
+  faqs: { question: string; answer: string }[];
+};
+
+const categories: FaqCategory[] = [
+  { name: "General", faqs: generalFaqs },
+  ...sorted.map((area) => ({
+    name: area.data.title,
+    slug: area.data.slug,
+    faqs: area.data.faqs,
+  })),
+];
+---
+
+<BaseLayout
+  title="Frequently Asked Questions | WorkRight Legal | Sydney Employment Lawyers"
+  description="Common questions about employment law in Australia. Unfair dismissal, discrimination, contracts, bullying, redundancy. Free answers from specialist lawyers."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "FAQ", url: `${firmData.url}/faq` },
+    ]}
+  />
+  <FAQSchema faqs={allFaqs} />
+
+  <Hero
+    heading="Frequently asked questions"
+    subheading="Answers to common employment law questions from our specialist team."
+    variant="page"
+  />
+
+  <Breadcrumb
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "FAQ", url: `${firmData.url}/faq` },
+    ]}
+  />
+
+  <!-- Quick nav -->
+  <section class="py-8 border-b border-[var(--color-border)]">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="flex flex-wrap gap-2">
+        {categories.map((cat) => (
+          <a
+            href={`#${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+            class="text-xs font-medium px-3 py-1.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+          >
+            {cat.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ categories -->
+  {categories.map((cat) => (
+    <section id={cat.name.toLowerCase().replace(/\s+/g, "-")} class="py-14 lg:py-18 border-b border-[var(--color-border-subtle)]">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+        <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center gap-3">
+            <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+            <h2
+              class="text-2xl font-bold tracking-tight"
+              style="font-family: var(--font-heading);"
+            >
+              {cat.name}
+            </h2>
+          </div>
+          {cat.slug && (
+            <a
+              href={`/services/${cat.slug}`}
+              class="text-xs font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+            >
+              View service &rarr;
+            </a>
+          )}
+        </div>
+        <FAQAccordion faqs={cat.faqs} />
+      </div>
+    </section>
+  ))}
+
+  <CTASection
+    heading="Still have questions?"
+    subheading="Contact us for a free, confidential consultation."
+  />
+</BaseLayout>

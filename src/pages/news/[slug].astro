@@ -31,6 +31,9 @@ const formattedDate = new Date(data.date).toLocaleDateString("en-AU", {
   month: "long",
   year: "numeric",
 });
+
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 ---
 
 <BaseLayout title={data.metaTitle} description={data.metaDescription}>
@@ -66,6 +69,7 @@ const formattedDate = new Date(data.date).toLocaleDateString("en-AU", {
             {data.category}
           </span>
           <span class="text-xs text-[var(--color-text-tertiary)]">{formattedDate}</span>
+          <span class="text-xs text-[var(--color-text-tertiary)]">&middot; {readingTime} min read</span>
         </div>
 
         <h1

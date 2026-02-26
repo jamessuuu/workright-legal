@@ -1,0 +1,70 @@
+---
+interface Props {
+  value: string;
+  label: string;
+}
+
+const { value, label } = Astro.props;
+
+// Parse the numeric part and prefix/suffix
+const match = value.match(/^([^\d]*)(\d+)(.*)$/);
+const prefix = match?.[1] || "";
+const number = match?.[2] || value;
+const suffix = match?.[3] || "";
+---
+
+<div class="counter-item" data-target={number} data-prefix={prefix} data-suffix={suffix}>
+  <div
+    class="text-3xl lg:text-4xl font-bold tracking-tight"
+    style="font-family: var(--font-heading);"
+  >
+    <span class="counter-value">{value}</span>
+  </div>
+  <div class="mt-1 text-sm text-[var(--color-text-tertiary)] font-medium">
+    {label}
+  </div>
+</div>
+
+<script>
+  function initCounters() {
+    const items = document.querySelectorAll(".counter-item");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          if (el.dataset.counted) return;
+          el.dataset.counted = "true";
+
+          const target = parseInt(el.dataset.target || "0", 10);
+          const prefix = el.dataset.prefix || "";
+          const suffix = el.dataset.suffix || "";
+          const display = el.querySelector(".counter-value");
+          if (!display) return;
+
+          const duration = 1500;
+          const start = performance.now();
+
+          function tick(now: number) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(eased * target);
+            display!.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+
+          requestAnimationFrame(tick);
+          observer.unobserve(el);
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+  }
+
+  initCounters();
+  document.addEventListener("astro:after-swap", initCounters);
+</script>
