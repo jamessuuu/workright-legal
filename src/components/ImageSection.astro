@@ -21,6 +21,14 @@ const aspectMap = {
   square: "aspect-square",
   portrait: "aspect-[3/4]",
 };
+
+const dimensionMap = {
+  video: { w: 1200, h: 675 },
+  wide: { w: 1200, h: 514 },
+  square: { w: 800, h: 800 },
+  portrait: { w: 600, h: 800 },
+};
+const dims = dimensionMap[aspectRatio];
 ---
 
 <figure class="reveal">
@@ -33,6 +41,8 @@ const aspectMap = {
       src={src}
       alt={alt}
       class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+      width={dims.w}
+      height={dims.h}
       loading="lazy"
       decoding="async"
     />

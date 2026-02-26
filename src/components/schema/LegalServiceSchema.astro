@@ -5,9 +5,22 @@ interface Props {
   name: string;
   description: string;
   url: string;
+  serviceAreas?: string[];
 }
 
-const { name, description, url } = Astro.props;
+const { name, description, url, serviceAreas } = Astro.props;
+
+const areaServed = serviceAreas && serviceAreas.length > 0
+  ? serviceAreas.map((area) => ({
+      "@type": "City" as const,
+      name: area,
+      containedInPlace: { "@type": "State" as const, name: "New South Wales" },
+    }))
+  : {
+      "@type": "City" as const,
+      name: "Sydney",
+      containedInPlace: { "@type": "State" as const, name: "New South Wales" },
+    };
 
 const schema = {
   "@context": "https://schema.org",
@@ -20,11 +33,7 @@ const schema = {
     name: firmData.name,
     url: firmData.url,
   },
-  areaServed: {
-    "@type": "City",
-    name: "Sydney",
-    containedInPlace: { "@type": "State", name: "New South Wales" },
-  },
+  areaServed,
   offers: {
     "@type": "Offer",
     name: "Free Initial Consultation",

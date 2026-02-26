@@ -21,7 +21,7 @@
 
   --color-text: #1a1a1a;
   --color-text-secondary: #5c5650;
-  --color-text-tertiary: #9c9490;
+  --color-text-tertiary: #736e6a;
 
   /* Warm stone accent — subtle warmth without color saturation */
   --color-accent: #8b7355;
@@ -106,10 +106,14 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Prose/body text links — subtle opacity hover */
+.prose a {
   transition: opacity var(--duration-fast) var(--ease-in-out);
 }
 
-a:hover {
+.prose a:hover {
   opacity: 0.7;
 }
 

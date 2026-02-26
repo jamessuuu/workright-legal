@@ -31,11 +31,11 @@ process:
     timeline: "Within 48 hours"
   - step: 2
     title: "Evidence Gathering"
-    description: "We help you compile and preserve critical evidence — emails, witness statements, performance reviews, medical records, and policy documents."
+    description: "We help you compile and preserve critical evidence - emails, witness statements, performance reviews, medical records, and policy documents."
     timeline: "1–2 weeks"
   - step: 3
     title: "Lodging Your Complaint"
-    description: "We prepare and lodge your complaint with the appropriate body — the Australian Human Rights Commission, Fair Work Commission, or Anti-Discrimination NSW."
+    description: "We prepare and lodge your complaint with the appropriate body - the Australian Human Rights Commission, Fair Work Commission, or Anti-Discrimination NSW."
     timeline: "1–2 weeks"
   - step: 4
     title: "Conciliation"
@@ -47,7 +47,7 @@ process:
     timeline: "6–18 months from conciliation"
 faqs:
   - question: "What is the difference between direct and indirect discrimination?"
-    answer: "Direct discrimination occurs when someone is treated less favourably because of a protected attribute — for example, not being promoted because of your age. Indirect discrimination occurs when a seemingly neutral workplace policy or practice disadvantages people with a particular protected attribute — such as requiring all staff to work weekends, which may disadvantage parents with family responsibilities."
+    answer: "Direct discrimination occurs when someone is treated less favourably because of a protected attribute - for example, not being promoted because of your age. Indirect discrimination occurs when a seemingly neutral workplace policy or practice disadvantages people with a particular protected attribute - such as requiring all staff to work weekends, which may disadvantage parents with family responsibilities."
   - question: "What compensation can I receive for workplace discrimination?"
     answer: "Compensation varies based on the severity and impact of the discrimination. Awards typically include economic loss (lost wages, benefits), non-economic loss (pain and suffering, humiliation), and special damages (medical expenses). Awards commonly range from $20,000 to $100,000+, with serious cases exceeding $200,000."
   - question: "What time limits apply to discrimination claims?"
@@ -86,7 +86,7 @@ serviceAreas:
 
 ## Sydney's Trusted Workplace Discrimination Lawyers
 
-Discrimination at work can be deeply damaging — affecting your career, your confidence, and your wellbeing. Australian law protects employees from discrimination based on a range of protected attributes, and employers who breach these protections can be held accountable.
+Discrimination at work can be deeply damaging - affecting your career, your confidence, and your wellbeing. Australian law protects employees from discrimination based on a range of protected attributes, and employers who breach these protections can be held accountable.
 
 At WorkRight Legal, we provide compassionate, confidential legal support to employees who have experienced workplace discrimination. We understand how difficult it can be to speak up, and we're here to guide you through every step of the process.
 

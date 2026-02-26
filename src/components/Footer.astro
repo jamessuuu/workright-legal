@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
       <!-- Brand -->
       <div>
-        <a href="/" class="inline-flex items-baseline gap-0.5" style="opacity: 1;">
+        <a href="/" class="inline-flex items-baseline gap-0.5">
           <span class="text-xl font-semibold tracking-tight" style="font-family: var(--font-heading);">
             WorkRight
           </span>
@@ -29,7 +29,7 @@ const year = new Date().getFullYear();
         <ul class="space-y-3">
           {practiceAreasList.map((area) => (
             <li>
-              <a href={`/services/${area.slug}`} class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200" style="opacity: 1;">
+              <a href={`/services/${area.slug}`} class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200">
                 {area.name}
               </a>
             </li>
@@ -47,12 +47,12 @@ const year = new Date().getFullYear();
         <div class="space-y-3 text-sm text-[var(--color-text-secondary)]">
           <p>{firmData.address.full}</p>
           <p>
-            <a href={`tel:${firmData.phoneClean}`} class="hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">
+            <a href={`tel:${firmData.phoneClean}`} class="hover:text-[var(--color-text)] transition-colors">
               {firmData.phone}
             </a>
           </p>
           <p>
-            <a href={`mailto:${firmData.email}`} class="hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">
+            <a href={`mailto:${firmData.email}`} class="hover:text-[var(--color-text)] transition-colors">
               {firmData.email}
             </a>
           </p>
@@ -60,19 +60,28 @@ const year = new Date().getFullYear();
         </div>
       </div>
 
-      <!-- Legal -->
+      <!-- Company -->
       <div>
         <h3 class="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-5"
           style="font-family: var(--font-body);"
         >
-          Legal
+          Company
         </h3>
         <ul class="space-y-3">
           <li>
-            <a href="/privacy-policy" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">Privacy Policy</a>
+            <a href="/about" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">About</a>
           </li>
           <li>
-            <a href="/terms-of-service" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors" style="opacity: 1;">Terms of Service</a>
+            <a href="/news" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">News</a>
+          </li>
+          <li>
+            <a href="/contact" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">Contact</a>
+          </li>
+          <li>
+            <a href="/privacy-policy" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/terms-of-service" class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">Terms of Service</a>
           </li>
         </ul>
       </div>
@@ -91,7 +100,7 @@ const year = new Date().getFullYear();
           &copy; {year} {firmData.name}. All rights reserved.
         </p>
         <p class="text-xs text-[var(--color-text-tertiary)]">
-          ABN 00 000 000 000
+          ABN 12 345 678 901
         </p>
       </div>
     </div>

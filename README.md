@@ -1,43 +1,67 @@
-# Astro Starter Kit: Minimal
+# WorkRight Legal - Employment Law Firm Website
+
+Premium website for WorkRight Legal, a Sydney-based specialist employment law firm dedicated exclusively to protecting employee rights.
+
+**Live:** [workrightlegal.vercel.app](https://workrightlegal.vercel.app)
+
+## Tech Stack
+
+- **Framework:** Astro 5 (static site generation with View Transitions)
+- **Styling:** Tailwind CSS v4 (CSS-first configuration, OKLCH color tokens)
+- **Interactive:** React 19 (islands architecture via `client:visible`)
+- **Fonts:** Cormorant Garamond (headings) + DM Sans (body)
+- **Smooth scroll:** Lenis
+- **Deployment:** Vercel
+
+## Pages
+
+| Route | Description |
+|---|---|
+| `/` | Homepage with hero, practice areas, testimonials, CTA |
+| `/about` | Firm mission, attorney profile, differentiators |
+| `/services` | All practice areas overview |
+| `/services/[slug]` | Individual practice area pages (6 total) |
+| `/contact` | Contact form + firm details |
+| `/privacy-policy` | Privacy policy |
+| `/terms-of-service` | Terms of service |
+
+## Architecture
+
+```
+src/
+├── components/        # Astro + React components
+│   ├── schema/        # JSON-LD structured data
+│   └── icons/         # SVG icon map
+├── content/           # Content Collections (MD)
+│   ├── practice-areas/  # 6 practice areas
+│   ├── attorneys/       # Attorney profiles
+│   └── testimonials/    # Client testimonials
+├── data/
+│   └── firm.ts        # Central firm configuration
+├── layouts/
+│   └── BaseLayout.astro
+├── pages/             # File-based routing
+└── styles/
+    └── global.css     # Tailwind v4 theme
+```
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install      # Install dependencies
+npm run dev      # Start dev server (localhost:4321)
+npm run build    # Production build to ./dist/
+npm run preview  # Preview production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Design
 
-## 🚀 Project Structure
+Minimal white aesthetic with monochrome palette. Scroll-driven reveal animations using CSS `animation-timeline: view()`. No JavaScript animation libraries - pure CSS motion.
 
-Inside of your Astro project, you'll see the following folders and files:
+## SEO
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- JSON-LD schema: Organization, LegalService, Person, FAQ, Breadcrumb
+- Open Graph + Twitter Card meta on all pages
+- robots.txt with AI crawler directives
+- llms.txt for AI citation optimization
+- Auto-generated sitemap via @astrojs/sitemap

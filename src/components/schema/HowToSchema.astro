@@ -1,0 +1,31 @@
+---
+import { firmData } from "../../data/firm";
+
+interface Props {
+  name: string;
+  description: string;
+  steps: {
+    step: number;
+    title: string;
+    description: string;
+    timeline: string;
+  }[];
+}
+
+const { name, description, steps } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name,
+  description,
+  step: steps.map((s) => ({
+    "@type": "HowToStep",
+    position: s.step,
+    name: s.title,
+    text: s.description,
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

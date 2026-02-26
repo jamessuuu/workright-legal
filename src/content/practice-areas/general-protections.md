@@ -3,12 +3,12 @@ title: "General Protections Claims"
 slug: "general-protections-lawyers-sydney"
 description: "Expert general protections claims lawyers in Sydney. Adverse action, workplace rights violations. Uncapped compensation."
 metaTitle: "General Protections Lawyers Sydney | Uncapped Compensation | WorkRight Legal"
-metaDescription: "Sydney's specialist general protections lawyers. Uncapped compensation — awards exceeding $200,000. 21-day deadline. Free case evaluation. Call (02) 9555 1234."
+metaDescription: "Sydney's specialist general protections lawyers. Uncapped compensation - awards exceeding $200,000. 21-day deadline. Free case evaluation. Call (02) 9555 1234."
 heroHeading: "Uncapped compensation for workplace rights violations."
 heroSubheading: "Don't let employers punish you for exercising your rights."
 icon: "🔒"
 order: 6
-ctaText: "Only 21 Days to Act — Get Free Case Evaluation"
+ctaText: "Only 21 Days to Act - Get Free Case Evaluation"
 stats:
   - value: "$200K+"
     label: "Potential Awards"
@@ -19,11 +19,11 @@ stats:
   - value: "21"
     label: "Days to Act"
 keyFacts:
-  - "Compensation for general protections claims is uncapped — unlike unfair dismissal (capped at 6 months' pay)"
+  - "Compensation for general protections claims is uncapped - unlike unfair dismissal (capped at 6 months' pay)"
   - "Awards and settlements regularly exceed $200,000"
   - "Employer penalties: up to $93,900 for individuals and $469,500 for companies"
   - "Strict 21-day deadline to lodge claims from date of dismissal"
-  - "Reverse onus of proof — employer must prove the prohibited reason was not a factor"
+  - "Reverse onus of proof - employer must prove the prohibited reason was not a factor"
   - "Covers constructive dismissal scenarios where you were forced to resign"
 process:
   - step: 1
@@ -32,7 +32,7 @@ process:
     timeline: "Same day or next day"
   - step: 2
     title: "Evidence Gathering"
-    description: "We help you preserve and compile evidence linking the adverse action to a prohibited reason — the key element of a successful claim."
+    description: "We help you preserve and compile evidence linking the adverse action to a prohibited reason - the key element of a successful claim."
     timeline: "1–2 weeks"
   - step: 3
     title: "Claim Lodging"
@@ -87,7 +87,7 @@ serviceAreas:
 
 ## Sydney's General Protections Specialists
 
-General protections claims are among the most powerful tools in Australian employment law. Unlike unfair dismissal claims — which are capped at 6 months' pay — general protections claims offer uncapped compensation, a reverse onus of proof, and the possibility of substantial penalties against employers who break the law.
+General protections claims are among the most powerful tools in Australian employment law. Unlike unfair dismissal claims - which are capped at 6 months' pay - general protections claims offer uncapped compensation, a reverse onus of proof, and the possibility of substantial penalties against employers who break the law.
 
 At WorkRight Legal, we have extensive experience with general protections claims and understand how to leverage their unique advantages to achieve the best possible outcomes for our clients.
 

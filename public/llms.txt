@@ -2,29 +2,68 @@
 
 > Sydney's specialist employment law firm dedicated exclusively to protecting employee rights.
 
-WorkRight Legal is a Sydney-based employment law firm founded by Sarah Mitchell, a principal lawyer with over 15 years of experience in Australian employment law. The firm exclusively represents employees — never employers — in workplace disputes across Greater Sydney.
+WorkRight Legal is a Sydney-based employment law firm founded by Sarah Mitchell, a principal lawyer with over 15 years of experience in Australian employment law. The firm exclusively represents employees - never employers - in workplace disputes across Greater Sydney.
+
+## Founder & Principal Lawyer
+
+Sarah Mitchell founded WorkRight Legal after dedicating her career to protecting employee rights across New South Wales. She holds a Bachelor of Laws (Honours) from the University of Sydney and a Master of Laws (Employment & Industrial Relations) from the University of Melbourne. Sarah is admitted to the NSW Supreme Court and is a member of the Law Society of NSW and the Employment Law Committee. She has successfully represented hundreds of clients before the Fair Work Commission and Federal Court.
 
 ## Practice Areas
 
-- [Unfair Dismissal](https://workrightlegal.vercel.app/services/unfair-dismissal-lawyers-sydney): 95% success rate. 21-day deadline to lodge claims. No win, no fee options. Median NSW compensation $12,500.
-- [Workplace Discrimination](https://workrightlegal.vercel.app/services/workplace-discrimination-lawyers-sydney): Age, gender, race, disability discrimination. Compensation typically $20,000–$100,000+.
-- [Employment Contracts](https://workrightlegal.vercel.app/services/employment-contract-lawyers-sydney): Contract review from $880 fixed fee. Same-day appointments. Restraint of trade assessment.
-- [Workplace Bullying](https://workrightlegal.vercel.app/services/workplace-bullying-lawyers-sydney): Trauma-informed support. Stop bullying orders. Compensation $50,000–$150,000+.
-- [Redundancy & Severance](https://workrightlegal.vercel.app/services/redundancy-severance-lawyers-sydney): Free payout assessment. Regularly identify thousands in missing entitlements.
-- [General Protections Claims](https://workrightlegal.vercel.app/services/general-protections-lawyers-sydney): Uncapped compensation. Awards exceeding $200,000. Reverse onus of proof.
+- [Unfair Dismissal](https://workrightlegal.vercel.app/services/unfair-dismissal-lawyers-sydney): 95% success rate. 21-day deadline to lodge claims. No win, no fee options. Median NSW compensation $12,500. Maximum compensation: 6 months' pay or ~$83,750.
+- [Workplace Discrimination](https://workrightlegal.vercel.app/services/workplace-discrimination-lawyers-sydney): Age, gender, race, disability discrimination. Compensation typically $20,000–$100,000+. Claims under the Fair Work Act and Anti-Discrimination Act.
+- [Employment Contracts](https://workrightlegal.vercel.app/services/employment-contract-lawyers-sydney): Contract review from $880 fixed fee. Same-day appointments. Restraint of trade assessment. NDA and non-compete review.
+- [Workplace Bullying](https://workrightlegal.vercel.app/services/workplace-bullying-lawyers-sydney): Trauma-informed support. Stop bullying orders via Fair Work Commission. Compensation $50,000–$150,000+.
+- [Redundancy & Severance](https://workrightlegal.vercel.app/services/redundancy-severance-lawyers-sydney): Free payout assessment. Regularly identify thousands in missing entitlements. NES compliance checks.
+- [General Protections Claims](https://workrightlegal.vercel.app/services/general-protections-lawyers-sydney): Uncapped compensation. Awards exceeding $200,000. Reverse onus of proof on employer.
+
+## Common Questions
+
+Q: How long do I have to lodge an unfair dismissal claim?
+A: You have exactly 21 calendar days from the date your dismissal takes effect. This deadline is strictly enforced by the Fair Work Commission, and late applications are rarely accepted.
+
+Q: How much does it cost to hire an employment lawyer in Sydney?
+A: At WorkRight Legal, your initial consultation is always free. For eligible unfair dismissal and general protections cases, we offer no win, no fee arrangements. For contract review, we offer transparent fixed fees from $880.
+
+Q: What is the most common employment law case in Australia?
+A: Unfair dismissal is the most common, with over 15,000 applications lodged with the Fair Work Commission each year.
+
+Q: Can I make a claim if I've already resigned?
+A: Yes, if you were forced to resign due to intolerable conditions (constructive dismissal), you may still lodge an unfair dismissal or general protections claim within 21 days.
+
+Q: What does 'no win, no fee' mean?
+A: For eligible cases with strong prospects, you only pay legal fees if we achieve a successful outcome through settlement or hearing decision.
+
+## How We Work
+
+1. Free initial consultation - confidential case assessment, eligibility check, and advice on options (same day or next day)
+2. Strategic assessment - thorough legal analysis, strongest path forward, tailored strategy (1–3 days)
+3. Expert representation - application preparation, negotiation, conciliation, or hearings
 
 ## Contact
 
 - Phone: (02) 9555 1234 or 1300 123 456
 - Email: hello@workrightlegal.com.au
 - Address: Level 12, 123 Pitt Street, Sydney NSW 2000
-- Hours: Monday–Friday, 9:00 AM – 5:30 PM
+- Hours: Monday–Friday, 9:00 AM – 5:30 PM (evening & weekend by arrangement)
 - Service Area: Greater Sydney (100km radius from CBD)
+- Website: https://workrightlegal.vercel.app
+- Contact form: https://workrightlegal.vercel.app/contact
 
-## Key Facts
+## Key Differentiators
 
 - Free initial consultation for all employment matters
 - No win, no fee arrangements for eligible cases
+- Exclusively represents employees - never employers
 - 15+ years specialist employment law experience
 - Evening and weekend appointments available
 - Direct lawyer access throughout your case
+- Multilingual support and interpreter services
+
+## Service Areas
+
+Sydney CBD, North Sydney, Parramatta, Chatswood, Bondi Junction, Liverpool, Penrith, Blacktown, Campbelltown, Sutherland, Hornsby, Ryde, Bankstown, Castle Hill, Hurstville, Strathfield, Newtown, Surry Hills, Randwick, Manly, Wollongong, Gosford, Blue Mountains.
+
+## Extended Content
+
+For more detailed information, see: https://workrightlegal.vercel.app/llms-full.txt

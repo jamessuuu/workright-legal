@@ -1,5 +1,12 @@
 ---
 import { firmData } from "../../data/firm";
+import { getCollection } from "astro:content";
+
+const testimonials = await getCollection("testimonials");
+const reviewCount = testimonials.length;
+const avgRating = reviewCount > 0
+  ? (testimonials.reduce((sum, t) => sum + t.data.rating, 0) / reviewCount).toFixed(1)
+  : "5.0";
 
 const schema = {
   "@context": "https://schema.org",
@@ -7,6 +14,8 @@ const schema = {
   name: firmData.name,
   description: firmData.tagline,
   url: firmData.url,
+  logo: `${firmData.url}/favicon.svg`,
+  image: `${firmData.url}/og-default.svg`,
   telephone: firmData.phone,
   email: firmData.email,
   address: {
@@ -56,7 +65,16 @@ const schema = {
     jobTitle: "Principal Lawyer",
   },
   foundingDate: String(firmData.foundedYear),
-  sameAs: [firmData.social.linkedin, firmData.social.facebook, firmData.social.twitter],
+  ...(reviewCount > 0 && {
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: avgRating,
+      reviewCount: String(reviewCount),
+      bestRating: "5",
+      worstRating: "1",
+    },
+  }),
+  sameAs: [firmData.social.linkedin, firmData.social.facebook, firmData.social.twitter].filter(Boolean),
 };
 ---
 

@@ -9,7 +9,7 @@ import { firmData, practiceAreasList } from "../data/firm";
   <nav class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10" aria-label="Main navigation">
     <div class="flex items-center justify-between h-16 lg:h-[72px]">
       <!-- Logo -->
-      <a href="/" class="flex items-baseline gap-0.5 group" style="opacity: 1;">
+      <a href="/" class="flex items-baseline gap-0.5 group">
         <span
           class="text-xl lg:text-2xl font-semibold tracking-tight"
           style="font-family: var(--font-heading);"
@@ -21,27 +21,36 @@ import { firmData, practiceAreasList } from "../data/firm";
 
       <!-- Desktop Nav -->
       <div class="hidden lg:flex items-center gap-10">
-        <a href="/about" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300" style="opacity: 1;">
+        <a href="/about" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
           About
         </a>
 
         <!-- Services Dropdown -->
-        <div class="relative group">
-          <a href="/services" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300 inline-flex items-center gap-1" style="opacity: 1;">
+        <div class="relative group" id="services-dropdown">
+          <a
+            href="/services"
+            class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300 inline-flex items-center gap-1"
+                       aria-expanded="false"
+            aria-controls="services-panel"
+          >
             Services
-            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </a>
-          <div class="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <div
+            id="services-panel"
+            class="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300"
+            role="menu"
+          >
             <div class="bg-white rounded-xl shadow-lg border border-[var(--color-border)] py-2 w-64">
               {practiceAreasList.map((area) => (
                 <a
                   href={`/services/${area.slug}`}
-                  class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] transition-colors duration-200"
-                  style="opacity: 1;"
+                  class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] focus:bg-[var(--color-surface-muted)] focus:text-[var(--color-text)] focus:outline-none transition-colors duration-200"
+                                   role="menuitem"
                 >
-                  <span class="w-1 h-1 rounded-full bg-[var(--color-accent-muted)] group-hover:bg-[var(--color-accent)] shrink-0"></span>
+                  <span class="w-1 h-1 rounded-full bg-[var(--color-accent-muted)] shrink-0"></span>
                   <span>{area.name}</span>
                 </a>
               ))}
@@ -49,13 +58,17 @@ import { firmData, practiceAreasList } from "../data/firm";
           </div>
         </div>
 
-        <a href="/contact" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300" style="opacity: 1;">
+        <a href="/news" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
+          News
+        </a>
+
+        <a href="/contact" class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] text-sm font-medium tracking-wide transition-colors duration-300">
           Contact
         </a>
 
         <div class="h-5 w-px bg-[var(--color-border)]"></div>
 
-        <a href={`tel:${firmData.phoneClean}`} class="text-sm font-medium text-[var(--color-text)] tracking-tight" style="opacity: 1;">
+        <a href={`tel:${firmData.phoneClean}`} class="text-sm font-medium text-[var(--color-text)] tracking-tight">
           {firmData.phone}
         </a>
 
@@ -74,6 +87,7 @@ import { firmData, practiceAreasList } from "../data/firm";
           class="p-2 text-[var(--color-text)] hover:text-[var(--color-text-secondary)] transition-colors"
           aria-label="Toggle menu"
           aria-expanded="false"
+          aria-controls="mobile-menu"
         >
           <svg class="w-5 h-5 menu-open" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -88,14 +102,15 @@ import { firmData, practiceAreasList } from "../data/firm";
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="lg:hidden hidden border-t border-[var(--color-border-subtle)] pb-6 pt-4">
       <div class="flex flex-col gap-0.5">
-        <a href="/about" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors" style="opacity: 1;">About</a>
-        <a href="/services" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors" style="opacity: 1;">All Services</a>
+        <a href="/about" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">About</a>
+        <a href="/services" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">All Services</a>
         {practiceAreasList.map((area) => (
-          <a href={`/services/${area.slug}`} class="px-3 py-2 pl-7 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-muted)] rounded-lg text-sm transition-colors" style="opacity: 1;">
+          <a href={`/services/${area.slug}`} class="px-3 py-2 pl-7 text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-muted)] rounded-lg text-sm transition-colors">
             {area.name}
           </a>
         ))}
-        <a href="/contact" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors" style="opacity: 1;">Contact</a>
+        <a href="/news" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">News</a>
+        <a href="/contact" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Contact</a>
         <div class="mt-4 px-3">
           <a href="/contact" class="btn btn-primary w-full text-center text-sm">Free Consultation</a>
         </div>
@@ -107,16 +122,53 @@ import { firmData, practiceAreasList } from "../data/firm";
 <div class="h-16 lg:h-[72px]"></div>
 
 <script>
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  const openIcon = btn?.querySelector(".menu-open");
-  const closeIcon = btn?.querySelector(".menu-close");
+  function initHeader() {
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const openIcon = btn?.querySelector(".menu-open");
+    const closeIcon = btn?.querySelector(".menu-close");
 
-  btn?.addEventListener("click", () => {
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!expanded));
-    menu?.classList.toggle("hidden");
-    openIcon?.classList.toggle("hidden");
-    closeIcon?.classList.toggle("hidden");
-  });
+    function closeMobileMenu() {
+      if (!btn || !menu) return;
+      btn.setAttribute("aria-expanded", "false");
+      menu.classList.add("hidden");
+      openIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    }
+
+    btn?.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      if (expanded) {
+        closeMobileMenu();
+      } else {
+        btn.setAttribute("aria-expanded", "true");
+        menu?.classList.remove("hidden");
+        openIcon?.classList.add("hidden");
+        closeIcon?.classList.remove("hidden");
+      }
+    });
+
+    // Close mobile menu on link click (View Transitions keep header persistent)
+    menu?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => closeMobileMenu());
+    });
+
+    // Close mobile menu on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeMobileMenu();
+        // Also blur out of desktop dropdown
+        const active = document.activeElement as HTMLElement;
+        if (active?.closest("#services-dropdown")) {
+          active.blur();
+        }
+      }
+    });
+
+    // Close on View Transition navigation
+    document.addEventListener("astro:before-swap", () => closeMobileMenu());
+  }
+
+  initHeader();
+  document.addEventListener("astro:after-swap", initHeader);
 </script>

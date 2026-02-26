@@ -1,0 +1,9 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#737373"/>
+  <text x="100" y="260" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="#fafafa" letter-spacing="-1">WorkRight Legal</text>
+  <text x="100" y="330" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#a3a3a3" letter-spacing="0.5">Specialist Employment Lawyers — Sydney</text>
+  <line x1="100" y1="370" x2="200" y2="370" stroke="#737373" stroke-width="1"/>
+  <text x="100" y="420" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#737373">Unfair Dismissal · Discrimination · Contracts · Bullying · Redundancy</text>
+  <text x="100" y="540" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#525252">workrightlegal.vercel.app</text>
+</svg>

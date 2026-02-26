@@ -55,4 +55,19 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { practiceAreas, attorneys, testimonials };
+const news = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    date: z.string(),
+    author: z.string(),
+    category: z.string(),
+    image: z.string().optional(),
+    metaTitle: z.string(),
+    metaDescription: z.string(),
+  }),
+});
+
+export const collections = { practiceAreas, attorneys, testimonials, news };

@@ -35,11 +35,11 @@ process:
     timeline: "1–2 weeks"
   - step: 3
     title: "Strategic Options Assessment"
-    description: "We develop a tailored strategy based on your goals — whether that's stopping the bullying, obtaining compensation, negotiating an exit, or all three."
+    description: "We develop a tailored strategy based on your goals - whether that's stopping the bullying, obtaining compensation, negotiating an exit, or all three."
     timeline: "Ongoing"
   - step: 4
     title: "Taking Action"
-    description: "We pursue the most appropriate legal pathway — stop bullying orders, general protections claims, discrimination complaints, or negotiated outcomes."
+    description: "We pursue the most appropriate legal pathway - stop bullying orders, general protections claims, discrimination complaints, or negotiated outcomes."
     timeline: "Varies by pathway"
   - step: 5
     title: "Resolution & Recovery"
@@ -55,7 +55,7 @@ faqs:
   - question: "What evidence do I need to prove workplace bullying?"
     answer: "Keep detailed records of incidents including dates, times, witnesses, and what was said or done. Save emails, text messages, and written communications. Obtain medical evidence from your GP or psychologist documenting the impact on your health. Copies of workplace policies and any internal complaints are also valuable."
   - question: "What's the difference between bullying and reasonable management action?"
-    answer: "Reasonable management action carried out in a reasonable manner — such as performance management, setting work tasks, or directing how work is done — is not workplace bullying, even if it causes stress. However, if management action is carried out unreasonably (for example, public humiliation during a performance review), it may cross the line into bullying."
+    answer: "Reasonable management action carried out in a reasonable manner - such as performance management, setting work tasks, or directing how work is done - is not workplace bullying, even if it causes stress. However, if management action is carried out unreasonably (for example, public humiliation during a performance review), it may cross the line into bullying."
   - question: "Should I make an internal complaint before seeking legal help?"
     answer: "Not necessarily. While internal complaints can sometimes resolve issues quickly, they can also alert the bully and lead to retaliation if not handled properly. We can advise whether an internal complaint is appropriate for your situation before you take that step."
 serviceAreas:
@@ -86,7 +86,7 @@ serviceAreas:
 
 ## Compassionate Workplace Bullying Lawyers in Sydney
 
-Workplace bullying can devastate your mental health, your career, and your life. If you're experiencing repeated unreasonable behaviour at work, you have legal options — and you don't have to face them alone.
+Workplace bullying can devastate your mental health, your career, and your life. If you're experiencing repeated unreasonable behaviour at work, you have legal options - and you don't have to face them alone.
 
 At WorkRight Legal, we take a compassionate, trauma-informed approach to workplace bullying cases. We understand the courage it takes to speak up, and we provide safe, confidential support throughout the entire process.
 

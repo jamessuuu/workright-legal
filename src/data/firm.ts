@@ -21,9 +21,9 @@ export const firmData = {
   domain: "workrightlegal.vercel.app",
   url: "https://workrightlegal.vercel.app",
   social: {
-    linkedin: "#",
-    facebook: "#",
-    twitter: "#",
+    linkedin: "",
+    facebook: "",
+    twitter: "",
   },
   geo: {
     lat: -33.8688,

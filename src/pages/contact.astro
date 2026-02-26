@@ -42,19 +42,31 @@ import { firmData } from "../data/firm";
             <div class="space-y-4 text-sm">
               <div>
                 <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Phone</p>
-                <a href={`tel:${firmData.phoneClean}`} class="font-medium" style="opacity: 1;">{firmData.phone}</a>
+                <a href={`tel:${firmData.phoneClean}`} class="font-medium">{firmData.phone}</a>
                 <br />
-                <a href={`tel:${firmData.secondaryPhoneClean}`} class="text-[var(--color-text-secondary)]" style="opacity: 1;">{firmData.secondaryPhone}</a>
+                <a href={`tel:${firmData.secondaryPhoneClean}`} class="text-[var(--color-text-secondary)]">{firmData.secondaryPhone}</a>
               </div>
 
               <div>
                 <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Email</p>
-                <a href={`mailto:${firmData.email}`} class="text-[var(--color-text-secondary)]" style="opacity: 1;">{firmData.email}</a>
+                <a href={`mailto:${firmData.email}`} class="text-[var(--color-text-secondary)]">{firmData.email}</a>
               </div>
 
               <div>
                 <p class="text-[var(--color-text-tertiary)] text-xs font-medium uppercase tracking-wider mb-1">Address</p>
                 <p class="text-[var(--color-text-secondary)]">{firmData.address.full}</p>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(firmData.address.full)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
+                                 >
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Get directions
+                </a>
               </div>
 
               <div>

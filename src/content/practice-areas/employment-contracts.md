@@ -86,7 +86,7 @@ serviceAreas:
 
 ## Expert Employment Contract Lawyers in Sydney
 
-Your employment contract is one of the most important documents you'll sign — it governs your rights, obligations, pay, benefits, and what happens if the relationship ends. Don't leave thousands of dollars, or your career rights, on the table.
+Your employment contract is one of the most important documents you'll sign - it governs your rights, obligations, pay, benefits, and what happens if the relationship ends. Don't leave thousands of dollars, or your career rights, on the table.
 
 At WorkRight Legal, we review hundreds of employment contracts every year. Our specialist focus means we know exactly what to look for, what's negotiable, and how to protect your interests.
 
@@ -96,4 +96,4 @@ We offer comprehensive contract services including line-by-line contract review 
 
 ## Why Choose WorkRight Legal
 
-We focus exclusively on employment law and review hundreds of contracts every year. Our fast turnaround times mean same-day appointments for urgent matters and detailed reports within 2–3 business days. We explain everything in clear, simple language so you fully understand what you're signing. Our strong negotiation skills regularly secure substantial improvements for our clients — many recoup their fees many times over from the improvements we negotiate. Transparent fixed fees from $880 to $1,650 mean no surprises.
+We focus exclusively on employment law and review hundreds of contracts every year. Our fast turnaround times mean same-day appointments for urgent matters and detailed reports within 2–3 business days. We explain everything in clear, simple language so you fully understand what you're signing. Our strong negotiation skills regularly secure substantial improvements for our clients - many recoup their fees many times over from the improvements we negotiate. Transparent fixed fees from $880 to $1,650 mean no surprises.

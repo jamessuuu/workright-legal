@@ -6,6 +6,8 @@ import TestimonialCard from "../components/TestimonialCard.astro";
 import CTASection from "../components/CTASection.astro";
 import VideoSection from "../components/VideoSection.astro";
 import ImageSection from "../components/ImageSection.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import FAQSchema from "../components/schema/FAQSchema.astro";
 import { firmData, practiceAreasList } from "../data/firm";
 import { getCollection } from "astro:content";
 
@@ -14,6 +16,29 @@ const testimonialData = testimonials.map((t) => ({
   ...t,
   renderedBody: t.body || "",
 }));
+
+const homeFaqs = [
+  {
+    question: "Do I need an employment lawyer, or can I handle my case myself?",
+    answer: "While you can represent yourself at the Fair Work Commission, employment law is complex and employers almost always have legal representation. Having a specialist employment lawyer significantly improves your chances of a favourable outcome. At WorkRight Legal, we offer a free initial consultation so you can understand your options before deciding."
+  },
+  {
+    question: "How much does it cost to hire an employment lawyer in Sydney?",
+    answer: "At WorkRight Legal, your initial consultation is always free. For eligible unfair dismissal and general protections cases, we offer no win, no fee arrangements. For other matters such as contract review, we offer transparent fixed fees. We'll always discuss costs upfront so there are no surprises."
+  },
+  {
+    question: "What is the most common type of employment law case in Australia?",
+    answer: "Unfair dismissal is the most common employment law claim in Australia, with over 15,000 applications lodged with the Fair Work Commission each year. Other common cases include workplace bullying, discrimination, general protections claims, and disputes over redundancy and severance pay."
+  },
+  {
+    question: "How long does an employment law case typically take?",
+    answer: "Timelines vary depending on the type of case. Unfair dismissal claims typically resolve within 3–6 months. Workplace discrimination matters may take 6–12 months. Contract disputes can often be resolved within weeks. During your free consultation, we'll give you a realistic timeline for your specific situation."
+  },
+  {
+    question: "Can I make a claim if I've already resigned from my job?",
+    answer: "Yes, in some circumstances. If you were forced to resign due to intolerable working conditions - known as constructive dismissal - you may still be able to lodge an unfair dismissal claim. You may also have grounds for a general protections claim if your workplace rights were violated. Contact us within 21 days of your resignation for the best chance of success."
+  },
+];
 ---
 
 <BaseLayout
@@ -47,7 +72,10 @@ const testimonialData = testimonials.map((t) => ({
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=600&fit=crop&q=80"
             alt="Modern Sydney office interior with harbour views"
             class="w-full h-full object-cover"
+            width="1400"
+            height="600"
             loading="eager"
+            fetchpriority="high"
           />
         </div>
       </div>
@@ -84,7 +112,7 @@ const testimonialData = testimonials.map((t) => ({
           How we can help
         </h2>
         <p class="mt-4 text-[var(--color-text-secondary)]">
-          We focus exclusively on employment law — specialist expertise that general practice firms can't match.
+          We focus exclusively on employment law - specialist expertise that general practice firms can't match.
         </p>
       </div>
 
@@ -112,6 +140,8 @@ const testimonialData = testimonials.map((t) => ({
               src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop&q=80"
               alt="Professional handshake in modern office setting"
               class="w-full h-full object-cover"
+              width="800"
+              height="600"
               loading="lazy"
             />
           </div>
@@ -171,6 +201,8 @@ const testimonialData = testimonials.map((t) => ({
                 src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop&q=80"
                 alt="Legal consultation in a modern office"
                 class="w-full h-full object-cover"
+                width="800"
+                height="600"
                 loading="lazy"
               />
             </div>
@@ -179,9 +211,9 @@ const testimonialData = testimonials.map((t) => ({
 
         <div class="space-y-10 stagger-children">
           {[
-            { num: "01", title: "Free initial call", desc: "Tell us about your situation. We'll assess your case and explain your options — no obligation, completely confidential." },
+            { num: "01", title: "Free initial call", desc: "Tell us about your situation. We'll assess your case and explain your options - no obligation, completely confidential." },
             { num: "02", title: "Strategic assessment", desc: "We conduct a thorough legal analysis, identify the strongest path forward, and develop a tailored strategy." },
-            { num: "03", title: "Expert representation", desc: "We handle everything — from preparing your application to representing you in negotiations, conciliation, or hearings." },
+            { num: "03", title: "Expert representation", desc: "We handle everything - from preparing your application to representing you in negotiations, conciliation, or hearings." },
           ].map((step) => (
             <div class="group">
               <div class="flex items-baseline gap-5">
@@ -235,6 +267,26 @@ const testimonialData = testimonials.map((t) => ({
           />
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <FAQSchema faqs={homeFaqs} />
+  <section class="py-20 lg:py-28 bg-[var(--color-surface-alt)]">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="mb-10 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">FAQ</span>
+        </div>
+        <h2
+          class="text-3xl lg:text-4xl font-bold tracking-tight"
+          style="font-family: var(--font-heading);"
+        >
+          Common questions
+        </h2>
+      </div>
+      <FAQAccordion faqs={homeFaqs} />
     </div>
   </section>
 

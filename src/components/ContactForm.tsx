@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
 
+const FORMSPREE_URL = "https://formspree.io/f/xpwzgqrz";
+
 const serviceOptions = [
   "Unfair Dismissal Claims",
   "General Protections Claims",
@@ -12,6 +14,8 @@ const serviceOptions = [
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function validate(form: FormData) {
@@ -26,13 +30,30 @@ export default function ContactForm() {
     return errs;
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const errs = validate(form);
     setErrors(errs);
-    if (Object.keys(errs).length === 0) {
-      setSubmitted(true);
+    setSubmitError("");
+    if (Object.keys(errs).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        body: form,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError("Something went wrong. Please try again or call us directly.");
+      }
+    } catch {
+      setSubmitError("Network error. Please check your connection or call us directly.");
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -63,15 +84,15 @@ export default function ContactForm() {
           <label htmlFor="firstName" className="block text-sm font-medium mb-2">
             First Name <span className="text-[var(--color-text-tertiary)]">*</span>
           </label>
-          <input type="text" id="firstName" name="firstName" className={inputClass} aria-required="true" aria-invalid={!!errors.firstName} />
-          {errors.firstName && <p className="mt-1.5 text-xs text-red-600" role="alert">{errors.firstName}</p>}
+          <input type="text" id="firstName" name="firstName" autoComplete="given-name" className={inputClass} aria-required="true" aria-invalid={!!errors.firstName} aria-describedby={errors.firstName ? "firstName-error" : undefined} />
+          {errors.firstName && <p id="firstName-error" className="mt-1.5 text-xs text-red-600" role="alert">{errors.firstName}</p>}
         </div>
         <div>
           <label htmlFor="lastName" className="block text-sm font-medium mb-2">
             Last Name <span className="text-[var(--color-text-tertiary)]">*</span>
           </label>
-          <input type="text" id="lastName" name="lastName" className={inputClass} aria-required="true" aria-invalid={!!errors.lastName} />
-          {errors.lastName && <p className="mt-1.5 text-xs text-red-600" role="alert">{errors.lastName}</p>}
+          <input type="text" id="lastName" name="lastName" autoComplete="family-name" className={inputClass} aria-required="true" aria-invalid={!!errors.lastName} aria-describedby={errors.lastName ? "lastName-error" : undefined} />
+          {errors.lastName && <p id="lastName-error" className="mt-1.5 text-xs text-red-600" role="alert">{errors.lastName}</p>}
         </div>
       </div>
 
@@ -80,14 +101,14 @@ export default function ContactForm() {
           <label htmlFor="email" className="block text-sm font-medium mb-2">
             Email <span className="text-[var(--color-text-tertiary)]">*</span>
           </label>
-          <input type="email" id="email" name="email" className={inputClass} aria-required="true" aria-invalid={!!errors.email} />
-          {errors.email && <p className="mt-1.5 text-xs text-red-600" role="alert">{errors.email}</p>}
+          <input type="email" id="email" name="email" autoComplete="email" className={inputClass} aria-required="true" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} />
+          {errors.email && <p id="email-error" className="mt-1.5 text-xs text-red-600" role="alert">{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="phone" className="block text-sm font-medium mb-2">
             Phone <span className="text-[var(--color-text-tertiary)] font-normal">(optional)</span>
           </label>
-          <input type="tel" id="phone" name="phone" className={inputClass} />
+          <input type="tel" id="phone" name="phone" autoComplete="tel" className={inputClass} />
         </div>
       </div>
 
@@ -107,15 +128,23 @@ export default function ContactForm() {
         <label htmlFor="message" className="block text-sm font-medium mb-2">
           How can we help? <span className="text-[var(--color-text-tertiary)]">*</span>
         </label>
-        <textarea id="message" name="message" rows={4} className={inputClass + " resize-y"} aria-required="true" aria-invalid={!!errors.message} />
-        {errors.message && <p className="mt-1.5 text-xs text-red-600" role="alert">{errors.message}</p>}
+        <textarea id="message" name="message" rows={4} className={inputClass + " resize-y"} aria-required="true" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} />
+        {errors.message && <p id="message-error" className="mt-1.5 text-xs text-red-600" role="alert">{errors.message}</p>}
       </div>
 
-      <button type="submit" className="btn btn-primary w-full sm:w-auto">
-        Send Enquiry
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+      {submitError && (
+        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3" role="alert">
+          {submitError}
+        </p>
+      )}
+
+      <button type="submit" disabled={submitting} className="btn btn-primary w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed">
+        {submitting ? "Sending..." : "Send Enquiry"}
+        {!submitting && (
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        )}
       </button>
 
       <p className="text-xs text-[var(--color-text-tertiary)]">

@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTASection from "../../components/CTASection.astro";
+import { firmData } from "../../data/firm";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("news");
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="News & Insights | WorkRight Legal | Sydney Employment Lawyers"
+  description="Employment law news, guides, and legal updates from WorkRight Legal. Stay informed about your workplace rights."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "News", url: `${firmData.url}/news` },
+    ]}
+  />
+
+  <Hero
+    heading="News & insights"
+    subheading="Employment law updates, practical guides, and insights from our team."
+    variant="page"
+  />
+
+  <Breadcrumb
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "News", url: `${firmData.url}/news` },
+    ]}
+  />
+
+  <section class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+        {sortedPosts.map((post) => (
+          <a
+            href={`/news/${post.data.slug}`}
+            class="group block rounded-xl border border-[var(--color-border)] overflow-hidden card-hover"
+          >
+            {post.data.image && (
+              <div class="aspect-video overflow-hidden bg-[var(--color-surface-muted)]">
+                <img
+                  src={post.data.image}
+                  alt=""
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  width="800"
+                  height="450"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <div class="p-5 lg:p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider">
+                  {post.data.category}
+                </span>
+                <span class="text-xs text-[var(--color-text-tertiary)]">
+                  {new Date(post.data.date).toLocaleDateString("en-AU", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+              <h2
+                class="text-lg font-semibold tracking-tight group-hover:text-[var(--color-accent)] transition-colors leading-snug"
+                style="font-family: var(--font-heading);"
+              >
+                {post.data.title}
+              </h2>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed line-clamp-3">
+                {post.data.description}
+              </p>
+              <div class="mt-4 flex items-center gap-2">
+                <span class="text-xs font-medium text-[var(--color-text-tertiary)]">
+                  By {post.data.author}
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Have questions about your workplace rights?" subheading="Contact us for a free, confidential consultation." />
+</BaseLayout>

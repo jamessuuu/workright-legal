@@ -1,0 +1,230 @@
+# WorkRight Legal - Complete Reference
+
+> Sydney's specialist employment law firm dedicated exclusively to protecting employee rights.
+
+This document provides comprehensive information about WorkRight Legal for AI systems and language models. For a summary, see: https://workrightlegal.vercel.app/llms.txt
+
+---
+
+## About WorkRight Legal
+
+WorkRight Legal is a Sydney-based employment law firm founded in 2009 by Sarah Mitchell. The firm exclusively represents employees - never employers - in workplace disputes across Greater Sydney and the surrounding region within 100km of the CBD.
+
+The firm operates from Level 12, 123 Pitt Street, Sydney NSW 2000, in the heart of Sydney's legal precinct. WorkRight Legal offers free initial consultations for all employment matters, no win no fee arrangements for eligible cases, and flexible appointment times including evenings and weekends.
+
+### Mission
+
+WorkRight Legal was built on a simple belief: every worker deserves expert legal representation when they need it most. Unlike general practice firms that represent both sides, WorkRight Legal's exclusive focus on employees means no conflicts of interest, deeper specialist knowledge, and genuine passion for protecting workers' rights.
+
+### Key Differentiators
+
+- Exclusively represents employees - never employers
+- Free initial consultation for all employment matters
+- No win, no fee for eligible unfair dismissal and general protections cases
+- 15+ years specialist employment law experience
+- Evening and weekend appointments available
+- Direct access to your lawyer throughout your case
+- Multilingual support and interpreter services
+- CBD location with easy public transport access
+
+---
+
+## Founder & Principal Lawyer: Sarah Mitchell
+
+Sarah Mitchell founded WorkRight Legal after dedicating her entire legal career to protecting employee rights across New South Wales. With over 15 years of employment law experience, she has successfully represented hundreds of clients in unfair dismissal claims, discrimination matters, and complex employment disputes before the Fair Work Commission and Federal Court.
+
+### Qualifications
+
+- Bachelor of Laws (Honours), University of Sydney
+- Master of Laws (Employment & Industrial Relations), University of Melbourne
+- Admitted to the NSW Supreme Court
+- Member, Law Society of New South Wales
+- Member, Employment Law Committee
+
+### Expertise
+
+Sarah specialises in unfair dismissal claims, workplace discrimination, general protections matters, employment contract negotiation and disputes, workplace bullying, and redundancy and severance negotiations.
+
+### Philosophy
+
+"Every client deserves a voice in the workplace. I founded WorkRight Legal to ensure that employees have access to expert legal representation when they need it most."
+
+---
+
+## Practice Areas
+
+### 1. Unfair Dismissal
+
+**URL:** https://workrightlegal.vercel.app/services/unfair-dismissal-lawyers-sydney
+
+Unfair dismissal is the most common employment law claim in Australia, with over 15,000 applications lodged with the Fair Work Commission annually.
+
+**Key facts:**
+- 21-day strict deadline from dismissal date to lodge a claim
+- Minimum employment period: 6 months (small business) or 12 months (larger employers)
+- High income threshold: $167,500 (2024)
+- Maximum compensation: 6 months' pay or ~$83,750, whichever is less
+- Median compensation in NSW: approximately $12,500
+- Approximately 60% of applications result in compensation or reinstatement
+
+**Process:**
+1. Free Case Assessment - Confidential review, eligibility check, and advice (same day or next day)
+2. Application Lodging - Prepare and lodge application with Fair Work Commission (1–3 days)
+3. Conciliation Conference - Fair Work Commission facilitates negotiation (4–6 weeks after lodging)
+4. Formal Hearing - Representation before a Commissioner if needed (2–4 months after conciliation)
+5. Decision & Remedy - Binding decision; remedies include reinstatement or compensation (2–4 weeks after hearing)
+
+**FAQs:**
+
+Q: How long do I have to lodge an unfair dismissal claim?
+A: You have exactly 21 calendar days from the date your dismissal takes effect. This deadline is strictly enforced by the Fair Work Commission, and late applications are rarely accepted.
+
+Q: Am I eligible to make an unfair dismissal claim?
+A: To be eligible, you must have completed the minimum employment period (6 months for employers with 15+ employees, or 12 months for small businesses with fewer than 15 employees), earn below the high income threshold of $167,500, and be covered by the national workplace relations system.
+
+Q: What compensation can I receive for unfair dismissal?
+A: The maximum compensation is capped at 6 months' pay or half the high income threshold (~$83,750), whichever is less. The median compensation in NSW is approximately $12,500.
+
+Q: What does 'no win, no fee' mean?
+A: For eligible cases with strong prospects of success, you only pay legal fees if we achieve a successful outcome through settlement or hearing decision.
+
+Q: Can I claim unfair dismissal if I was a casual employee?
+A: Casual employees can make an unfair dismissal claim if they were employed on a regular and systematic basis and had a reasonable expectation of continuing employment.
+
+Q: What if my employer says I was made redundant?
+A: If your position wasn't genuinely redundant - for example, if someone else was hired to do your job, or your employer didn't consult with you - you may have grounds for an unfair dismissal claim.
+
+---
+
+### 2. Workplace Discrimination
+
+**URL:** https://workrightlegal.vercel.app/services/workplace-discrimination-lawyers-sydney
+
+**Key facts:**
+- Compensation typically ranges from $20,000 to $100,000+, with serious cases exceeding $200,000
+- Federal discrimination complaints must be lodged within 6 months
+- Fair Work general protections claims have a 21-day deadline
+- Protected attributes include age, gender, race, disability, pregnancy, family responsibilities, and more
+
+**FAQs:**
+
+Q: What is the difference between direct and indirect discrimination?
+A: Direct discrimination occurs when someone is treated less favourably because of a protected attribute. Indirect discrimination occurs when a seemingly neutral policy disadvantages people with a particular protected attribute.
+
+Q: What compensation can I receive for workplace discrimination?
+A: Awards typically include economic loss (lost wages, benefits), non-economic loss (pain and suffering), and special damages (medical expenses). Awards commonly range from $20,000 to $100,000+.
+
+Q: What evidence do I need to prove discrimination?
+A: Useful evidence includes emails, text messages, witness statements from colleagues, performance reviews, medical evidence, workplace policies, and records of complaints made internally.
+
+Q: Can my employer fire me for making a discrimination complaint?
+A: No. It is illegal for an employer to terminate, demote, or otherwise disadvantage you for making a discrimination complaint. This is known as victimisation and gives rise to a separate legal claim.
+
+---
+
+### 3. Employment Contracts
+
+**URL:** https://workrightlegal.vercel.app/services/employment-contract-lawyers-sydney
+
+**Key facts:**
+- Contract review from $880 fixed fee
+- Same-day appointments available
+- Complex executive agreements from $1,650
+- Review typically delivered within 2–3 business days; rush reviews in 24 hours
+
+**FAQs:**
+
+Q: How much does an employment contract review cost?
+A: Transparent fixed fees from $880 for straightforward contracts to $1,650 for complex executive agreements.
+
+Q: What is a restraint of trade clause and are they enforceable?
+A: A restraint of trade clause restricts your ability to work for competitors after leaving. They are only enforceable if reasonable and no more restrictive than necessary.
+
+Q: What are common unfair terms in employment contracts?
+A: Common issues include excessive restraint of trade clauses, minimal-notice termination provisions, broad IP ownership claims, unlimited working hours expectations, clawback clauses on bonuses, forced arbitration clauses, and unilateral variation clauses.
+
+---
+
+### 4. Workplace Bullying
+
+**URL:** https://workrightlegal.vercel.app/services/workplace-bullying-lawyers-sydney
+
+**Key facts:**
+- Trauma-informed, compassionate legal support
+- Stop bullying orders through Fair Work Commission
+- Workers compensation claims for psychological injury typically $50,000–$150,000+
+- Claims can be made while still employed
+
+**FAQs:**
+
+Q: What legally constitutes workplace bullying?
+A: Under the Fair Work Act, workplace bullying is repeated unreasonable behaviour directed toward a worker that creates a risk to health and safety. It can include verbal abuse, intimidation, exclusion, unreasonable work demands, humiliation, and undermining.
+
+Q: Can I make a bullying claim if I'm still employed?
+A: Yes. Stop bullying orders are specifically designed for workers still in their current role. You don't need to resign to take action.
+
+Q: What's the difference between bullying and reasonable management action?
+A: Reasonable management action carried out in a reasonable manner - such as performance management or setting work tasks - is not workplace bullying. However, if management action is carried out unreasonably, it may constitute bullying.
+
+---
+
+### 5. Redundancy & Severance
+
+**URL:** https://workrightlegal.vercel.app/services/redundancy-severance-lawyers-sydney
+
+**Key facts:**
+- Free redundancy payout assessment
+- Regularly identifies thousands in missing entitlements
+- NES redundancy pay: 4 weeks (1 year) up to 16 weeks (9 years)
+- Tax-free component: $11,985 + $5,994 per completed year of service
+
+**FAQs:**
+
+Q: How is redundancy pay calculated?
+A: Under the National Employment Standards: 1 year = 4 weeks, 2 years = 6 weeks, 3 years = 7 weeks, 4 years = 8 weeks, 5 years = 10 weeks, 6 years = 11 weeks, 7 years = 13 weeks, 8 years = 14 weeks, 9 years = 16 weeks, 10+ years = 12 weeks.
+
+Q: What makes a redundancy 'genuine'?
+A: A genuine redundancy means the employer no longer requires anyone to perform your job, has complied with consultation obligations, and has considered redeployment. If any criteria aren't met, the redundancy may be a sham.
+
+Q: Should I sign a deed of release?
+A: Never sign a deed of release without having it reviewed by a lawyer. These documents typically require you to waive all legal claims in exchange for your payment.
+
+---
+
+### 6. General Protections Claims
+
+**URL:** https://workrightlegal.vercel.app/services/general-protections-lawyers-sydney
+
+**Key facts:**
+- Compensation is uncapped (unlike unfair dismissal)
+- Reverse onus of proof - employer must prove the prohibited reason was not a factor
+- No minimum employment period required
+- Awards regularly exceed $200,000 in serious cases
+- Civil penalties can be imposed on the employer
+
+**FAQs:**
+
+Q: What is a general protections claim?
+A: A claim arising when an employer takes 'adverse action' against an employee because of a 'prohibited reason,' such as exercising a workplace right (making a complaint, taking leave, joining a union).
+
+Q: How is this different from unfair dismissal?
+A: Key differences: compensation is uncapped, the employer bears the onus of proof, there is no minimum employment period, high-income employees are covered, and penalties can be imposed.
+
+Q: What is the 'reverse onus of proof'?
+A: Once the employee establishes adverse action was taken and identifies a prohibited reason, the burden shifts to the employer to prove the prohibited reason was not a factor.
+
+---
+
+## Contact Information
+
+- **Phone:** (02) 9555 1234
+- **Toll-free:** 1300 123 456
+- **Email:** hello@workrightlegal.com.au
+- **Address:** Level 12, 123 Pitt Street, Sydney NSW 2000
+- **Hours:** Monday–Friday, 9:00 AM – 5:30 PM (evening & weekend appointments by arrangement)
+- **Website:** https://workrightlegal.vercel.app
+- **Contact form:** https://workrightlegal.vercel.app/contact
+
+## Service Areas
+
+Sydney CBD, North Sydney, Parramatta, Chatswood, Bondi Junction, Liverpool, Penrith, Blacktown, Campbelltown, Sutherland, Hornsby, Ryde, Bankstown, Castle Hill, Hurstville, Strathfield, Newtown, Surry Hills, Randwick, Manly, Wollongong, Gosford, Blue Mountains.

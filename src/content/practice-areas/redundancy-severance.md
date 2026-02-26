@@ -36,7 +36,7 @@ process:
     timeline: "1–2 business days"
   - step: 3
     title: "Genuine Redundancy Assessment"
-    description: "We investigate whether your redundancy meets the legal requirements — was there genuine consultation? Were redeployment options considered?"
+    description: "We investigate whether your redundancy meets the legal requirements - was there genuine consultation? Were redeployment options considered?"
     timeline: "2–3 business days"
   - step: 4
     title: "Negotiation Strategy"
@@ -87,7 +87,7 @@ serviceAreas:
 
 ## Sydney's Expert Redundancy & Severance Lawyers
 
-Being made redundant is stressful and uncertain. But you don't have to accept the first offer. Many employees receive less than they're entitled to — and we regularly identify thousands of dollars in missing entitlements for long-serving employees.
+Being made redundant is stressful and uncertain. But you don't have to accept the first offer. Many employees receive less than they're entitled to - and we regularly identify thousands of dollars in missing entitlements for long-serving employees.
 
 At WorkRight Legal, we specialise in redundancy and severance matters. Whether your redundancy is genuine or you suspect it's a sham, we can help you get the best possible outcome.
 

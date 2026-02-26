@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTASection from "../../components/CTASection.astro";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
+import { firmData } from "../../data/firm";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("news");
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+
+const formattedDate = new Date(data.date).toLocaleDateString("en-AU", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<BaseLayout title={data.metaTitle} description={data.metaDescription}>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "News", url: `${firmData.url}/news` },
+      { name: data.title, url: `${firmData.url}/news/${data.slug}` },
+    ]}
+  />
+
+  <section class="pt-28 lg:pt-36 pb-10">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <Breadcrumb
+        items={[
+          { name: "Home", url: firmData.url },
+          { name: "News", url: `${firmData.url}/news` },
+          { name: data.title, url: `${firmData.url}/news/${data.slug}` },
+        ]}
+      />
+
+      <div class="mt-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider">
+            {data.category}
+          </span>
+          <span class="text-xs text-[var(--color-text-tertiary)]">{formattedDate}</span>
+        </div>
+
+        <h1
+          class="text-3xl lg:text-4xl font-bold tracking-tight leading-tight"
+          style="font-family: var(--font-heading);"
+        >
+          {data.title}
+        </h1>
+
+        <p class="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed">
+          {data.description}
+        </p>
+
+        <div class="mt-6 flex items-center gap-3 pb-8 border-b border-[var(--color-border)]">
+          <div>
+            <p class="text-sm font-medium">{data.author}</p>
+            <p class="text-xs text-[var(--color-text-tertiary)]">Principal Lawyer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {data.image && (
+    <section class="pb-10">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+        <div class="overflow-hidden rounded-xl aspect-video bg-[var(--color-surface-muted)]">
+          <img
+            src={data.image}
+            alt=""
+            class="w-full h-full object-cover"
+            width="800"
+            height="450"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="py-10 lg:py-14">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="prose prose-lg prose-neutral max-w-none
+        prose-headings:font-[var(--font-heading)] prose-headings:tracking-tight prose-headings:font-semibold
+        prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+        prose-p:text-[var(--color-text-secondary)] prose-p:leading-relaxed prose-p:mb-6
+        prose-li:text-[var(--color-text-secondary)]
+        prose-a:text-[var(--color-text)] prose-a:underline prose-a:underline-offset-4 prose-a:decoration-[var(--color-border)]"
+      >
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Need legal advice?" subheading="Contact us for a free, confidential consultation about your situation." />
+</BaseLayout>

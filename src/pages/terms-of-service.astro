@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import { firmData } from "../data/firm";
+---
+
+<BaseLayout
+  title="Terms of Service | WorkRight Legal"
+  description="Terms of service for the WorkRight Legal website. Read our terms governing use of this website and our legal services."
+  noindex={true}
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Terms of Service", url: `${firmData.url}/terms-of-service` },
+    ]}
+  />
+
+  <Hero
+    heading="Terms of service"
+    subheading="Terms and conditions governing use of this website."
+    variant="page"
+  />
+
+  <section class="py-16 lg:py-24">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="prose prose-sm max-w-none space-y-10 text-[var(--color-text-secondary)]">
+
+        <div class="reveal">
+          <p class="text-xs uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] font-medium mb-6">
+            Last updated: 1 January 2025
+          </p>
+
+          <p class="leading-relaxed">
+            These Terms of Service ("Terms") govern your use of the WorkRight Legal website at {firmData.domain} ("Website"). By accessing or using this Website, you agree to be bound by these Terms. If you do not agree, please do not use the Website.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">1. General information only</h2>
+          <p class="mt-3 leading-relaxed">
+            The content on this Website is provided for general informational purposes only. Nothing on this Website constitutes legal advice, and no solicitor-client relationship is created by your use of this Website or by submitting an enquiry through our contact form.
+          </p>
+          <p class="mt-3 leading-relaxed">
+            You should not act or refrain from acting based on information on this Website without first seeking independent legal advice specific to your circumstances.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">2. No guarantee of outcomes</h2>
+          <p class="mt-3 leading-relaxed">
+            Any case studies, results, or testimonials presented on this Website are specific to those particular matters and do not guarantee similar outcomes. Every legal matter depends on its own facts and circumstances.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">3. Professional obligations</h2>
+          <p class="mt-3 leading-relaxed">
+            WorkRight Legal operates in accordance with the <em>Legal Profession Uniform Law (NSW)</em>, the <em>Legal Profession Uniform General Rules 2015</em>, and the professional conduct rules issued by the Law Society of New South Wales. Our lawyers hold current practising certificates issued by the Law Society of New South Wales.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">4. Intellectual property</h2>
+          <p class="mt-3 leading-relaxed">
+            All content on this Website - including text, graphics, logos, and design - is the property of WorkRight Legal or its content suppliers and is protected by Australian and international copyright laws. You may not reproduce, distribute, or republish any content without our prior written consent.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">5. Third-party links</h2>
+          <p class="mt-3 leading-relaxed">
+            This Website may contain links to external websites. We do not control and are not responsible for the content, privacy policies, or practices of any third-party websites. Accessing linked sites is at your own risk.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">6. Limitation of liability</h2>
+          <p class="mt-3 leading-relaxed">
+            To the maximum extent permitted by law, WorkRight Legal excludes all liability for any loss or damage arising from your use of, or reliance on, information contained on this Website. This includes, without limitation, indirect or consequential loss, loss of data, or loss of profit.
+          </p>
+          <p class="mt-3 leading-relaxed">
+            Nothing in these Terms excludes or limits liability that cannot be excluded under Australian Consumer Law.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">7. Privacy</h2>
+          <p class="mt-3 leading-relaxed">
+            Your use of this Website is also governed by our <a href="/privacy-policy" class="underline hover:text-[var(--color-text)] transition-colors">Privacy Policy</a>, which explains how we collect, use, and protect your personal information.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">8. Enquiries and consultations</h2>
+          <p class="mt-3 leading-relaxed">
+            Submitting an enquiry through our Website does not create a solicitor-client relationship. A formal engagement only commences when we provide you with a written costs agreement and letter of engagement, which you accept.
+          </p>
+          <p class="mt-3 leading-relaxed">
+            While we endeavour to respond to all enquiries promptly, submitting a form does not obligate us to provide legal services or guarantee a response within any specific timeframe.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">9. Governing law</h2>
+          <p class="mt-3 leading-relaxed">
+            These Terms are governed by and construed in accordance with the laws of New South Wales, Australia. You agree to submit to the exclusive jurisdiction of the courts of New South Wales.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">10. Changes to these terms</h2>
+          <p class="mt-3 leading-relaxed">
+            We reserve the right to modify these Terms at any time. Changes take effect immediately upon publication on this Website. Your continued use of the Website constitutes acceptance of the updated Terms.
+          </p>
+        </div>
+
+        <div class="reveal border-t border-[var(--color-border)] pt-8">
+          <h2 class="text-xl font-semibold text-[var(--color-text)] tracking-tight" style="font-family: var(--font-heading);">11. Contact us</h2>
+          <p class="mt-3 leading-relaxed">
+            If you have questions about these Terms, please contact us:
+          </p>
+          <div class="mt-4 text-sm space-y-1">
+            <p><strong class="text-[var(--color-text)]">WorkRight Legal</strong></p>
+            <p>{firmData.address.full}</p>
+            <p>Phone: <a href={`tel:${firmData.phoneClean}`} class="underline">{firmData.phone}</a></p>
+            <p>Email: <a href={`mailto:${firmData.email}`} class="underline">{firmData.email}</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

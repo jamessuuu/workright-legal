@@ -1,0 +1,19 @@
+---
+import { firmData } from "../../data/firm";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: firmData.name,
+  url: firmData.url,
+  description: firmData.tagline,
+  publisher: {
+    "@type": "Organization",
+    name: firmData.name,
+    url: firmData.url,
+  },
+  inLanguage: "en-AU",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
