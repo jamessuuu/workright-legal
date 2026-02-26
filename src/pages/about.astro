@@ -49,8 +49,8 @@ const sarah = attorneys[0];
             { title: "Accessible", desc: "Free consultations, no win no fee, evening and weekend appointments." },
           ].map((v) => (
             <div class="p-6 rounded-xl border border-[var(--color-border)]">
-              <h3 class="font-semibold text-sm" style="font-family: var(--font-heading);">{v.title}</h3>
-              <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">{v.desc}</p>
+              <h3 class="font-semibold text-base" style="font-family: var(--font-heading);">{v.title}</h3>
+              <p class="mt-2 text-base text-[var(--color-text-secondary)] leading-relaxed">{v.desc}</p>
             </div>
           ))}
         </div>
@@ -103,7 +103,7 @@ const sarah = attorneys[0];
               <h3 class="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--color-text-tertiary)] mb-4">Credentials</h3>
               <ul class="space-y-2.5">
                 {sarah.data.credentials.map((c: string) => (
-                  <li class="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
+                  <li class="flex items-start gap-3 text-base text-[var(--color-text-secondary)]">
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-1.5 shrink-0"></span>
                     {c}
                   </li>
@@ -139,8 +139,8 @@ const sarah = attorneys[0];
           { title: "Direct lawyer access", desc: "You work directly with your lawyer throughout your case." },
         ].map((f) => (
           <div>
-            <h3 class="font-semibold text-sm tracking-tight">{f.title}</h3>
-            <p class="mt-1.5 text-sm text-[var(--color-text-secondary)] leading-relaxed">{f.desc}</p>
+            <h3 class="font-semibold text-base tracking-tight">{f.title}</h3>
+            <p class="mt-1.5 text-base text-[var(--color-text-secondary)] leading-relaxed">{f.desc}</p>
           </div>
         ))}
       </div>

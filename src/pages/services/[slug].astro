@@ -6,6 +6,7 @@ import ProcessSteps from "../../components/ProcessSteps.astro";
 import FAQAccordion from "../../components/FAQAccordion.astro";
 import ServiceAreaGrid from "../../components/ServiceAreaGrid.astro";
 import CTASection from "../../components/CTASection.astro";
+import UrgencyBanner from "../../components/UrgencyBanner.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
 import LegalServiceSchema from "../../components/schema/LegalServiceSchema.astro";
 import FAQSchema from "../../components/schema/FAQSchema.astro";
@@ -38,6 +39,19 @@ const allTestimonials = await getCollection("testimonials");
 const pageTestimonials = allTestimonials.filter(
   (t) => t.data.practiceArea === data.title
 );
+
+// Urgency banners for time-sensitive practice areas
+const urgencyData: Record<string, { days: number; message: string }> = {
+  "unfair-dismissal-lawyers-sydney": {
+    days: 21,
+    message: "You have 21 days from dismissal to lodge your claim. Do not wait.",
+  },
+  "general-protections-lawyers-sydney": {
+    days: 21,
+    message: "General protections claims must be lodged within 21 days. Act now.",
+  },
+};
+const urgency = urgencyData[data.slug];
 ---
 
 <BaseLayout title={data.metaTitle} description={data.metaDescription}>
@@ -72,6 +86,10 @@ const pageTestimonials = allTestimonials.filter(
     showStats={true}
     stats={data.stats}
   />
+
+  {urgency && (
+    <UrgencyBanner days={urgency.days} message={urgency.message} />
+  )}
 
   <Breadcrumb
     items={[

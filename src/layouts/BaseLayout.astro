@@ -1,8 +1,20 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/400-italic.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/500-italic.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/cormorant-garamond/700.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/400-italic.css";
+import "@fontsource/dm-sans/500.css";
+import "@fontsource/dm-sans/600.css";
+import "@fontsource/dm-sans/700.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import StickyMobileCTA from "../components/StickyMobileCTA.astro";
 import OrganizationSchema from "../components/schema/OrganizationSchema.astro";
 import WebSiteSchema from "../components/schema/WebSiteSchema.astro";
 
@@ -46,13 +58,7 @@ const socialImage = ogImage || `${siteUrl}/og-default.svg`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts: self-hosted via @fontsource (no render-blocking external requests) -->
 
     <!-- Favicon + Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -71,6 +77,7 @@ const socialImage = ogImage || `${siteUrl}/og-default.svg`;
       <slot />
     </main>
     <Footer />
+    <StickyMobileCTA />
 
     <!-- Lenis smooth scroll -->
     <script>

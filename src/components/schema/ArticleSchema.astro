@@ -1,0 +1,50 @@
+---
+import { firmData } from "../../data/firm";
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  authorName: string;
+  image?: string;
+}
+
+const { title, description, url, datePublished, authorName, image } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description: description,
+  url: url,
+  datePublished: datePublished,
+  dateModified: datePublished,
+  author: {
+    "@type": "Person",
+    name: authorName,
+    url: `${firmData.url}/about`,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: firmData.name,
+    url: firmData.url,
+    logo: {
+      "@type": "ImageObject",
+      url: `${firmData.url}/favicon.svg`,
+    },
+  },
+  ...(image && {
+    image: {
+      "@type": "ImageObject",
+      url: image,
+    },
+  }),
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": url,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
