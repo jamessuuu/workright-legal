@@ -4,28 +4,87 @@ interface Props {
   rating: number;
   practiceArea: string;
   content: string;
+  featured?: boolean;
 }
 
-const { name, rating, practiceArea, content } = Astro.props;
+const { name, rating, practiceArea, content, featured = false } = Astro.props;
 ---
 
-<div class="relative p-7 rounded-xl border border-[var(--color-border)] bg-white">
-  <!-- Quote mark -->
-  <span class="text-5xl leading-none text-[var(--color-border)] font-serif absolute top-4 right-6" aria-hidden="true">
+<div
+  class:list={[
+    "relative rounded-2xl overflow-hidden transition-all duration-500 group",
+    featured
+      ? "p-10 lg:p-12 section-dark gradient-mesh-dark"
+      : "p-8 lg:p-9 border border-[var(--color-border)] bg-white hover:border-[var(--color-accent-muted)] hover:shadow-lg hover:-translate-y-1",
+  ]}
+>
+  <!-- Large decorative quote mark -->
+  <span
+    class:list={[
+      "text-7xl leading-none font-serif absolute top-4 right-6",
+      featured ? "text-[var(--color-accent)] opacity-20" : "text-[var(--color-accent-muted)] opacity-40",
+    ]}
+    aria-hidden="true"
+    style="font-family: var(--font-heading);"
+  >
     &ldquo;
   </span>
 
-  <p class="text-base text-[var(--color-text-secondary)] leading-relaxed pr-8">
+  <!-- Stars at top -->
+  <div
+    class:list={[
+      "text-sm tracking-widest mb-5",
+      featured ? "text-[var(--color-accent-light)]" : "text-[var(--color-accent)]",
+    ]}
+    role="img"
+    aria-label={`${rating} out of 5 stars`}
+  >
+    {"★".repeat(rating)}
+  </div>
+
+  <p
+    class:list={[
+      "text-lg leading-relaxed pr-6",
+      featured ? "text-[var(--color-text-on-dark)]" : "text-[var(--color-text-secondary)]",
+    ]}
+  >
     {content}
   </p>
 
-  <div class="mt-6 pt-5 border-t border-[var(--color-border-subtle)] flex items-center justify-between">
-    <div>
-      <cite class="text-sm font-semibold text-[var(--color-text)] not-italic block">{name}</cite>
-      <span class="text-xs text-[var(--color-text-tertiary)]">{practiceArea}</span>
+  <div
+    class:list={[
+      "mt-8 pt-6 flex items-center gap-4",
+      featured ? "border-t border-white/10" : "border-t border-[var(--color-border-subtle)]",
+    ]}
+  >
+    <!-- Avatar initial -->
+    <div
+      class:list={[
+        "w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold shrink-0",
+        featured
+          ? "bg-[var(--color-accent)] text-white"
+          : "bg-[var(--color-accent-subtle)] text-[var(--color-accent)]",
+      ]}
+    >
+      {name.charAt(0)}
     </div>
-    <div class="text-[var(--color-accent)] text-xs tracking-wider" role="img" aria-label={`${rating} out of 5 stars`}>
-      {"★".repeat(rating)}
+    <div>
+      <cite
+        class:list={[
+          "text-sm font-semibold not-italic block",
+          featured ? "text-[var(--color-text-on-dark)]" : "text-[var(--color-text)]",
+        ]}
+      >
+        {name}
+      </cite>
+      <span
+        class:list={[
+          "text-xs",
+          featured ? "text-[var(--color-text-on-dark-secondary)]" : "text-[var(--color-text-tertiary)]",
+        ]}
+      >
+        {practiceArea}
+      </span>
     </div>
   </div>
 </div>

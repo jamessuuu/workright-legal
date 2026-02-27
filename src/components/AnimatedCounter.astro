@@ -13,14 +13,14 @@ const number = match?.[2] || value;
 const suffix = match?.[3] || "";
 ---
 
-<div class="counter-item" data-target={number} data-prefix={prefix} data-suffix={suffix}>
+<div class="counter-item text-center" data-target={number} data-prefix={prefix} data-suffix={suffix}>
   <div
-    class="text-3xl lg:text-4xl font-bold tracking-tight"
+    class="text-4xl lg:text-5xl font-bold tracking-tight text-gradient"
     style="font-family: var(--font-heading);"
   >
     <span class="counter-value">{value}</span>
   </div>
-  <div class="mt-1 text-sm text-[var(--color-text-tertiary)] font-medium">
+  <div class="mt-2 text-sm text-[var(--color-text-tertiary)] font-medium uppercase tracking-wider">
     {label}
   </div>
 </div>
@@ -42,7 +42,7 @@ const suffix = match?.[3] || "";
           const display = el.querySelector(".counter-value");
           if (!display) return;
 
-          const duration = 1500;
+          const duration = 1800;
           const start = performance.now();
 
           function tick(now: number) {
