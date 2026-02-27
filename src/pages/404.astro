@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { practiceAreasList } from "../data/firm";
+import { firmData, practiceAreasList } from "../data/firm";
 ---
 
 <BaseLayout
@@ -28,12 +28,66 @@ import { practiceAreasList } from "../data/firm";
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
+        <a href={`tel:${firmData.phoneClean}`} class="btn btn-outline">
+          Call {firmData.phone}
+        </a>
         <a href="/" class="btn btn-outline">Back to Home</a>
       </div>
     </div>
   </section>
 
-  <section class="py-16 border-t border-[var(--color-border)]">
+  <!-- Quick Links -->
+  <section class="py-12 border-t border-[var(--color-border)]">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-4 text-center">
+        Looking for something?
+      </h2>
+      <p class="text-base text-[var(--color-text-secondary)] text-center mb-8">
+        Try one of the pages below, or call us directly and we'll point you in the right direction.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+        <a
+          href="/about"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">About Us</span>
+        </a>
+        <a
+          href="/team"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">Our Team</span>
+        </a>
+        <a
+          href="/faq"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">FAQ</span>
+        </a>
+        <a
+          href="/news"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">News</span>
+        </a>
+        <a
+          href="/testimonials"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">Testimonials</span>
+        </a>
+        <a
+          href="/contact"
+          class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
+        >
+          <span class="text-sm font-medium">Contact</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Areas -->
+  <section class="py-12 border-t border-[var(--color-border)]">
     <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
       <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6 text-center">
         Our Services

@@ -30,7 +30,8 @@ interface Props {
 const { title, description, canonical, ogImage, noindex = false, hideMobileCTA = false } = Astro.props;
 const siteUrl = "https://workrightlegal.vercel.app";
 const pageUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
-const socialImage = ogImage || `${siteUrl}/og-default.svg`;
+const ogSlug = Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/^\//, "").replace(/\/$/, "");
+const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "index.png"}`;
 ---
 
 <!doctype html>
@@ -60,6 +61,10 @@ const socialImage = ogImage || `${siteUrl}/og-default.svg`;
     <meta name="twitter:image" content={socialImage} />
 
     <!-- Fonts: self-hosted via @fontsource (no render-blocking external requests) -->
+
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
     <!-- Favicon + Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

@@ -6,10 +6,13 @@ interface Props {
 const { faqs } = Astro.props;
 ---
 
-<div class="divide-y divide-[var(--color-border)]">
-  {faqs.map((faq) => (
-    <details class="group">
-      <summary class="flex items-center justify-between py-5 text-[var(--color-text)] text-sm lg:text-base font-medium cursor-pointer select-none">
+<div class="divide-y divide-[var(--color-border)]" role="list">
+  {faqs.map((faq, index) => (
+    <details class="group" role="listitem">
+      <summary
+        class="flex items-center justify-between py-5 text-[var(--color-text)] text-sm lg:text-base font-medium cursor-pointer select-none"
+        aria-controls={`faq-content-${index}`}
+      >
         <span class="pr-6">{faq.question}</span>
         <svg
           class="chevron w-4 h-4 shrink-0 text-[var(--color-text-tertiary)]"
@@ -22,7 +25,7 @@ const { faqs } = Astro.props;
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </summary>
-      <div class="accordion-content pb-5 pr-10">
+      <div id={`faq-content-${index}`} class="accordion-content pb-5 pr-10">
         <p class="text-base text-[var(--color-text-secondary)] leading-relaxed">{faq.answer}</p>
       </div>
     </details>

@@ -13,4 +13,8 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
   },
+  image: {
+    domains: ["images.unsplash.com"],
+  },
+  compressHTML: true,
 });
