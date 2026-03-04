@@ -7,6 +7,7 @@ import FAQAccordion from "../../components/FAQAccordion.astro";
 import ServiceAreaGrid from "../../components/ServiceAreaGrid.astro";
 import CTASection from "../../components/CTASection.astro";
 import UrgencyBanner from "../../components/UrgencyBanner.astro";
+import ExitIntentModal from "../../components/ExitIntentModal.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
 import LegalServiceSchema from "../../components/schema/LegalServiceSchema.astro";
 import FAQSchema from "../../components/schema/FAQSchema.astro";
@@ -233,4 +234,8 @@ const urgency = urgencyData[data.slug];
   </section>
 
   <CTASection heading={data.ctaText} subheading="Contact us today for a free, confidential assessment of your case." />
+
+  {urgency && (
+    <ExitIntentModal days={urgency.days} practiceArea={data.title} />
+  )}
 </BaseLayout>
