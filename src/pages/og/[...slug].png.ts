@@ -95,10 +95,20 @@ const pages: Record<string, OGPageData> = {
     description: "Uncapped compensation for workplace rights violations",
     type: "practice",
   },
-  // Attorney
+  // Attorneys
   "team/sarah-mitchell": {
     title: "Sarah Mitchell",
     description: "Principal Lawyer",
+    type: "attorney",
+  },
+  "team/james-chen": {
+    title: "James Chen",
+    description: "Senior Associate",
+    type: "attorney",
+  },
+  "team/priya-sharma": {
+    title: "Priya Sharma",
+    description: "Associate",
     type: "attorney",
   },
 };
