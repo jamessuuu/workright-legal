@@ -171,4 +171,4 @@
 | Location-specific landing pages (10 suburbs x 6 areas = 60 pages) | Done | 2026-03-04 | Dynamic [slug]/[location] routing |
 | Vercel Analytics + Speed Insights | Done | 2026-03-04 | Privacy-friendly, no cookies needed |
 | Cookie consent banner | Not needed | 2026-03-04 | Vercel Analytics is cookie-free |
-| V3 practice areas ambient video | Planned | | Ambient video for practice area pages |
+| V3 practice areas ambient video | Deferred | | No Veo MCP available; revisit when video gen tool configured |
