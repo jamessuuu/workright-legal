@@ -163,7 +163,24 @@
 | Improve ClientJourney GSAP animations | Done | 2026-03-04 | Smooth crossfade, text stagger, scale entrance |
 | Add journey card CSS fallbacks | Done | 2026-03-04 | No-JS fallback for card children |
 
-## Phase 7: Future Enhancements (PLANNED)
+## Phase 7: UI/UX Enhancement Pass (COMPLETED)
+> Bug fixes, design polish, animation improvements
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Fix hero descender clipping (leading-[1.05] to [1.15]) | Done | 2026-03-04 | HeroTextReveal.tsx + Hero.astro practice variant |
+| Fix situation card default border (transparent to visible) | Done | 2026-03-04 | global.css border-left uses --color-border |
+| Fix ClientJourney scroll skip bug | Done | 2026-03-04 | Rebuilt with GSAP timeline + scrub (was onUpdate) |
+| Fix video section too tall (max-h-[70vh]) | Done | 2026-03-04 | VideoSection.astro inline variant |
+| Situation cards: descriptions visible on mobile | Done | 2026-03-04 | CSS media query, hover-reveal only on lg+ |
+| Client Journey: stage numbers more prominent | Done | 2026-03-04 | opacity-20, text-7xl |
+| FAQ: numbered indicators (01-07) | Done | 2026-03-04 | FAQAccordion.astro |
+| Stats: accent line beneath numbers | Done | 2026-03-04 | AnimatedCounter.astro |
+| Hero: scroll-down indicator with bounce | Done | 2026-03-04 | Desktop only, aria-hidden |
+| Video: pulsing ring on play button | Done | 2026-03-04 | animate-ping with 2s duration |
+| Verified build (88 pages) + mobile/desktop viewports | Done | 2026-03-04 | Playwright screenshots at 375px + 1440px |
+
+## Phase 8: Future Enhancements (PLANNED)
 > Stretch goals and upcoming features
 
 | Task | Status | Date | Notes |
