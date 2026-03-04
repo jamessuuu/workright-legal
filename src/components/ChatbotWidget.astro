@@ -1,0 +1,58 @@
+---
+/**
+ * ChatbotWidget - Floating chatbot button with lawyer avatar.
+ * Marked as "Coming Soon" with a highlighted badge.
+ * Uses a placeholder avatar image — replace with Nano Banana generated asset.
+ */
+---
+
+<div class="chatbot-widget" aria-label="Chat with a lawyer - coming soon">
+  <div class="chatbot-tooltip">
+    <p class="text-xs font-medium text-[var(--color-text)]" style="font-family: var(--font-heading);">
+      Talk to our AI legal assistant
+    </p>
+    <p class="text-[0.65rem] text-[var(--color-text-tertiary)] mt-0.5">
+      Launching soon. We'll let you know.
+    </p>
+  </div>
+  <button class="chatbot-bubble" aria-label="Chat assistant - coming soon" type="button">
+    <!-- Lawyer avatar — detailed SVG with suit/tie silhouette -->
+    <svg class="w-7 h-7 text-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Head -->
+      <circle cx="16" cy="10" r="5.5" fill="currentColor" opacity="0.9" />
+      <!-- Suit shoulders -->
+      <path d="M6 27c0-5.523 4.477-10 10-10s10 4.477 10 10" fill="currentColor" opacity="0.7" />
+      <!-- Suit lapel left -->
+      <path d="M12 17l4 6-4 4" fill="none" stroke="white" stroke-width="0.8" opacity="0.5" />
+      <!-- Suit lapel right -->
+      <path d="M20 17l-4 6 4 4" fill="none" stroke="white" stroke-width="0.8" opacity="0.5" />
+      <!-- Tie -->
+      <path d="M16 17l-1.2 4 1.2 5 1.2-5-1.2-4z" fill="white" opacity="0.6" />
+      <!-- Collar points -->
+      <path d="M13.5 17.5L16 19l2.5-1.5" fill="none" stroke="white" stroke-width="0.7" opacity="0.4" />
+    </svg>
+    <!-- Avatar image slot — uncomment when Nano Banana asset is ready:
+    <img src="/images/chatbot-avatar.png" alt="" class="w-8 h-8 rounded-full object-cover" />
+    -->
+    <span class="chatbot-badge">Soon</span>
+  </button>
+</div>
+
+<script>
+  function initChatbot() {
+    const chatBtn = document.querySelector('.chatbot-bubble');
+    chatBtn?.addEventListener('click', () => {
+      const tooltip = document.querySelector('.chatbot-tooltip') as HTMLElement;
+      if (tooltip) {
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateY(0)';
+        setTimeout(() => {
+          tooltip.style.opacity = '';
+          tooltip.style.transform = '';
+        }, 3000);
+      }
+    });
+  }
+  initChatbot();
+  document.addEventListener('astro:after-swap', initChatbot);
+</script>

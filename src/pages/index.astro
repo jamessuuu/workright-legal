@@ -1,15 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import PracticeAreaCard from "../components/PracticeAreaCard.astro";
+import DeadlineUrgency from "../components/DeadlineUrgency.astro";
+import AnimatedCounter from "../components/AnimatedCounter.astro";
+import SituationSelector from "../components/SituationSelector.astro";
+import ImageSection from "../components/ImageSection.astro";
+import ClaimChecker from "../components/ClaimChecker.tsx";
+import ClientJourney from "../components/ClientJourney.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
 import CTASection from "../components/CTASection.astro";
 import VideoSection from "../components/VideoSection.astro";
-import ImageSection from "../components/ImageSection.astro";
 import FAQAccordion from "../components/FAQAccordion.astro";
 import FAQSchema from "../components/schema/FAQSchema.astro";
-import AnimatedCounter from "../components/AnimatedCounter.astro";
-import { firmData, practiceAreasList } from "../data/firm";
+import { firmData } from "../data/firm";
 import { getCollection } from "astro:content";
 
 const testimonials = await getCollection("testimonials");
@@ -19,6 +22,14 @@ const testimonialData = testimonials.map((t) => ({
 }));
 
 const homeFaqs = [
+  {
+    question: "I just got fired. What should I do first?",
+    answer: "Take a breath. You likely have 21 days to lodge an unfair dismissal claim with the Fair Work Commission. Do not sign any documents your employer gives you without legal advice. Write down everything you remember about the dismissal while it is fresh. Then call us for a free consultation so we can assess your situation and explain your options."
+  },
+  {
+    question: "I'm scared to make a complaint. Will my employer find out?",
+    answer: "We understand this fear completely. Your initial consultation with us is confidential. If we proceed with a claim, your employer will eventually be notified, but it is unlawful for them to retaliate against you for exercising your workplace rights. General protections claims exist specifically to prevent this kind of retaliation."
+  },
   {
     question: "Do I need an employment lawyer, or can I handle my case myself?",
     answer: "While you can represent yourself at the Fair Work Commission, employment law is complex and employers almost always have legal representation. Having a specialist employment lawyer significantly improves your chances of a favourable outcome. At WorkRight Legal, we offer a free initial consultation so you can understand your options before deciding."
@@ -46,21 +57,24 @@ const homeFaqs = [
   title="WorkRight Legal | Sydney Employment Lawyers | Free Consultation"
   description="Sydney's specialist employment lawyers. Unfair dismissal, workplace discrimination, contract review. Free initial consultation. No win, no fee options. Call (02) 9555 1234."
 >
-  <!-- Hero -->
+  <!-- 1. Hero with rotating empathetic questions -->
   <Hero
     heading="Protecting employee rights across Greater Sydney"
-    subheading="Specialist employment lawyers dedicated exclusively to workers. Free initial consultation for all employment matters."
-    ctaText="Get Started"
-    ctaLink="/contact"
+    subheading="We only represent workers. Never employers. Free initial consultation, always."
+    ctaText="Check if you have a case"
+    ctaLink="/check-my-case"
     secondaryCtaText={`Call ${firmData.phone}`}
     secondaryCtaLink={`tel:${firmData.phoneClean}`}
     variant="home"
   />
 
-  <!-- Animated stats -->
-  <section class="py-14 lg:py-20 border-b border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+  <!-- 2. Deadline urgency banner -->
+  <DeadlineUrgency />
+
+  <!-- 3. Animated stats -->
+  <section class="py-8 lg:py-12 border-b border-[var(--color-border)] bg-[var(--color-surface-alt)]">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
         <AnimatedCounter value="15+" label="Years Experience" />
         <AnimatedCounter value="95%" label="Success Rate" />
         <AnimatedCounter value="500+" label="Clients Helped" />
@@ -69,27 +83,29 @@ const homeFaqs = [
     </div>
   </section>
 
-  <!-- Hero image -->
-  <section class="py-16 lg:py-24">
+  <!-- 4. Situation selector — "Which sounds like you?" -->
+  <SituationSelector />
+
+  <!-- 5. Hero image with parallax -->
+  <section class="py-10 lg:py-14">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
       <div class="reveal-scale">
-        <div class="overflow-hidden rounded-2xl aspect-[21/9] bg-[var(--color-surface-muted)] shadow-xl">
+        <div class="overflow-hidden rounded-2xl aspect-[21/9] bg-[var(--color-surface-muted)] shadow-xl parallax-container">
           <img
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=600&fit=crop&q=80"
             alt="Modern Sydney office interior with harbour views"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover parallax-image"
             width="1400"
             height="600"
-            loading="eager"
-            fetchpriority="high"
+            loading="lazy"
           />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Credibility badges -->
-  <section class="py-10 lg:py-14 border-y border-[var(--color-border-subtle)]">
+  <!-- 6. Credibility badges -->
+  <section class="py-6 lg:py-8 border-y border-[var(--color-border-subtle)]">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)] text-center mb-6">Memberships & Recognition</p>
       <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-sm text-[var(--color-text-secondary)] font-medium">
@@ -113,49 +129,45 @@ const homeFaqs = [
     </div>
   </section>
 
-  <!-- Practice Areas -->
-  <section class="py-24 lg:py-32">
+  <!-- 7. ClaimChecker mini-embed -->
+  <section class="py-14 lg:py-20 section-warm">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="max-w-2xl mb-16 reveal">
-        <div class="flex items-center gap-4 mb-5">
-          <div class="h-[1.5px] w-10 accent-line"></div>
-          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Services</span>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div class="reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-[1.5px] w-8 accent-line"></div>
+            <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Free Assessment</span>
+          </div>
+          <h2
+            class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
+            style="font-family: var(--font-heading);"
+          >
+            Not sure where you stand?
+          </h2>
+          <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+            Answer a few quick questions. We'll tell you if you might have a case. Private, instant, no sign-up.
+          </p>
         </div>
-        <h2
-          class="text-3xl lg:text-[3rem] font-bold tracking-tight leading-[1.08]"
-          style="font-family: var(--font-heading);"
-        >
-          How we can help
-        </h2>
-        <p class="mt-5 text-lg text-[var(--color-text-secondary)] leading-relaxed">
-          We focus exclusively on employment law. Specialist expertise that general practice firms can't match.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-        {practiceAreasList.map((area, i) => (
-          <PracticeAreaCard
-            title={area.name}
-            description={area.shortDescription}
-            iconKey={area.iconKey}
-            slug={area.slug}
-            index={i}
-          />
-        ))}
+        <div class="reveal-delay-1">
+          <ClaimChecker client:visible mini={true} />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured image + text "Why Us" -->
-  <section class="py-24 lg:py-32 section-warm">
+  <!-- 8. Client journey scroll story -->
+  <ClientJourney />
+
+  <!-- 9. Why Us -->
+  <section class="py-14 lg:py-20 section-warm">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div class="reveal">
-          <div class="overflow-hidden rounded-2xl aspect-[4/3] bg-[var(--color-surface-muted)] shadow-lg">
+          <div class="overflow-hidden rounded-xl aspect-[4/3] bg-[var(--color-surface-muted)] shadow-lg parallax-container">
             <img
               src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop&q=80"
               alt="Professional handshake in modern office setting"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover parallax-image"
               width="800"
               height="600"
               loading="lazy"
@@ -163,20 +175,20 @@ const homeFaqs = [
           </div>
         </div>
         <div class="reveal-delay-1">
-          <div class="flex items-center gap-4 mb-5">
-            <div class="h-[1.5px] w-10 accent-line"></div>
-            <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Why Us</span>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-[1.5px] w-8 accent-line"></div>
+            <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">On your side</span>
           </div>
           <h2
-            class="text-3xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.08]"
+            class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
             style="font-family: var(--font-heading);"
           >
-            We only represent employees
+            We never represent employers. Only you.
           </h2>
-          <p class="mt-6 text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            Unlike general practice firms that represent both sides, we exclusively advocate for workers. This means no conflicts of interest, deeper specialist knowledge, and a genuine passion for protecting your rights.
+          <p class="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed">
+            Most firms play both sides. We don't. No conflicts of interest, no divided loyalties. Just a team that's fully in your corner.
           </p>
-          <div class="mt-10 space-y-4">
+          <div class="mt-6 space-y-3">
             {["15+ years focused on employment law", "Hundreds of successful cases", "Direct access to your lawyer", "No win, no fee for eligible cases"].map((item) => (
               <div class="flex items-center gap-4">
                 <div class="w-6 h-6 rounded-full bg-[var(--color-accent)] flex items-center justify-center shrink-0">
@@ -193,63 +205,7 @@ const homeFaqs = [
     </div>
   </section>
 
-  <!-- Process -->
-  <section class="py-24 lg:py-32">
-    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-        <div class="reveal lg:sticky lg:top-28">
-          <div class="flex items-center gap-4 mb-5">
-            <div class="h-[1.5px] w-10 accent-line"></div>
-            <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Process</span>
-          </div>
-          <h2
-            class="text-3xl lg:text-[3rem] font-bold tracking-tight leading-[1.08]"
-            style="font-family: var(--font-heading);"
-          >
-            Three steps to resolution
-          </h2>
-          <p class="mt-5 text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            We make the legal process simple and stress-free.
-          </p>
-          <div class="mt-10">
-            <div class="overflow-hidden rounded-2xl aspect-[4/3] bg-[var(--color-surface-muted)] shadow-lg">
-              <img
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop&q=80"
-                alt="Legal consultation in a modern office"
-                class="w-full h-full object-cover"
-                width="800"
-                height="600"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-12 stagger-children">
-          {[
-            { num: "01", title: "Free initial call", desc: "Tell us about your situation. We'll assess your case and explain your options. No obligation, completely confidential." },
-            { num: "02", title: "Strategic assessment", desc: "We conduct a thorough legal analysis, identify the strongest path forward, and develop a tailored strategy." },
-            { num: "03", title: "Expert representation", desc: "We handle everything, from preparing your application to representing you in negotiations, conciliation, or hearings." },
-          ].map((step) => (
-            <div class="group">
-              <div class="flex items-start gap-6">
-                <span class="text-4xl font-bold text-gradient tracking-tight" style="font-family: var(--font-heading);">{step.num}</span>
-                <div>
-                  <h3 class="text-xl lg:text-2xl font-semibold tracking-tight" style="font-family: var(--font-heading);">
-                    {step.title}
-                  </h3>
-                  <p class="mt-3 text-base lg:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-lg">{step.desc}</p>
-                </div>
-              </div>
-              <div class="mt-8 h-px bg-[var(--color-border)]"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Section -->
+  <!-- 10. Video Section -->
   <VideoSection
     heading="See how we work"
     subheading="A brief introduction to WorkRight Legal and our approach to employment law."
@@ -257,22 +213,22 @@ const homeFaqs = [
     posterUrl="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1280&h=720&fit=crop&q=80"
   />
 
-  <!-- Testimonials -->
-  <section class="py-24 lg:py-32 section-warm">
+  <!-- 11. Testimonials -->
+  <section class="py-14 lg:py-20 section-warm">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="max-w-2xl mb-16 reveal">
-        <div class="flex items-center gap-4 mb-5">
-          <div class="h-[1.5px] w-10 accent-line"></div>
-          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Testimonials</span>
+      <div class="max-w-2xl mb-10 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-[1.5px] w-8 accent-line"></div>
+          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Real stories</span>
         </div>
         <h2
-          class="text-3xl lg:text-[3rem] font-bold tracking-tight leading-[1.08]"
+          class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
           style="font-family: var(--font-heading);"
         >
-          What our clients say
+          People like you, who took the first step
         </h2>
-        <p class="mt-5 text-lg text-[var(--color-text-secondary)] leading-relaxed">
-          Real experiences from real people we've helped.
+        <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+          Hear from clients who've been exactly where you are right now.
         </p>
       </div>
 
@@ -290,29 +246,26 @@ const homeFaqs = [
     </div>
   </section>
 
-  <!-- FAQs -->
+  <!-- 12. FAQs -->
   <FAQSchema faqs={homeFaqs} />
-  <section class="py-24 lg:py-32">
+  <section class="py-14 lg:py-20">
     <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12">
-      <div class="mb-12 reveal">
-        <div class="flex items-center gap-4 mb-5">
-          <div class="h-[1.5px] w-10 accent-line"></div>
-          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">FAQ</span>
+      <div class="mb-8 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-[1.5px] w-8 accent-line"></div>
+          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">You asked</span>
         </div>
         <h2
-          class="text-3xl lg:text-[3rem] font-bold tracking-tight leading-[1.08]"
+          class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
           style="font-family: var(--font-heading);"
         >
-          Common questions
+          Questions we hear every day
         </h2>
       </div>
       <FAQAccordion faqs={homeFaqs} />
     </div>
   </section>
 
-  <!-- CTA -->
-  <CTASection
-    heading="Ready to discuss your case?"
-    subheading="Contact us today for a free, confidential consultation with a specialist employment lawyer."
-  />
+  <!-- 13. CTA with empathetic copy -->
+  <CTASection emotion="home" />
 </BaseLayout>

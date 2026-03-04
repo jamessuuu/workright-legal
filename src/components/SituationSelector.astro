@@ -1,0 +1,108 @@
+---
+/**
+ * SituationSelector — "Which sounds like you?" empathetic scenario cards.
+ * Replaces generic practice area cards with first-person client language.
+ * Each card mirrors what clients are actually feeling, not legal jargon.
+ */
+
+const situations = [
+  {
+    feeling: "I was fired and it doesn't feel right",
+    response: "If your dismissal was harsh, unjust or unreasonable, you may have a claim. You have 21 days to act.",
+    area: "Unfair Dismissal",
+    slug: "unfair-dismissal-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>`,
+  },
+  {
+    feeling: "I'm being treated differently because of who I am",
+    response: "Discrimination based on age, gender, race, disability or any protected attribute is unlawful. You deserve better.",
+    area: "Workplace Discrimination",
+    slug: "workplace-discrimination-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  },
+  {
+    feeling: "My employer wants me to sign something I don't understand",
+    response: "Never sign a contract, deed of release or settlement without understanding every clause. We can review it for you.",
+    area: "Employment Contracts",
+    slug: "employment-contract-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  },
+  {
+    feeling: "I dread going to work every day",
+    response: "Workplace bullying and harassment are not something you should have to tolerate. There are legal protections available to you.",
+    area: "Workplace Bullying",
+    slug: "workplace-bullying-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  },
+  {
+    feeling: "They say my role is redundant but I'm not sure that's true",
+    response: "Not every redundancy is genuine. If your role still exists or the process was unfair, you may be entitled to more.",
+    area: "Redundancy & Severance",
+    slug: "redundancy-severance-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+  },
+  {
+    feeling: "I stood up for my rights and now I'm being punished",
+    response: "It is unlawful for your employer to take adverse action because you exercised a workplace right. These claims carry uncapped compensation.",
+    area: "General Protections",
+    slug: "general-protections-lawyers-sydney",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  },
+];
+---
+
+<section class="py-14 lg:py-20">
+  <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+    <div class="max-w-2xl mb-10 reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-[1.5px] w-8 accent-line"></div>
+        <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Sound familiar?</span>
+      </div>
+      <h2
+        class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
+        style="font-family: var(--font-heading);"
+      >
+        Tell us what you're going through
+      </h2>
+      <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+        Pick the one that fits. We've helped hundreds of people in exactly your situation.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children">
+      {situations.map((s) => (
+        <a
+          href={`/services/${s.slug}`}
+          class="group situation-card block p-6 rounded-xl border border-[var(--color-border)] bg-white overflow-hidden"
+        >
+          <div class="w-9 h-9 rounded-lg bg-[var(--color-accent-subtle)] flex items-center justify-center text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-white transition-all duration-500 mb-4">
+            <div class="w-4.5 h-4.5" set:html={s.icon} />
+          </div>
+
+          <p
+            class="text-base lg:text-lg font-semibold tracking-tight leading-snug"
+            style="font-family: var(--font-heading);"
+          >
+            "{s.feeling}"
+          </p>
+
+          <div class="situation-reveal">
+            <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              {s.response}
+            </p>
+          </div>
+
+          <div class="mt-4 flex items-center gap-2 text-[var(--color-accent)] font-semibold">
+            <span class="text-sm">{s.area}</span>
+            <svg
+              class="w-4 h-4 transform translate-x-0 group-hover:translate-x-2 transition-transform duration-300"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

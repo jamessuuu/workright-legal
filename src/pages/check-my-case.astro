@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ClaimChecker from "../components/ClaimChecker.tsx";
+import CTASection from "../components/CTASection.astro";
+---
+
+<BaseLayout
+  title="Do I Have a Case? Free Assessment | WorkRight Legal"
+  description="Answer a few simple questions to find out if you have an employment law claim. Private, free, no obligation. Takes less than 2 minutes."
+>
+  <Hero
+    heading="Do I have a case?"
+    subheading="Answer a few simple questions to understand your situation. This takes less than 2 minutes, and we don't store any of your answers."
+    ctaText="Call us instead"
+    ctaLink="tel:0295551234"
+    variant="practice"
+  />
+
+  <section class="py-16 lg:py-24">
+    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <!-- Main checker -->
+        <div class="lg:col-span-2">
+          <ClaimChecker client:visible />
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- How it works -->
+          <div class="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+            <h3
+              class="text-lg font-semibold tracking-tight mb-4"
+              style="font-family: var(--font-heading);"
+            >
+              How this works
+            </h3>
+            <div class="space-y-3 text-sm text-[var(--color-text-secondary)]">
+              <div class="flex items-start gap-3">
+                <span class="shrink-0 w-5 h-5 rounded-full bg-[var(--color-accent)] text-white text-xs flex items-center justify-center font-semibold">1</span>
+                <p>Tell us what happened in your own words</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="shrink-0 w-5 h-5 rounded-full bg-[var(--color-accent)] text-white text-xs flex items-center justify-center font-semibold">2</span>
+                <p>Answer a few follow-up questions</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="shrink-0 w-5 h-5 rounded-full bg-[var(--color-accent)] text-white text-xs flex items-center justify-center font-semibold">3</span>
+                <p>Get an instant, private assessment of your situation</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy notice -->
+          <div class="p-6 rounded-2xl border border-[var(--color-border)]">
+            <div class="flex items-center gap-3 mb-3">
+              <svg class="w-5 h-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <h3 class="text-base font-semibold" style="font-family: var(--font-heading);">
+                Your privacy is protected
+              </h3>
+            </div>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              This assessment runs entirely in your browser. We do not send, store or track any of your answers. No cookies, no analytics, no data collection.
+            </p>
+          </div>
+
+          <!-- What happens next -->
+          <div class="p-6 rounded-2xl border border-[var(--color-border)]">
+            <h3
+              class="text-base font-semibold tracking-tight mb-3"
+              style="font-family: var(--font-heading);"
+            >
+              What happens next?
+            </h3>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              After your assessment, you can book a free 30-minute consultation with one of our employment lawyers. They'll review your situation in detail and explain your options. No obligation, completely confidential.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection emotion="home" />
+</BaseLayout>
