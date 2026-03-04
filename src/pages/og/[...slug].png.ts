@@ -95,6 +95,11 @@ const pages: Record<string, OGPageData> = {
     description: "Uncapped compensation for workplace rights violations",
     type: "practice",
   },
+  "case-results": {
+    title: "Case Results",
+    description: "Successful employment law outcomes for our clients",
+    type: "default",
+  },
   // Attorneys
   "team/sarah-mitchell": {
     title: "Sarah Mitchell",

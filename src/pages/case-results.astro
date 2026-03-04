@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CTASection from "../components/CTASection.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import { firmData } from "../data/firm";
+import { getCollection } from "astro:content";
+
+const caseResults = await getCollection("caseResults");
+const sorted = caseResults.sort((a, b) => a.data.order - b.data.order);
+
+const practiceAreaColors: Record<string, string> = {
+  "Unfair Dismissal": "bg-[var(--color-accent)]/10 text-[var(--color-accent)]",
+  "Workplace Discrimination": "bg-emerald-50 text-emerald-700",
+  "Workplace Bullying": "bg-amber-50 text-amber-700",
+  "Redundancy & Severance": "bg-sky-50 text-sky-700",
+  "General Protections": "bg-violet-50 text-violet-700",
+  "Employment Contracts": "bg-rose-50 text-rose-700",
+};
+---
+
+<BaseLayout
+  title="Case Results | WorkRight Legal | Sydney Employment Lawyers"
+  description="Read about successful employment law outcomes for WorkRight Legal clients. Unfair dismissal, discrimination, bullying, and redundancy cases across Sydney."
+>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Case Results", url: `${firmData.url}/case-results` },
+    ]}
+  />
+
+  <Hero
+    heading="Case results"
+    subheading="A selection of outcomes we have achieved for clients across a range of employment law matters."
+    variant="page"
+  />
+
+  <Breadcrumb
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Case Results", url: `${firmData.url}/case-results` },
+    ]}
+  />
+
+  <section class="py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <!-- ASCR Disclaimer -->
+      <div class="mb-12 p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+        <p class="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
+          <strong class="text-[var(--color-text-secondary)]">Important:</strong> Past results do not guarantee future outcomes. Every case is unique, and results depend on the specific facts and circumstances involved. Settlement amounts shown are approximate ranges. Client details have been anonymised to protect confidentiality.
+        </p>
+      </div>
+
+      <div class="space-y-8 stagger-children">
+        {sorted.map((result) => (
+          <article class="border border-[var(--color-border)] rounded-xl p-6 lg:p-8 reveal">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium ${practiceAreaColors[result.data.practiceArea] || "bg-gray-100 text-gray-700"}`}>
+                {result.data.practiceArea}
+              </span>
+              <span class="text-xs text-[var(--color-text-tertiary)]">{result.data.year}</span>
+            </div>
+
+            <h2
+              class="text-xl lg:text-2xl font-semibold tracking-tight mb-3"
+              style="font-family: var(--font-heading);"
+            >
+              {result.data.title}
+            </h2>
+
+            <p class="text-base text-[var(--color-text-secondary)] leading-relaxed mb-5">
+              {result.data.summary}
+            </p>
+
+            <div class="flex flex-wrap gap-6 pt-4 border-t border-[var(--color-border)]">
+              <div>
+                <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Outcome</p>
+                <p class="text-base font-semibold text-[var(--color-text)]">{result.data.outcome}</p>
+              </div>
+              {result.data.settlementRange && (
+                <div>
+                  <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Settlement range</p>
+                  <p class="text-base font-semibold text-[var(--color-accent)]">{result.data.settlementRange}</p>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Think you have a case?"
+    subheading="Get a free, confidential assessment from our experienced employment lawyers."
+  />
+</BaseLayout>

@@ -70,4 +70,17 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { practiceAreas, attorneys, testimonials, news };
+const caseResults = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/case-results" }),
+  schema: z.object({
+    title: z.string(),
+    practiceArea: z.string(),
+    outcome: z.string(),
+    settlementRange: z.string().optional(),
+    year: z.number(),
+    summary: z.string(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { practiceAreas, attorneys, testimonials, news, caseResults };
