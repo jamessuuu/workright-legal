@@ -136,10 +136,12 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
       });
     </script>
 
-    <!-- Vercel Analytics (privacy-friendly, no cookie consent needed) -->
+    <!-- Vercel Analytics + Speed Insights (privacy-friendly, no cookie consent needed) -->
     <script>
       import { inject } from "@vercel/analytics";
+      import { injectSpeedInsights } from "@vercel/speed-insights";
       inject();
+      injectSpeedInsights();
     </script>
   </body>
 </html>
