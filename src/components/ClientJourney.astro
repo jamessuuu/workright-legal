@@ -1,9 +1,9 @@
 ---
 /**
- * ClientJourney — Scroll-driven emotional story section.
- * Replaces generic 3-step process with a narrative that follows
- * a real client journey from crisis to resolution.
- * Uses CSS animation-timeline: view() with fallback.
+ * ClientJourney — Immersive pinned scroll storytelling section.
+ * Each stage pins and cross-fades as the user scrolls, creating
+ * a narrative journey from crisis to resolution.
+ * Uses GSAP ScrollTrigger pin + scrub.
  */
 
 const stages = [
@@ -12,36 +12,42 @@ const stages = [
     text: "You just got the call. Your position has been made redundant. Your mind races. Can they do this? What about your mortgage? Your kids' school fees? You feel the ground shift beneath you.",
     accent: "var(--color-accent)",
     shape: "circle",
+    number: "01",
   },
   {
     label: "You're not alone in this",
     text: "Every week, hundreds of Australians face the same situation. Many don't know they have rights. Many miss the 21-day window to act. But you found us, and that changes everything.",
     accent: "var(--color-accent-light)",
     shape: "diamond",
+    number: "02",
   },
   {
     label: "One conversation changes everything",
     text: "Sarah listens. She doesn't just hear the legal facts. She understands what this means for your family, your confidence, your future. She's seen this before, and she knows what to do.",
     accent: "var(--color-accent)",
     shape: "square",
+    number: "03",
   },
   {
     label: "We fight while you focus on what matters",
     text: "While you're at home with your kids, we're building your case. Gathering evidence. Negotiating with your employer's lawyers. Preparing your application to the Fair Work Commission.",
     accent: "var(--color-accent-light)",
     shape: "circle",
+    number: "04",
   },
   {
     label: "A fair outcome",
     text: "Six weeks later, you receive a settlement that reflects your years of service. Not just money, but acknowledgment. You can breathe again. You can plan again. You can move forward.",
     accent: "var(--color-accent)",
     shape: "diamond",
+    number: "05",
   },
 ];
 ---
 
-<section class="py-14 lg:py-20 overflow-hidden">
-  <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+<!-- Mobile: stacked cards | Desktop: pinned scroll -->
+<section class="overflow-hidden" id="client-journey">
+  <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-14 lg:py-20">
     <div class="max-w-2xl mb-12 reveal">
       <div class="flex items-center gap-3 mb-4">
         <div class="h-[1.5px] w-8 accent-line"></div>
@@ -57,102 +63,116 @@ const stages = [
         This is what it looks like when someone fights for you.
       </p>
     </div>
+  </div>
 
-    <div class="relative">
-      <!-- Vertical timeline line (desktop: center, mobile: left) -->
-      <div class="journey-line hidden lg:block" aria-hidden="true"></div>
-      <div class="journey-line lg:hidden" aria-hidden="true"></div>
+  <!-- Desktop: Pinned scroll container -->
+  <div class="hidden lg:block journey-pinned" id="journey-pinned">
+    <div class="journey-pinned-inner relative" style="height: 100vh;">
+      <!-- Progress bar -->
+      <div class="absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 h-48 w-[2px] bg-[var(--color-border)]" aria-hidden="true">
+        <div class="journey-progress-bar w-full bg-[var(--color-accent)] origin-top" style="height: 0%;"></div>
+      </div>
 
-      <div class="space-y-10 lg:space-y-16">
-        {stages.map((stage, i) => (
-          <div class="journey-stage relative">
-            <div class:list={[
-              "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
-              i % 2 === 1 && "lg:direction-rtl",
-            ]}>
-              <!-- Text side -->
-              <div class:list={[
-                "relative pl-12 lg:pl-0",
-                i % 2 === 1 ? "lg:text-right lg:order-2" : "lg:order-1",
-              ]}>
-                <!-- Mobile timeline dot -->
-                <div class="absolute left-3 top-1 w-5 h-5 rounded-full border-2 border-[var(--color-accent)] bg-white lg:hidden" aria-hidden="true"></div>
-
+      <!-- Stage cards (stacked, cross-faded via GSAP) -->
+      {stages.map((stage, i) => (
+        <div
+          class="journey-card absolute inset-0 flex items-center"
+          data-index={i}
+          style={i === 0 ? "" : "opacity: 0;"}
+        >
+          <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 w-full">
+            <div class="grid grid-cols-2 gap-20 items-center">
+              <!-- Text -->
+              <div class:list={[i % 2 === 1 ? "order-2" : "order-1"]}>
                 <span
-                  class="inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3"
-                  style={`color: ${stage.accent};`}
+                  class="inline-block text-6xl font-bold opacity-10 mb-2"
+                  style={`color: ${stage.accent}; font-family: var(--font-heading);`}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {stage.number}
                 </span>
                 <h3
-                  class="text-xl lg:text-2xl font-bold tracking-tight leading-tight"
+                  class="text-2xl lg:text-3xl font-bold tracking-tight leading-tight"
                   style="font-family: var(--font-heading);"
                 >
                   {stage.label}
                 </h3>
-                <p class="mt-3 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
+                <p class="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
                   {stage.text}
                 </p>
               </div>
 
-              <!-- Visual side -->
+              <!-- Visual -->
               <div class:list={[
-                "journey-visual hidden lg:flex items-center justify-center",
-                i % 2 === 1 ? "lg:order-1" : "lg:order-2",
+                "flex items-center justify-center",
+                i % 2 === 1 ? "order-1" : "order-2",
               ]}>
-                <div class="relative w-28 h-28">
-                  <!-- Decorative shape -->
+                <div class="relative w-40 h-40 journey-shape">
                   {stage.shape === "circle" && (
-                    <div
-                      class="w-full h-full rounded-full opacity-15"
-                      style={`background: ${stage.accent};`}
-                    />
-                    <div
-                      class="absolute inset-6 rounded-full opacity-25"
-                      style={`background: ${stage.accent};`}
-                    />
+                    <div class="w-full h-full rounded-full opacity-15" style={`background: ${stage.accent};`} />
+                    <div class="absolute inset-8 rounded-full opacity-25" style={`background: ${stage.accent};`} />
                   )}
                   {stage.shape === "diamond" && (
-                    <div
-                      class="w-28 h-28 rotate-45 mx-auto mt-6 rounded-xl opacity-15"
-                      style={`background: ${stage.accent};`}
-                    />
-                    <div
-                      class="absolute inset-0 flex items-center justify-center"
-                    >
-                      <div
-                        class="w-14 h-14 rotate-45 rounded-lg opacity-25"
-                        style={`background: ${stage.accent};`}
-                      />
+                    <div class="w-36 h-36 rotate-45 mx-auto mt-8 rounded-xl opacity-15" style={`background: ${stage.accent};`} />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="w-16 h-16 rotate-45 rounded-lg opacity-25" style={`background: ${stage.accent};`} />
                     </div>
                   )}
                   {stage.shape === "square" && (
-                    <div
-                      class="w-full h-full rounded-2xl opacity-15"
-                      style={`background: ${stage.accent};`}
-                    />
-                    <div
-                      class="absolute inset-6 rounded-xl opacity-25"
-                      style={`background: ${stage.accent};`}
-                    />
+                    <div class="w-full h-full rounded-2xl opacity-15" style={`background: ${stage.accent};`} />
+                    <div class="absolute inset-8 rounded-xl opacity-25" style={`background: ${stage.accent};`} />
                   )}
-                  <!-- Center dot -->
                   <div class="absolute inset-0 flex items-center justify-center">
-                    <div
-                      class="w-3 h-3 rounded-full"
-                      style={`background: ${stage.accent};`}
-                    />
+                    <div class="w-4 h-4 rounded-full" style={`background: ${stage.accent};`} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mobile: Stacked cards (no pin) -->
+  <div class="lg:hidden">
+    <div class="max-w-[90rem] mx-auto px-5 sm:px-8">
+      <div class="relative">
+        <!-- Mobile timeline line -->
+        <div class="journey-line lg:hidden" aria-hidden="true"></div>
+
+        <div class="space-y-10">
+          {stages.map((stage, i) => (
+            <div class="journey-stage relative">
+              <div class="relative pl-12">
+                <!-- Mobile timeline dot -->
+                <div class="absolute left-3 top-1 w-5 h-5 rounded-full border-2 border-[var(--color-accent)] bg-white" aria-hidden="true"></div>
+
+                <span
+                  class="inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3"
+                  style={`color: ${stage.accent};`}
+                >
+                  {stage.number}
+                </span>
+                <h3
+                  class="text-xl font-bold tracking-tight leading-tight"
+                  style="font-family: var(--font-heading);"
+                >
+                  {stage.label}
+                </h3>
+                <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  {stage.text}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Closing CTA -->
-    <div class="mt-12 text-center reveal">
+  <!-- Closing CTA -->
+  <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-14 lg:py-20">
+    <div class="text-center reveal">
       <p class="text-base text-[var(--color-text-secondary)] mb-5">
         Your story doesn't have to end with your employer's decision.
       </p>
@@ -165,17 +185,3 @@ const stages = [
     </div>
   </div>
 </section>
-
-<style>
-  .lg\:direction-rtl {
-    direction: ltr;
-  }
-  @media (min-width: 1024px) {
-    .lg\:direction-rtl {
-      direction: rtl;
-    }
-    .lg\:direction-rtl > * {
-      direction: ltr;
-    }
-  }
-</style>

@@ -96,15 +96,69 @@
 | Add News section with content collection | Done | 2026-02-26 | 3 articles, index + [slug] pages |
 | Add News to header + footer nav | Done | 2026-02-26 | Desktop, mobile, footer |
 
-## Phase 5: Future Enhancements (PLANNED)
-> Analytics, advanced features
+## Phase 5: Advanced Features (COMPLETED)
+> Attorney profiles, case results, conversion features, font optimization
 
 | Task | Status | Date | Notes |
 |------|--------|------|-------|
-| Individual attorney profile pages | Planned | | /attorneys/[slug] template |
+| Individual attorney profile pages | Done | 2026-02-27 | 3 profiles: Sarah Mitchell, Priya Sharma, James Chen |
+| Exit intent / urgency for deadline pages | Done | 2026-02-27 | Exit-intent modal on 21-day unfair dismissal pages |
+| Self-host fonts (fontsource) | Done | 2026-02-27 | Already using @fontsource, render-blocking Google Fonts eliminated |
+| Case results / settlements page | Done | 2026-02-27 | Social proof + conversion |
+
+## Phase 5b: Animation & Scroll (COMPLETED)
+> Replace CSS animations with GSAP ScrollTrigger + Lenis smooth scroll
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Replace CSS animation-timeline with GSAP ScrollTrigger | Done | 2026-02-28 | More reliable cross-browser support |
+| Lenis smooth scroll synced with GSAP ticker | Done | 2026-02-28 | gsap-init.ts handles sync |
+| Parallax images via ScrollTrigger scrub | Done | 2026-02-28 | Smooth parallax on scroll |
+| Journey stage reveal animations | Done | 2026-02-28 | ClientJourney step reveals |
+| Stagger children reveals | Done | 2026-02-28 | Cascading entrance animations |
+
+## Phase 5c: Production Hardening (COMPLETED)
+> Security headers, caching, PWA icons, sitemap filtering
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Security headers: CSP, HSTS, X-Content-Type-Options, X-Frame-Options | Done | 2026-02-28 | Full security header suite in vercel.json |
+| Immutable caching for static assets | Done | 2026-02-28 | Long-lived cache headers for hashed assets |
+| PWA icons (apple-touch-icon, icon-192, icon-512) | Done | 2026-02-28 | Complete icon set for mobile |
+| Sitemap filters noindex pages | Done | 2026-02-28 | Privacy/terms excluded from sitemap |
+| Social links conditional from firmData | Done | 2026-02-28 | No dead href="#" links when URLs empty |
+
+## Phase 5d: Image Optimization (COMPLETED)
+> Astro Image component for WebP optimization
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| All images converted to Astro Image component with WebP | Done | 2026-02-28 | Build-time WebP optimization |
+| Unsplash dns-prefetch/preconnect removed | Done | 2026-02-28 | No external image dependencies |
+
+## Phase 6: AI-Generated Media (COMPLETED)
+> Replace all Unsplash placeholders with NanoBanana AI-generated images and video
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| 20 NanoBanana AI-generated images | Done | 2026-03-04 | Replacing all Unsplash placeholders |
+| 3 attorney portraits | Done | 2026-03-04 | Sarah Mitchell, Priya Sharma, James Chen |
+| 6 practice area hero images | Done | 2026-03-04 | One per practice area |
+| 6 news article thumbnails | Done | 2026-03-04 | One per news article |
+| Homepage hero, consultation scene, video thumbnail, OG card | Done | 2026-03-04 | Key brand images |
+| Chatbot avatar | Done | 2026-03-04 | AI-generated avatar |
+| Hero ambient video loop (V1) | Done | 2026-03-04 | Fade-in + reduced-motion fallback |
+| Firm intro video (V2) | Done | 2026-03-04 | Ready for use |
+| All Unsplash references removed from codebase | Done | 2026-03-04 | Clean codebase, no external image deps |
+| Unsplash domain removed from astro.config.mjs | Done | 2026-03-04 | No external image domains configured |
+
+## Phase 7: Future Enhancements (PLANNED)
+> Stretch goals and upcoming features
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| ClientJourney pinned scroll | In Progress | | Pinned scroll animation for journey section |
 | Location-specific landing pages | Planned | | /services/unfair-dismissal-parramatta |
 | Analytics integration (Vercel Analytics or Plausible) | Planned | | Zero tracking currently |
 | Cookie consent banner | Planned | | Required if analytics added |
-| Self-host fonts (fontsource) | Planned | | Eliminate render-blocking Google Fonts |
-| Case results / settlements page | Planned | | Social proof + conversion |
-| Exit intent / urgency for deadline pages | Planned | | 21-day countdown for unfair dismissal |
+| V3 practice areas ambient video | Planned | | Ambient video for practice area pages |

@@ -3,6 +3,7 @@ interface Props {
   heading?: string;
   subheading?: string;
   videoId?: string;
+  videoSrc?: string;
   posterUrl?: string;
   variant?: "hero" | "inline" | "fullwidth";
 }
@@ -10,13 +11,15 @@ interface Props {
 const {
   heading,
   subheading,
-  videoId = "ntHRtf0GK8A",
+  videoId,
+  videoSrc,
   posterUrl = "/images/generated/video-thumbnail.png",
   variant = "inline",
 } = Astro.props;
 
 const isHero = variant === "hero";
 const isFullwidth = variant === "fullwidth";
+const isSelfHosted = !!videoSrc;
 ---
 
 <section class:list={[
@@ -45,7 +48,8 @@ const isFullwidth = variant === "fullwidth";
       isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl",
     ]}
       id="video-container"
-      data-video-id={videoId}
+      data-video-id={videoId || ""}
+      data-video-src={videoSrc || ""}
     >
       <!-- Poster image -->
       <img
@@ -58,7 +62,7 @@ const isFullwidth = variant === "fullwidth";
       />
 
       <!-- Overlay -->
-      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"></div>
+      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300" id="video-overlay"></div>
 
       <!-- Play button -->
       <button
@@ -73,7 +77,7 @@ const isFullwidth = variant === "fullwidth";
         </div>
       </button>
 
-      <!-- Video iframe (injected on click) -->
+      <!-- Video frame (injected on click) -->
       <div id="video-frame" class="absolute inset-0 hidden z-20"></div>
     </div>
   </div>
@@ -82,19 +86,36 @@ const isFullwidth = variant === "fullwidth";
 <script>
   const container = document.getElementById("video-container");
   const playBtn = document.getElementById("play-btn");
+  const overlay = document.getElementById("video-overlay");
   const frameContainer = document.getElementById("video-frame");
   const videoId = container?.dataset.videoId;
+  const videoSrc = container?.dataset.videoSrc;
 
   playBtn?.addEventListener("click", () => {
-    if (!frameContainer || !videoId) return;
-    frameContainer.innerHTML = `<iframe
-      src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
-      class="w-full h-full border-0"
-      title="${heading || 'WorkRight Legal'} video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>`;
+    if (!frameContainer) return;
+
+    if (videoSrc) {
+      // Self-hosted MP4
+      frameContainer.innerHTML = `<video
+        src="${videoSrc}"
+        class="w-full h-full object-cover"
+        autoplay
+        controls
+        playsinline
+      ></video>`;
+    } else if (videoId) {
+      // YouTube embed
+      frameContainer.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
+        class="w-full h-full border-0"
+        title="WorkRight Legal video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>`;
+    }
+
     frameContainer.classList.remove("hidden");
     playBtn.classList.add("hidden");
+    overlay?.classList.add("hidden");
   });
 </script>

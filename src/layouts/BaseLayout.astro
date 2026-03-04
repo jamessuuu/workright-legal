@@ -90,7 +90,7 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
     <script>
       import Lenis from "lenis";
       import { initGSAP, ScrollTrigger } from "../lib/gsap-init";
-      import { initReveals, initStaggerReveals, initParallax } from "../lib/scroll-animations";
+      import { initReveals, initStaggerReveals, initParallax, initJourneyPinned } from "../lib/scroll-animations";
 
       // Mark body so CSS knows JS is active (no-JS fallback)
       document.documentElement.classList.add("gsap-ready");
@@ -113,6 +113,7 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
         cleanups.push(initReveals());
         cleanups.push(initStaggerReveals());
         cleanups.push(initParallax());
+        cleanups.push(initJourneyPinned());
       }
 
       function killAllAnimations() {

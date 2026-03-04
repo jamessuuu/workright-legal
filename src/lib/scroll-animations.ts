@@ -122,6 +122,55 @@ export function initReveals(): (() => void) {
   return () => { triggers.forEach((st) => st.kill()); };
 }
 
+/** ClientJourney pinned scroll — cross-fade stages on desktop */
+export function initJourneyPinned(): (() => void) {
+  const reduced = prefersReducedMotion();
+  const triggers: ScrollTrigger[] = [];
+  const pinnedEl = document.getElementById("journey-pinned");
+
+  if (!pinnedEl || reduced || window.innerWidth < 1024) {
+    return () => {};
+  }
+
+  const cards = pinnedEl.querySelectorAll<HTMLElement>(".journey-card");
+  const progressBar = pinnedEl.querySelector<HTMLElement>(".journey-progress-bar");
+  const stageCount = cards.length;
+
+  if (stageCount < 2) return () => {};
+
+  const st = ScrollTrigger.create({
+    trigger: pinnedEl,
+    start: "top top",
+    end: `+=${stageCount * 100}vh`,
+    pin: true,
+    scrub: 0.8,
+    onUpdate: (self) => {
+      const progress = self.progress; // 0 → 1
+      const activeIndex = Math.min(
+        Math.floor(progress * stageCount),
+        stageCount - 1
+      );
+
+      // Update progress bar
+      if (progressBar) {
+        progressBar.style.height = `${progress * 100}%`;
+      }
+
+      // Cross-fade cards
+      cards.forEach((card, i) => {
+        if (i === activeIndex) {
+          gsap.set(card, { opacity: 1 });
+        } else {
+          gsap.set(card, { opacity: 0 });
+        }
+      });
+    },
+  });
+  triggers.push(st);
+
+  return () => { triggers.forEach((st) => st.kill()); };
+}
+
 /** Stagger children of `.stagger-children` containers */
 export function initStaggerReveals(): (() => void) {
   const reduced = prefersReducedMotion();
