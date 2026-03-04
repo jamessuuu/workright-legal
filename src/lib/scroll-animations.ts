@@ -138,6 +138,26 @@ export function initJourneyPinned(): (() => void) {
 
   if (stageCount < 2) return () => {};
 
+  // Set initial state for all cards except the first
+  cards.forEach((card, i) => {
+    const heading = card.querySelector<HTMLElement>(".journey-card-heading");
+    const text = card.querySelector<HTMLElement>(".journey-card-text");
+    const icon = card.querySelector<HTMLElement>(".journey-card-icon");
+    if (i === 0) {
+      gsap.set(card, { opacity: 1 });
+      if (heading) gsap.set(heading, { opacity: 1, y: 0 });
+      if (text) gsap.set(text, { opacity: 1, y: 0 });
+      if (icon) gsap.set(icon, { opacity: 1, scale: 1 });
+    } else {
+      gsap.set(card, { opacity: 0 });
+      if (heading) gsap.set(heading, { opacity: 0, y: 20 });
+      if (text) gsap.set(text, { opacity: 0, y: 20 });
+      if (icon) gsap.set(icon, { opacity: 0, scale: 0.85 });
+    }
+  });
+
+  let currentIndex = 0;
+
   const st = ScrollTrigger.create({
     trigger: pinnedEl,
     start: "top top",
@@ -151,19 +171,47 @@ export function initJourneyPinned(): (() => void) {
         stageCount - 1
       );
 
-      // Update progress bar
+      // Smooth progress bar
       if (progressBar) {
-        progressBar.style.height = `${progress * 100}%`;
+        gsap.to(progressBar, { height: `${progress * 100}%`, duration: 0.3, ease: "none", overwrite: true });
       }
 
-      // Cross-fade cards
-      cards.forEach((card, i) => {
-        if (i === activeIndex) {
-          gsap.set(card, { opacity: 1 });
-        } else {
-          gsap.set(card, { opacity: 0 });
+      // Cross-fade cards with smooth transitions
+      if (activeIndex !== currentIndex) {
+        const outCard = cards[currentIndex];
+        const inCard = cards[activeIndex];
+
+        // Fade out current card
+        gsap.to(outCard, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
+
+        // Fade in new card with staggered children
+        gsap.to(inCard, { opacity: 1, duration: 0.4, ease: "power2.inOut" });
+
+        const heading = inCard.querySelector<HTMLElement>(".journey-card-heading");
+        const text = inCard.querySelector<HTMLElement>(".journey-card-text");
+        const icon = inCard.querySelector<HTMLElement>(".journey-card-icon");
+
+        if (heading) {
+          gsap.fromTo(heading,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, delay: 0.1, ease: "power2.out" }
+          );
         }
-      });
+        if (text) {
+          gsap.fromTo(text,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.5, delay: 0.2, ease: "power2.out" }
+          );
+        }
+        if (icon) {
+          gsap.fromTo(icon,
+            { opacity: 0, scale: 0.85 },
+            { opacity: 1, scale: 1, duration: 0.6, delay: 0.05, ease: "power2.out" }
+          );
+        }
+
+        currentIndex = activeIndex;
+      }
     },
   });
   triggers.push(st);

@@ -152,12 +152,22 @@
 | All Unsplash references removed from codebase | Done | 2026-03-04 | Clean codebase, no external image deps |
 | Unsplash domain removed from astro.config.mjs | Done | 2026-03-04 | No external image domains configured |
 
+## Phase 6b: UI Polish & ClientJourney Redesign (COMPLETED)
+> Fix clipping bugs, redesign ClientJourney, improve scroll animations
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Fix SituationSelector overflow-hidden clipping | Done | 2026-03-04 | Border accent + shadow visible on hover |
+| Fix TestimonialCard overflow-hidden clipping | Done | 2026-03-04 | Quote mark + hover shadow visible |
+| Redesign ClientJourney content | Done | 2026-03-04 | Tighter copy, SVG icons replace shapes |
+| Improve ClientJourney GSAP animations | Done | 2026-03-04 | Smooth crossfade, text stagger, scale entrance |
+| Add journey card CSS fallbacks | Done | 2026-03-04 | No-JS fallback for card children |
+
 ## Phase 7: Future Enhancements (PLANNED)
 > Stretch goals and upcoming features
 
 | Task | Status | Date | Notes |
 |------|--------|------|-------|
-| ClientJourney pinned scroll | In Progress | | Pinned scroll animation for journey section |
 | Location-specific landing pages | Planned | | /services/unfair-dismissal-parramatta |
 | Analytics integration (Vercel Analytics or Plausible) | Planned | | Zero tracking currently |
 | Cookie consent banner | Planned | | Required if analytics added |

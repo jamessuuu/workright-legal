@@ -73,7 +73,7 @@ const situations = [
       {situations.map((s) => (
         <a
           href={`/services/${s.slug}`}
-          class="group situation-card block p-6 rounded-xl border border-[var(--color-border)] bg-white overflow-hidden"
+          class="group situation-card block p-6 rounded-xl border border-[var(--color-border)] bg-white"
         >
           <div class="w-9 h-9 rounded-lg bg-[var(--color-accent-subtle)] flex items-center justify-center text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-white transition-all duration-500 mb-4">
             <div class="w-4.5 h-4.5" set:html={s.icon} />

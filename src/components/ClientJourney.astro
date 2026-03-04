@@ -8,39 +8,39 @@
 
 const stages = [
   {
-    label: "The moment everything changed",
-    text: "You just got the call. Your position has been made redundant. Your mind races. Can they do this? What about your mortgage? Your kids' school fees? You feel the ground shift beneath you.",
+    label: "The moment it hits you",
+    text: "The call ends. Your role is gone. Twenty-one days to act — and the clock is already ticking.",
     accent: "var(--color-accent)",
-    shape: "circle",
     number: "01",
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="24" cy="24" r="20"/><path d="M24 14v10l7 7"/></svg>`,
   },
   {
-    label: "You're not alone in this",
-    text: "Every week, hundreds of Australians face the same situation. Many don't know they have rights. Many miss the 21-day window to act. But you found us, and that changes everything.",
+    label: "You find us",
+    text: "Hundreds face this every week. Most don't know their rights. You searched, you found us — that changes everything.",
     accent: "var(--color-accent-light)",
-    shape: "diamond",
     number: "02",
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="20" cy="20" r="14"/><path d="M30 30l12 12"/><path d="M15 20h10M20 15v10"/></svg>`,
   },
   {
-    label: "One conversation changes everything",
-    text: "Sarah listens. She doesn't just hear the legal facts. She understands what this means for your family, your confidence, your future. She's seen this before, and she knows what to do.",
+    label: "Sarah listens",
+    text: "Not just the facts — what this means for your family, your future. She's handled hundreds of these. She knows exactly what to do.",
     accent: "var(--color-accent)",
-    shape: "square",
     number: "03",
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M8 24c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M8 24v4a4 4 0 004 4h2v-12h-2a4 4 0 00-4 4zM40 24v4a4 4 0 01-4 4h-2v-12h2a4 4 0 014 4z"/><path d="M36 32v2a4 4 0 01-4 4h-6"/></svg>`,
   },
   {
-    label: "We fight while you focus on what matters",
-    text: "While you're at home with your kids, we're building your case. Gathering evidence. Negotiating with your employer's lawyers. Preparing your application to the Fair Work Commission.",
+    label: "We build your case",
+    text: "While you're at home with your family, we're gathering evidence, negotiating, and preparing your Fair Work application.",
     accent: "var(--color-accent-light)",
-    shape: "circle",
     number: "04",
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect x="6" y="10" width="36" height="28" rx="3"/><path d="M6 18h36"/><path d="M14 26h8M14 32h12"/></svg>`,
   },
   {
-    label: "A fair outcome",
-    text: "Six weeks later, you receive a settlement that reflects your years of service. Not just money, but acknowledgment. You can breathe again. You can plan again. You can move forward.",
+    label: "You move forward",
+    text: "A fair settlement. Acknowledgment. You can breathe again, plan again. Your story didn't end with their decision.",
     accent: "var(--color-accent)",
-    shape: "diamond",
     number: "05",
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M12 36l8-8 6 6 10-14"/><circle cx="24" cy="24" r="20"/></svg>`,
   },
 ];
 ---
@@ -60,7 +60,7 @@ const stages = [
         Here's what happens when you call us
       </h2>
       <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
-        This is what it looks like when someone fights for you.
+        From first call to fair outcome — this is what it looks like when someone fights for you.
       </p>
     </div>
   </div>
@@ -91,39 +91,25 @@ const stages = [
                   {stage.number}
                 </span>
                 <h3
-                  class="text-2xl lg:text-3xl font-bold tracking-tight leading-tight"
+                  class="journey-card-heading text-2xl lg:text-3xl font-bold tracking-tight leading-tight"
                   style="font-family: var(--font-heading);"
                 >
                   {stage.label}
                 </h3>
-                <p class="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
+                <p class="journey-card-text mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
                   {stage.text}
                 </p>
               </div>
 
-              <!-- Visual -->
+              <!-- Visual: Icon -->
               <div class:list={[
                 "flex items-center justify-center",
                 i % 2 === 1 ? "order-1" : "order-2",
               ]}>
-                <div class="relative w-40 h-40 journey-shape">
-                  {stage.shape === "circle" && (
-                    <div class="w-full h-full rounded-full opacity-15" style={`background: ${stage.accent};`} />
-                    <div class="absolute inset-8 rounded-full opacity-25" style={`background: ${stage.accent};`} />
-                  )}
-                  {stage.shape === "diamond" && (
-                    <div class="w-36 h-36 rotate-45 mx-auto mt-8 rounded-xl opacity-15" style={`background: ${stage.accent};`} />
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <div class="w-16 h-16 rotate-45 rounded-lg opacity-25" style={`background: ${stage.accent};`} />
-                    </div>
-                  )}
-                  {stage.shape === "square" && (
-                    <div class="w-full h-full rounded-2xl opacity-15" style={`background: ${stage.accent};`} />
-                    <div class="absolute inset-8 rounded-xl opacity-25" style={`background: ${stage.accent};`} />
-                  )}
-                  <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-4 h-4 rounded-full" style={`background: ${stage.accent};`} />
-                  </div>
+                <div class="journey-card-icon relative w-32 h-32 text-[var(--color-accent)]" style={`color: ${stage.accent};`}>
+                  <!-- Ambient glow ring -->
+                  <div class="absolute inset-[-1rem] rounded-full opacity-10" style={`background: radial-gradient(circle, ${stage.accent} 0%, transparent 70%);`}></div>
+                  <div set:html={stage.icon} />
                 </div>
               </div>
             </div>
@@ -140,26 +126,28 @@ const stages = [
         <!-- Mobile timeline line -->
         <div class="journey-line lg:hidden" aria-hidden="true"></div>
 
-        <div class="space-y-10">
+        <div class="space-y-8">
           {stages.map((stage, i) => (
             <div class="journey-stage relative">
-              <div class="relative pl-12">
+              <div class="relative pl-14">
                 <!-- Mobile timeline dot -->
-                <div class="absolute left-3 top-1 w-5 h-5 rounded-full border-2 border-[var(--color-accent)] bg-white" aria-hidden="true"></div>
+                <div class="absolute left-3 top-1 w-6 h-6 rounded-full border-2 border-[var(--color-accent)] bg-white flex items-center justify-center" aria-hidden="true">
+                  <div class="w-2 h-2 rounded-full bg-[var(--color-accent)]"></div>
+                </div>
 
                 <span
-                  class="inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3"
+                  class="inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-2"
                   style={`color: ${stage.accent};`}
                 >
-                  {stage.number}
+                  Step {stage.number}
                 </span>
                 <h3
-                  class="text-xl font-bold tracking-tight leading-tight"
+                  class="text-lg font-bold tracking-tight leading-tight"
                   style="font-family: var(--font-heading);"
                 >
                   {stage.label}
                 </h3>
-                <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                <p class="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">
                   {stage.text}
                 </p>
               </div>

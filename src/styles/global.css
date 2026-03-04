@@ -675,6 +675,14 @@ input:focus, textarea:focus, select:focus {
   transform: none;
 }
 
+/* Journey card children — no-JS fallback */
+.journey-card-heading,
+.journey-card-text,
+.journey-card-icon {
+  opacity: 1;
+  transform: none;
+}
+
 .journey-line {
   position: absolute;
   left: 50%;
