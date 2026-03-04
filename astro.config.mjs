@@ -9,7 +9,16 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) =>
+        !page.includes("/privacy-policy") &&
+        !page.includes("/terms-of-service") &&
+        !page.includes("/404") &&
+        !page.includes("/og/"),
+    }),
+  ],
   prefetch: {
     prefetchAll: true,
   },

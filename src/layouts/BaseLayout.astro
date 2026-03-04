@@ -23,11 +23,12 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  ogType?: string;
   noindex?: boolean;
   hideMobileCTA?: boolean;
 }
 
-const { title, description, canonical, ogImage, noindex = false, hideMobileCTA = false } = Astro.props;
+const { title, description, canonical, ogImage, ogType = "website", noindex = false, hideMobileCTA = false } = Astro.props;
 const siteUrl = "https://workrightlegal.vercel.app";
 const pageUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
 const ogSlug = Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/^\//, "").replace(/\/$/, "");
@@ -45,8 +46,11 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
     <link rel="canonical" href={pageUrl} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={pageUrl} />

@@ -7,6 +7,13 @@ import ArticleSchema from "../../components/schema/ArticleSchema.astro";
 import { firmData } from "../../data/firm";
 import { getCollection, render } from "astro:content";
 
+// Map author names to their team page slugs
+const authorSlugMap: Record<string, { slug: string; title: string }> = {
+  "Sarah Mitchell": { slug: "sarah-mitchell", title: "Principal Lawyer" },
+  "James Chen": { slug: "james-chen", title: "Senior Associate" },
+  "Priya Sharma": { slug: "priya-sharma", title: "Associate" },
+};
+
 export async function getStaticPaths() {
   const posts = await getCollection("news");
   return posts.map((post) => ({
@@ -36,7 +43,7 @@ const wordCount = post.body ? post.body.split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 ---
 
-<BaseLayout title={data.metaTitle} description={data.metaDescription}>
+<BaseLayout title={data.metaTitle} description={data.metaDescription} ogType="article">
   <BreadcrumbSchema
     items={[
       { name: "Home", url: firmData.url },
@@ -86,8 +93,12 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
         <div class="mt-6 flex items-center gap-3 pb-8 border-b border-[var(--color-border)]">
           <div>
-            <a href="/team/sarah-mitchell" class="text-sm font-medium hover:text-[var(--color-accent)] transition-colors">{data.author}</a>
-            <p class="text-xs text-[var(--color-text-tertiary)]">Principal Lawyer</p>
+            {authorSlugMap[data.author] ? (
+              <a href={`/team/${authorSlugMap[data.author].slug}`} class="text-sm font-medium hover:text-[var(--color-accent)] transition-colors">{data.author}</a>
+            ) : (
+              <span class="text-sm font-medium">{data.author}</span>
+            )}
+            <p class="text-xs text-[var(--color-text-tertiary)]">{authorSlugMap[data.author]?.title ?? "Lawyer"}</p>
           </div>
         </div>
       </div>
