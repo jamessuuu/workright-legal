@@ -5,7 +5,7 @@ description: "Not all redundancies come with fair payouts. Here is what Australi
 date: "2026-02-15"
 author: "Sarah Mitchell"
 category: "Practical Guide"
-image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6e?w=800&h=450&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop&q=80"
 metaTitle: "Redundancy Rights in Australia: What Your Employer Must Pay | WorkRight Legal"
 metaDescription: "Know your redundancy rights. Australian employees are entitled to specific notice periods and severance pay. Here is what the law requires."
 ---

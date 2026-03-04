@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTASection from "../../components/CTASection.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
@@ -60,14 +61,14 @@ const firstName = data.name.split(" ")[0];
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
         <div class="reveal">
           <div class="aspect-[3/4] rounded-xl overflow-hidden bg-[var(--color-surface-muted)]">
-            <img
+            <Image
               src={data.image}
               alt={`${data.name}, ${data.title} at WorkRight Legal`}
               class="w-full h-full object-cover"
-              width="600"
-              height="800"
+              width={600}
+              height={800}
               loading="eager"
-              fetchpriority="high"
+              format="webp"
             />
           </div>
         </div>

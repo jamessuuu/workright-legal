@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import CTASection from "../components/CTASection.astro";
@@ -49,13 +50,14 @@ const attorneys = await getCollection("attorneys");
             class="group block rounded-xl border border-[var(--color-border)] overflow-hidden card-hover"
           >
             <div class="aspect-[3/4] overflow-hidden bg-[var(--color-surface-muted)]">
-              <img
+              <Image
                 src={attorney.data.image}
                 alt={`${attorney.data.name}, ${attorney.data.title}`}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                width="600"
-                height="800"
+                width={600}
+                height={800}
                 loading="lazy"
+                format="webp"
               />
             </div>
             <div class="p-6">
