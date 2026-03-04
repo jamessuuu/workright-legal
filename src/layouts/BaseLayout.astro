@@ -86,76 +86,59 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
     <Footer />
     {!hideMobileCTA && <StickyMobileCTA />}
 
-    <!-- Scroll reveal (IntersectionObserver) + Parallax -->
+    <!-- GSAP ScrollTrigger + Lenis smooth scroll -->
     <script>
-      function initScrollEffects() {
-        // --- Reveal on scroll ---
-        const revealEls = document.querySelectorAll(
-          '.reveal, .reveal-delay-1, .reveal-delay-2, .reveal-fade, .reveal-scale, .reveal-left, .reveal-right, .reveal-line, .stagger-children, .journey-stage'
-        );
+      import Lenis from "lenis";
+      import { initGSAP, ScrollTrigger } from "../lib/gsap-init";
+      import { initReveals, initStaggerReveals, initParallax } from "../lib/scroll-animations";
 
-        const revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-        );
+      // Mark body so CSS knows JS is active (no-JS fallback)
+      document.documentElement.classList.add("gsap-ready");
 
-        revealEls.forEach((el) => revealObserver.observe(el));
+      // --- Lenis ---
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        autoRaf: false,
+      });
 
-        // --- Parallax images ---
-        const images = document.querySelectorAll('.parallax-image');
-        if (images.length) {
-          function onScroll() {
-            images.forEach((img) => {
-              const rect = (img as HTMLElement).closest('.parallax-container')?.getBoundingClientRect();
-              if (!rect) return;
-              const viewH = window.innerHeight;
-              if (rect.bottom < 0 || rect.top > viewH) return;
-              const progress = (rect.top + rect.height / 2 - viewH / 2) / viewH;
-              (img as HTMLElement).style.transform = `translateY(${progress * -30}px)`;
-            });
-          }
-          window.addEventListener('scroll', onScroll, { passive: true });
-          onScroll();
-        }
+      // Sync Lenis ↔ GSAP ticker
+      initGSAP(lenis);
+
+      // --- Scroll animations ---
+      let cleanups: (() => void)[] = [];
+
+      function initAllAnimations() {
+        cleanups.push(initReveals());
+        cleanups.push(initStaggerReveals());
+        cleanups.push(initParallax());
       }
 
-      initScrollEffects();
-      document.addEventListener('astro:after-swap', initScrollEffects);
+      function killAllAnimations() {
+        cleanups.forEach((fn) => fn());
+        cleanups = [];
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+      }
+
+      initAllAnimations();
+
+      // Re-init on View Transitions
+      document.addEventListener("astro:after-swap", () => {
+        killAllAnimations();
+        lenis.scrollTo(0, { immediate: true });
+        // Small delay to let new DOM settle
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+          initAllAnimations();
+        });
+      });
     </script>
 
     <!-- Vercel Analytics (privacy-friendly, no cookie consent needed) -->
     <script>
       import { inject } from "@vercel/analytics";
       inject();
-    </script>
-
-    <!-- Lenis smooth scroll -->
-    <script>
-      import Lenis from "lenis";
-
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
-
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      // Re-init on view transitions
-      document.addEventListener("astro:after-swap", () => {
-        lenis.scrollTo(0, { immediate: true });
-      });
     </script>
   </body>
 </html>

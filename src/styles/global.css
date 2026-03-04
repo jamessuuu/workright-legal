@@ -231,7 +231,10 @@ a {
   100% { background-position: 0% 50%; }
 }
 
-/* Scroll-reveal classes — powered by IntersectionObserver (see BaseLayout) */
+/* Scroll-reveal classes — powered by GSAP ScrollTrigger (see BaseLayout)
+   Initial state is set via GSAP; these CSS rules serve as no-JS fallback. */
+
+/* No-JS fallback: if GSAP hasn't loaded, show content immediately */
 .reveal,
 .reveal-delay-1,
 .reveal-delay-2,
@@ -239,36 +242,16 @@ a {
 .reveal-scale,
 .reveal-left,
 .reveal-right {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
-}
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-
-.reveal-fade { transform: none; }
-.reveal-scale { transform: scale(0.97); }
-.reveal-left { transform: translateX(-20px); }
-.reveal-right { transform: translateX(20px); }
-
-/* When IntersectionObserver adds .is-visible */
-.reveal.is-visible,
-.reveal-delay-1.is-visible,
-.reveal-delay-2.is-visible,
-.reveal-fade.is-visible,
-.reveal-scale.is-visible,
-.reveal-left.is-visible,
-.reveal-right.is-visible {
   opacity: 1;
   transform: none;
 }
 
+/* When GSAP is active, it controls opacity/transform via inline styles.
+   These classes just need to exist for the selectors in scroll-animations.ts */
 .reveal-line {
-  width: 0;
-  transition: width 0.8s var(--ease-out-expo);
+  /* GSAP controls width; fallback shows full width */
+  width: 100%;
 }
-.reveal-line.is-visible { width: 100%; }
 
 /* ==================
    Hero entrance animations
@@ -550,23 +533,10 @@ details[open] .accordion-content {
 }
 
 /* ==================
-   Stagger children
+   Stagger children — GSAP controls animation; no-JS fallback shows content
    ================== */
 
 .stagger-children > * {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
-}
-
-.stagger-children > *:nth-child(1) { transition-delay: 0s; }
-.stagger-children > *:nth-child(2) { transition-delay: 0.06s; }
-.stagger-children > *:nth-child(3) { transition-delay: 0.12s; }
-.stagger-children > *:nth-child(4) { transition-delay: 0.18s; }
-.stagger-children > *:nth-child(5) { transition-delay: 0.24s; }
-.stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
-
-.stagger-children.is-visible > * {
   opacity: 1;
   transform: none;
 }
@@ -694,26 +664,13 @@ input:focus, textarea:focus, select:focus {
    Client journey scroll story
    ================== */
 
+/* Journey stages — GSAP controls animation; no-JS fallback shows content */
 .journey-stage {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
-}
-
-.journey-stage .journey-visual {
-  opacity: 0;
-  transition: opacity 0.6s var(--ease-out-expo) 0.15s, transform 0.6s var(--ease-out-expo) 0.15s;
-}
-
-.journey-stage:nth-child(odd) .journey-visual { transform: translateX(20px); }
-.journey-stage:nth-child(even) .journey-visual { transform: translateX(-20px); }
-
-.journey-stage.is-visible {
   opacity: 1;
   transform: none;
 }
 
-.journey-stage.is-visible .journey-visual {
+.journey-stage .journey-visual {
   opacity: 1;
   transform: none;
 }
@@ -797,9 +754,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .parallax-image {
-  transition: transform 0.1s linear;
   will-change: transform;
-  scale: 1.15;
 }
 
 /* Smooth hover-reveal for images */
@@ -898,4 +853,64 @@ input:focus, textarea:focus, select:focus {
     transform: none !important;
     filter: none !important;
   }
+}
+
+/* ==================
+   Micro-interactions (CSS-only)
+   ================== */
+
+.btn-primary,
+.btn-primary-dark {
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.btn-primary:active,
+.btn-primary-dark:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-outline:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.card-lift {
+  border: 1.5px solid transparent;
+}
+
+.card-lift:hover {
+  border-color: var(--color-border-hover);
+}
+
+/* ==================
+   View Transitions — subtle vertical shift
+   ================== */
+
+@keyframes vt-slide-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vt-slide-up-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: vt-slide-up-out 0.2s ease-in forwards;
+}
+
+::view-transition-new(root) {
+  animation: vt-slide-up-in 0.25s ease-out forwards;
 }
