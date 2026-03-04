@@ -45,7 +45,7 @@ const isSelfHosted = !!videoSrc;
 
     <div class:list={[
       "relative group cursor-pointer overflow-hidden bg-[var(--color-surface-muted)]",
-      isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl",
+      isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl max-h-[70vh]",
     ]}
       id="video-container"
       data-video-id={videoId || ""}
@@ -70,10 +70,13 @@ const isSelfHosted = !!videoSrc;
         aria-label="Play video"
         id="play-btn"
       >
-        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-          <svg class="w-6 h-6 lg:w-7 lg:h-7 text-[var(--color-accent)] ml-1" fill="currentColor" viewBox="0 0 24 24">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
+        <div class="relative w-16 h-16 lg:w-20 lg:h-20">
+          <div class="absolute inset-0 rounded-full bg-white/30 animate-ping" style="animation-duration: 2s;"></div>
+          <div class="relative w-full h-full rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+            <svg class="w-6 h-6 lg:w-7 lg:h-7 text-[var(--color-accent)] ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          </div>
         </div>
       </button>
 

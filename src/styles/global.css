@@ -637,7 +637,7 @@ input:focus, textarea:focus, select:focus {
 
 .situation-card {
   position: relative;
-  border-left: 3px solid transparent;
+  border-left: 3px solid var(--color-border);
   transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
@@ -648,16 +648,23 @@ input:focus, textarea:focus, select:focus {
 }
 
 .situation-card .situation-reveal {
-  max-height: 0;
-  opacity: 0;
+  max-height: 120px;
+  opacity: 1;
   overflow: hidden;
   transition: max-height var(--duration-normal) var(--ease-out-expo),
               opacity var(--duration-normal) var(--ease-out-expo);
 }
 
-.situation-card:hover .situation-reveal {
-  max-height: 120px;
-  opacity: 1;
+@media (min-width: 1024px) {
+  .situation-card .situation-reveal {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .situation-card:hover .situation-reveal {
+    max-height: 120px;
+    opacity: 1;
+  }
 }
 
 /* ==================

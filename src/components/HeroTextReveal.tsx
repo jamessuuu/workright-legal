@@ -63,7 +63,7 @@ export default function HeroTextReveal({ segments, subheading }: Props) {
       <h1
         ref={containerRef}
         aria-label={fullText}
-        className="font-bold tracking-tight text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.05]"
+        className="font-bold tracking-tight text-[clamp(2.25rem,5.5vw,4.25rem)] leading-[1.15]"
         style={{ fontFamily: "var(--font-heading)" }}
       >
         {segments.map((seg, i) => (

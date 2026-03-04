@@ -122,7 +122,7 @@ export function initReveals(): (() => void) {
   return () => { triggers.forEach((st) => st.kill()); };
 }
 
-/** ClientJourney pinned scroll — cross-fade stages on desktop */
+/** ClientJourney pinned scroll — timeline-based cross-fade on desktop */
 export function initJourneyPinned(): (() => void) {
   const reduced = prefersReducedMotion();
   const triggers: ScrollTrigger[] = [];
@@ -138,7 +138,7 @@ export function initJourneyPinned(): (() => void) {
 
   if (stageCount < 2) return () => {};
 
-  // Set initial state for all cards except the first
+  // Set initial state: first card visible, rest hidden
   cards.forEach((card, i) => {
     const heading = card.querySelector<HTMLElement>(".journey-card-heading");
     const text = card.querySelector<HTMLElement>(".journey-card-text");
@@ -156,61 +156,49 @@ export function initJourneyPinned(): (() => void) {
     }
   });
 
-  let currentIndex = 0;
+  // Build a proper GSAP timeline for frame-perfect scrub
+  const tl = gsap.timeline();
 
+  for (let i = 0; i < stageCount - 1; i++) {
+    const outCard = cards[i];
+    const inCard = cards[i + 1];
+    const inHeading = inCard.querySelector<HTMLElement>(".journey-card-heading");
+    const inText = inCard.querySelector<HTMLElement>(".journey-card-text");
+    const inIcon = inCard.querySelector<HTMLElement>(".journey-card-icon");
+
+    // Hold the current card visible for a beat
+    tl.to({}, { duration: 0.4 });
+
+    // Cross-fade: out old, in new
+    tl.to(outCard, { opacity: 0, duration: 0.3, ease: "power2.inOut" });
+    tl.to(inCard, { opacity: 1, duration: 0.3, ease: "power2.inOut" }, "<");
+    if (inIcon) {
+      tl.fromTo(inIcon, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }, "<");
+    }
+    if (inHeading) {
+      tl.fromTo(inHeading, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<0.05");
+    }
+    if (inText) {
+      tl.fromTo(inText, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<0.05");
+    }
+
+    // Hold the new card visible
+    if (i < stageCount - 2) {
+      tl.to({}, { duration: 0.4 });
+    }
+  }
+
+  // Progress bar: sync with ScrollTrigger progress directly
   const st = ScrollTrigger.create({
     trigger: pinnedEl,
     start: "top top",
     end: `+=${stageCount * 100}vh`,
     pin: true,
-    scrub: 0.8,
+    scrub: true,
+    animation: tl,
     onUpdate: (self) => {
-      const progress = self.progress; // 0 → 1
-      const activeIndex = Math.min(
-        Math.floor(progress * stageCount),
-        stageCount - 1
-      );
-
-      // Smooth progress bar
       if (progressBar) {
-        gsap.to(progressBar, { height: `${progress * 100}%`, duration: 0.3, ease: "none", overwrite: true });
-      }
-
-      // Cross-fade cards with smooth transitions
-      if (activeIndex !== currentIndex) {
-        const outCard = cards[currentIndex];
-        const inCard = cards[activeIndex];
-
-        // Fade out current card
-        gsap.to(outCard, { opacity: 0, duration: 0.4, ease: "power2.inOut" });
-
-        // Fade in new card with staggered children
-        gsap.to(inCard, { opacity: 1, duration: 0.4, ease: "power2.inOut" });
-
-        const heading = inCard.querySelector<HTMLElement>(".journey-card-heading");
-        const text = inCard.querySelector<HTMLElement>(".journey-card-text");
-        const icon = inCard.querySelector<HTMLElement>(".journey-card-icon");
-
-        if (heading) {
-          gsap.fromTo(heading,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, delay: 0.1, ease: "power2.out" }
-          );
-        }
-        if (text) {
-          gsap.fromTo(text,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, delay: 0.2, ease: "power2.out" }
-          );
-        }
-        if (icon) {
-          gsap.fromTo(icon,
-            { opacity: 0, scale: 0.85 },
-            { opacity: 1, scale: 1, duration: 0.6, delay: 0.05, ease: "power2.out" }
-          );
-        }
-
-        currentIndex = activeIndex;
+        gsap.set(progressBar, { height: `${self.progress * 100}%` });
       }
     },
   });
