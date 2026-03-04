@@ -2,7 +2,7 @@
 name: "Sarah Mitchell"
 slug: "sarah-mitchell"
 title: "Principal Lawyer"
-image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&q=80"
+image: "/images/generated/attorneys/sarah-mitchell.png"
 credentials:
   - "Bachelor of Laws (Honours), University of Sydney"
   - "Master of Laws (Employment & Industrial Relations), University of Melbourne"

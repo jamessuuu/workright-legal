@@ -766,6 +766,15 @@ input:focus, textarea:focus, select:focus {
    Reduced motion
    ================== */
 
+/* Hero ambient video */
+.hero-video {
+  opacity: 0;
+  transition: opacity 1.2s ease-in;
+}
+.hero-video.is-playing {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -774,6 +783,7 @@ input:focus, textarea:focus, select:focus {
     scroll-behavior: auto !important;
   }
   .scroll-progress { display: none; }
+  .hero-video { display: none !important; }
   .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-fade, .reveal-scale,
   .reveal-left, .reveal-right, .hero-reveal, .hero-badge, .stagger-children > *,
   .journey-stage, .journey-stage .journey-visual,

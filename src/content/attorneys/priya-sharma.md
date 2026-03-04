@@ -2,7 +2,7 @@
 name: "Priya Sharma"
 slug: "priya-sharma"
 title: "Associate"
-image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&q=80"
+image: "/images/generated/attorneys/priya-sharma.png"
 credentials:
   - "Bachelor of Laws (Honours), Macquarie University"
   - "Bachelor of Arts (Psychology), Macquarie University"

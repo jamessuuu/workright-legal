@@ -5,7 +5,7 @@ description: "Australia's new right to disconnect law means employees can refuse
 date: "2026-02-05"
 author: "Sarah Mitchell"
 category: "Legal Updates"
-image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&q=80"
+image: "/images/generated/news/right-to-disconnect.png"
 metaTitle: "Right to Disconnect Law Australia: Employee Guide | WorkRight Legal"
 metaDescription: "Australia's right to disconnect gives employees legal protection from after-hours contact. Here is what the law says and how to exercise your rights."
 ---

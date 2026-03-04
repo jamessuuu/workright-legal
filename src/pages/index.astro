@@ -87,20 +87,33 @@ const homeFaqs = [
   <!-- 4. Situation selector — "Which sounds like you?" -->
   <SituationSelector />
 
-  <!-- 5. Hero image with parallax -->
+  <!-- 5. Hero video with parallax + static fallback -->
   <section class="py-10 lg:py-14">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
       <div class="reveal-scale">
-        <div class="overflow-hidden rounded-2xl aspect-[21/9] bg-[var(--color-surface-muted)] shadow-xl parallax-container">
+        <div class="overflow-hidden rounded-2xl aspect-[21/9] bg-[var(--color-surface-muted)] shadow-xl parallax-container relative">
+          <!-- Static image fallback (visible until video loads + for reduced-motion) -->
           <Image
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=600&fit=crop&q=80"
-            alt="Modern Sydney office interior with harbour views"
-            class="w-full h-full object-cover parallax-image"
+            src="/images/generated/hero-office-wide.png"
+            alt="Premium modern law office corridor with warm timber and teal accents"
+            class="absolute inset-0 w-full h-full object-cover parallax-image"
             width={1400}
             height={600}
             loading="lazy"
             format="webp"
           />
+          <!-- Ambient video loop (hidden for prefers-reduced-motion) -->
+          <video
+            class="absolute inset-0 w-full h-full object-cover hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/images/generated/hero-office-wide.png"
+          >
+            <source src="/videos/hero-office-loop.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
@@ -167,8 +180,8 @@ const homeFaqs = [
         <div class="reveal">
           <div class="overflow-hidden rounded-xl aspect-[4/3] bg-[var(--color-surface-muted)] shadow-lg parallax-container">
             <Image
-              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop&q=80"
-              alt="Professional handshake in modern office setting"
+              src="/images/generated/consultation-scene.png"
+              alt="Lawyer and client in a warm consultation moment at a modern Sydney office"
               class="w-full h-full object-cover parallax-image"
               width={800}
               height={600}
@@ -213,7 +226,7 @@ const homeFaqs = [
     heading="See how we work"
     subheading="A brief introduction to WorkRight Legal and our approach to employment law."
     videoId="ntHRtf0GK8A"
-    posterUrl="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1280&h=720&fit=crop&q=80"
+    posterUrl="/images/generated/video-thumbnail.png"
   />
 
   <!-- 11. Testimonials -->
@@ -271,4 +284,14 @@ const homeFaqs = [
 
   <!-- 13. CTA with empathetic copy -->
   <CTASection emotion="home" />
+
+  <!-- Hero video fade-in -->
+  <script>
+    const heroVideo = document.querySelector<HTMLVideoElement>('.hero-video');
+    if (heroVideo) {
+      heroVideo.addEventListener('playing', () => {
+        heroVideo.classList.add('is-playing');
+      }, { once: true });
+    }
+  </script>
 </BaseLayout>

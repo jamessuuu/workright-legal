@@ -5,7 +5,7 @@ description: "Australian law protects employees against five categories of workp
 date: "2026-02-10"
 author: "Sarah Mitchell"
 category: "Legal Explainer"
-image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=450&fit=crop&q=80"
+image: "/images/generated/news/workplace-discrimination-types.png"
 metaTitle: "5 Types of Workplace Discrimination in Australia | WorkRight Legal"
 metaDescription: "Understand the five types of workplace discrimination under Australian law: direct, indirect, harassment, victimisation, and adverse action."
 ---

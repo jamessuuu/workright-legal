@@ -5,7 +5,7 @@ description: "Understanding what evidence you need to support a workplace bullyi
 date: "2026-02-15"
 author: "Sarah Mitchell"
 category: "Guides"
-image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=450&fit=crop&q=80"
+image: "/images/generated/news/bullying-evidence.png"
 metaTitle: "Workplace Bullying Evidence Guide | WorkRight Legal Sydney"
 metaDescription: "What evidence do you need for a workplace bullying claim? Our Sydney employment lawyers explain how to document incidents and build a strong case."
 ---

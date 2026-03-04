@@ -5,7 +5,7 @@ description: "The Fair Work Commission has increased the high income threshold a
 date: "2026-02-20"
 author: "Sarah Mitchell"
 category: "Legal Updates"
-image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop&q=80"
+image: "/images/generated/news/fair-work-changes.png"
 metaTitle: "Fair Work Commission Unfair Dismissal Changes 2026 | WorkRight Legal"
 metaDescription: "The Fair Work Commission has updated the unfair dismissal compensation cap and high income threshold for 2026. Here is what employees need to know."
 ---

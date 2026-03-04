@@ -5,7 +5,7 @@ description: "Before signing your next employment contract, watch out for these 
 date: "2026-02-10"
 author: "Sarah Mitchell"
 category: "Guides"
-image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop&q=80"
+image: "/images/generated/news/contract-red-flags.png"
 metaTitle: "Employment Contract Red Flags | WorkRight Legal Sydney"
 metaDescription: "Five common employment contract clauses that could cost you. Learn what to watch for before signing, from restraint of trade to set-off clauses."
 ---

@@ -1,6 +1,6 @@
 /**
  * Centralized image map for practice areas and site-wide imagery.
- * Replaces scattered Unsplash URLs with a single source of truth.
+ * AI-generated images via NanoBanana, stored locally.
  */
 
 export const practiceAreaImages: Record<
@@ -8,45 +8,45 @@ export const practiceAreaImages: Record<
   { src: string; alt: string; width: number; height: number }
 > = {
   "unfair-dismissal-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=500&fit=crop&q=80",
-    alt: "Professional workspace representing unfair dismissal legal services in Sydney",
+    src: "/images/generated/practice-areas/unfair-dismissal.png",
+    alt: "Empty office desk with personal belongings in a cardboard box, representing unfair dismissal",
     width: 1200,
     height: 500,
   },
   "workplace-discrimination-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&h=500&fit=crop&q=80",
-    alt: "Diverse workplace setting representing discrimination law services",
+    src: "/images/generated/practice-areas/workplace-discrimination.png",
+    alt: "Confident professional woman standing in a diverse modern workplace",
     width: 1200,
     height: 500,
   },
   "employment-contract-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=500&fit=crop&q=80",
-    alt: "Contract review setting for employment contract legal services",
+    src: "/images/generated/practice-areas/employment-contracts.png",
+    alt: "Hands reviewing a legal employment contract on a timber desk",
     width: 1200,
     height: 500,
   },
   "workplace-bullying-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=500&fit=crop&q=80",
-    alt: "Supportive workplace environment for bullying law services",
+    src: "/images/generated/practice-areas/workplace-bullying.png",
+    alt: "Person sitting alone in a corporate corridor, contemplating next steps",
     width: 1200,
     height: 500,
   },
   "redundancy-severance-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=500&fit=crop&q=80",
-    alt: "Professional consultation for redundancy and severance legal advice",
+    src: "/images/generated/practice-areas/redundancy-severance.png",
+    alt: "Negotiation table with severance documents and notepad ready for discussion",
     width: 1200,
     height: 500,
   },
   "general-protections-lawyers-sydney": {
-    src: "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?w=1200&h=500&fit=crop&q=80",
-    alt: "Worker rights protection representing general protections law services",
+    src: "/images/generated/practice-areas/general-protections.png",
+    alt: "Hand pressing emergency stop button, symbolising exercising workplace rights",
     width: 1200,
     height: 500,
   },
 };
 
 export const defaultImage = {
-  src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=500&fit=crop&q=80",
+  src: "/images/generated/hero-office-wide.png",
   alt: "WorkRight Legal Sydney office",
   width: 1200,
   height: 500,

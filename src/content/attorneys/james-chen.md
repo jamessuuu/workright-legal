@@ -2,7 +2,7 @@
 name: "James Chen"
 slug: "james-chen"
 title: "Senior Associate"
-image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&q=80"
+image: "/images/generated/attorneys/james-chen.png"
 credentials:
   - "Bachelor of Laws, University of New South Wales"
   - "Graduate Diploma in Legal Practice, College of Law"
