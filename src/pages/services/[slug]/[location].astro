@@ -1,0 +1,204 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import FAQAccordion from "../../../components/FAQAccordion.astro";
+import CTASection from "../../../components/CTASection.astro";
+import BreadcrumbSchema from "../../../components/schema/BreadcrumbSchema.astro";
+import LegalServiceSchema from "../../../components/schema/LegalServiceSchema.astro";
+import FAQSchema from "../../../components/schema/FAQSchema.astro";
+import { firmData, practiceAreasList } from "../../../data/firm";
+import { locations, getLocationMeta } from "../../../data/locations";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const areas = await getCollection("practiceAreas");
+  const paths: Array<{
+    params: { slug: string; location: string };
+    props: { area: (typeof areas)[0]; location: (typeof locations)[0] };
+  }> = [];
+
+  for (const area of areas) {
+    for (const loc of locations) {
+      paths.push({
+        params: { slug: area.data.slug, location: loc.slug },
+        props: { area, location: loc },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { area, location } = Astro.props;
+const { data } = area;
+const meta = getLocationMeta(data, location);
+
+// Get top 3 FAQs from the practice area
+const topFaqs = data.faqs.slice(0, 3);
+
+const canonicalUrl = `${firmData.url}/services/${data.slug}/${location.slug}`;
+const parentUrl = `${firmData.url}/services/${data.slug}`;
+
+// Other locations for internal linking (exclude current)
+const otherLocations = locations.filter((l) => l.slug !== location.slug).slice(0, 6);
+
+// Related practice areas for cross-linking
+const relatedAreas = practiceAreasList.filter((a) => a.slug !== data.slug).slice(0, 3);
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Services", url: `${firmData.url}/services` },
+      { name: data.title, url: parentUrl },
+      { name: location.name, url: canonicalUrl },
+    ]}
+  />
+  <LegalServiceSchema
+    name={`${data.title} Lawyers ${location.name} - ${firmData.name}`}
+    description={meta.description}
+    url={canonicalUrl}
+    serviceAreas={[location.name]}
+  />
+  <FAQSchema faqs={topFaqs} />
+
+  <Hero
+    heading={meta.heading}
+    subheading={meta.subheading}
+    ctaText="Get Free Case Assessment"
+    ctaLink="/contact"
+    secondaryCtaText={`Call ${firmData.secondaryPhone}`}
+    secondaryCtaLink={`tel:${firmData.secondaryPhoneClean}`}
+    variant="practice"
+    showStats={true}
+    stats={data.stats}
+  />
+
+  <Breadcrumb
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "Services", url: `${firmData.url}/services` },
+      { name: data.title, url: parentUrl },
+      { name: location.name, url: canonicalUrl },
+    ]}
+  />
+
+  <!-- Location intro -->
+  <section class="py-14 lg:py-20">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="reveal">
+        <h2
+          class="text-2xl lg:text-3xl font-bold tracking-tight leading-tight mb-6"
+          style="font-family: var(--font-heading);"
+        >
+          {data.title} representation for {location.name} workers
+        </h2>
+        <div class="space-y-4 text-base text-[var(--color-text-secondary)] leading-relaxed">
+          <p>
+            {location.description} If you work in or around {location.name} and are facing a
+            {data.title.toLowerCase()} issue, WorkRight Legal can help.
+          </p>
+          <p>
+            Our office is located at {firmData.address.full}, {location.distanceFromCBD} from {location.name}.
+            We offer in-person consultations, phone appointments, and video calls to suit your needs.
+          </p>
+          <p>
+            As specialist employment lawyers, we handle {data.title.toLowerCase()} cases across
+            {location.region} and Greater Sydney. Every case benefits from our 15+ years of focused
+            employment law experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key facts -->
+  <section class="py-14 bg-[var(--color-surface-alt)]">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">
+        Key Facts
+      </h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
+        {data.keyFacts.map((fact: string) => (
+          <li class="flex items-start gap-3 text-base text-[var(--color-text-secondary)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 shrink-0"></span>
+            {fact}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQs (top 3) -->
+  <section class="py-14 lg:py-20">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <span class="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">FAQ</span>
+      </div>
+      <h2 class="text-2xl lg:text-3xl font-bold tracking-tight mb-8" style="font-family: var(--font-heading);">
+        Common {data.title.toLowerCase()} questions
+      </h2>
+      <FAQAccordion faqs={topFaqs} />
+      <p class="mt-8 text-sm text-[var(--color-text-tertiary)]">
+        <a href={`/services/${data.slug}`} class="text-[var(--color-accent)] hover:underline">
+          See all {data.title.toLowerCase()} FAQs &rarr;
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Other locations -->
+  <section class="py-14 border-t border-[var(--color-border)]">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
+      <h2 class="text-2xl lg:text-3xl font-bold tracking-tight mb-4" style="font-family: var(--font-heading);">
+        {data.title} lawyers across Sydney
+      </h2>
+      <p class="text-base text-[var(--color-text-secondary)] mb-6">
+        We serve clients across Greater Sydney and surrounding areas.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 stagger-children">
+        {otherLocations.map((loc) => (
+          <a
+            href={`/services/${data.slug}/${loc.slug}`}
+            class="flex items-center gap-2 p-3 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors group text-sm font-medium"
+          >
+            <span class="group-hover:text-[var(--color-accent)] transition-colors">{loc.name}</span>
+            <svg class="w-3 h-3 ml-auto text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related practice areas -->
+  <section class="py-14 border-t border-[var(--color-border)]">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
+      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">
+        Other Services in {location.name}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {relatedAreas.map((ra) => (
+          <a
+            href={`/services/${ra.slug}/${location.slug}`}
+            class="flex items-center gap-3 p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors group"
+          >
+            <span class="text-sm font-medium group-hover:text-[var(--color-accent)] transition-colors">{ra.name}</span>
+            <svg class="w-3.5 h-3.5 ml-auto text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading={`Need a ${data.title.toLowerCase()} lawyer in ${location.name}?`}
+    subheading="Contact us today for a free, confidential assessment of your case."
+  />
+</BaseLayout>
