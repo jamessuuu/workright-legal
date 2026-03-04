@@ -7,15 +7,22 @@ import PersonSchema from "../../components/schema/PersonSchema.astro";
 import { firmData, practiceAreasList } from "../../data/firm";
 import { getCollection, render } from "astro:content";
 
-const attorneys = await getCollection("attorneys");
-const sarah = attorneys.find((a) => a.data.slug === "sarah-mitchell");
-if (!sarah) throw new Error("Attorney not found");
+export async function getStaticPaths() {
+  const attorneys = await getCollection("attorneys");
+  return attorneys.map((attorney) => ({
+    params: { slug: attorney.data.slug },
+    props: { attorney },
+  }));
+}
 
-const { Content } = await render(sarah);
-const { data } = sarah;
+const { attorney } = Astro.props;
+const { data } = attorney;
+const { Content } = await render(attorney);
 
 const testimonials = await getCollection("testimonials");
 const clientStories = testimonials.slice(0, 3);
+
+const firstName = data.name.split(" ")[0];
 ---
 
 <BaseLayout title={data.metaTitle} description={data.metaDescription}>
@@ -95,7 +102,7 @@ const clientStories = testimonials.slice(0, 3);
 
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="/contact" class="btn btn-primary text-sm">Book Consultation</a>
-            <a href={`mailto:${firmData.email}`} class="btn btn-outline text-sm">Email Sarah</a>
+            <a href={`mailto:${firmData.email}`} class="btn btn-outline text-sm">Email {firstName}</a>
           </div>
         </div>
       </div>
@@ -214,7 +221,7 @@ const clientStories = testimonials.slice(0, 3);
   )}
 
   <CTASection
-    heading="Ready to discuss your case with Sarah?"
+    heading={`Ready to discuss your case with ${firstName}?`}
     subheading="Book a free, confidential consultation today."
   />
 </BaseLayout>
