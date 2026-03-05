@@ -22,3 +22,17 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# MCP config (local)
+.mcp.json
+
+# Playwright MCP
+.playwright-mcp/
+
+# Screenshots (audit/debug artifacts)
+audit-*.png
+audit-*.jpeg
+enhance-*.png
+fix-*.png
+verify-*.png
+image.png
