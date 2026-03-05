@@ -11,6 +11,10 @@
     {
       "name": "prose",
       "version": "1.0.1"
+    },
+    {
+      "name": "separator",
+      "version": "1.0.1"
     }
   ]
 }

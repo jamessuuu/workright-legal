@@ -226,3 +226,61 @@
 | Location pages: key facts visual upgrade | Done | 2026-03-05 | Bordered cards with info icon (matches service detail page) |
 | Location pages: key facts border-y for section separation | Done | 2026-03-05 | bg-surface-alt + border-y |
 | Build verification: 88 pages, zero errors | Done | 2026-03-05 | Playwright screenshots verified |
+
+## Phase 11: Typography & Consistency (COMPLETED)
+> Typography hierarchy and padding consistency fix
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Footer h3: font-family body → heading | Done | 2026-03-05 | var(--font-heading) |
+| 404: hero padding py-20 lg:py-28, sections py-16 lg:py-20 | Done | 2026-03-05 | Consistent with site |
+| Team profile: top padding on hero | Done | 2026-03-05 | Spacing fix |
+| Service detail: key facts py-14 → py-16 lg:py-20 | Done | 2026-03-05 | Matches site-wide rhythm |
+
+## Phase 12: Starwind UI Site-Wide Integration (IN PROGRESS)
+> Extend Starwind UI component library beyond Prose — Separator, Badge, Breadcrumb, Card, Alert, Accordion, Dialog
+
+**Constraint:** NO visual changes — must look identical before and after. React islands (ContactForm, ClaimChecker) stay as-is.
+
+**NOT replacing:** Buttons (elaborate ::before sweep animations), React form inputs, Navigation header, PracticeAreaCard, TestimonialCard.
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| **Phase 0: Foundation** | | | |
+| Create `src/lib/utils/cn.ts` (tailwind-merge utility) | Done | 2026-03-05 | Required by Starwind components |
+| Verify starwind.config.json paths | Done | 2026-03-05 | componentDir + utilsDir correct |
+| Build verification (88 pages) | Done | 2026-03-05 | Zero errors |
+| **Phase 1: Separator** | | | |
+| Install Starwind Separator component | Done | 2026-03-05 | Moved from nested dir to src/components/starwind/separator/ |
+| Replace border-t/border-b dividers (~8 files) | Pending | | team/[slug], news/[slug], services/[slug], faq, testimonials, case-results |
+| **Phase 2: Badge** | | | |
+| Install Starwind Badge | Pending | | |
+| Replace category labels (~3 files) | Pending | | case-results, news/index, news/[slug] |
+| **Phase 3: Breadcrumb** | | | |
+| Install Starwind Breadcrumb | Pending | | |
+| Create SiteBreadcrumb.astro wrapper | Pending | | Same API as current Breadcrumb.astro |
+| Update ~15 consumer pages | Pending | | |
+| Delete old Breadcrumb.astro | Pending | | After verification |
+| **Phase 4: Card** | | | |
+| Install Starwind Card | Pending | | |
+| Add bridge CSS (--color-card, --color-card-foreground) | Pending | | |
+| Replace simple card patterns (~3 files) | Pending | | case-results, news/index only |
+| **Phase 5: Alert** | | | |
+| Install Starwind Alert | Pending | | |
+| Add bridge CSS (--color-error, --color-error-foreground) | Pending | | |
+| Rewrite UrgencyBanner.astro internals | Pending | | Preserve dark bg + CTA |
+| **Phase 6: Accordion** | | | |
+| Install Starwind Accordion | Pending | | |
+| Create SiteFAQAccordion.astro wrapper | Pending | | Same faqs[] API |
+| Replace FAQAccordion in service + FAQ pages | Pending | | Test View Transitions reinit |
+| Delete old FAQAccordion.astro | Pending | | After verification |
+| **Phase 7: Dialog** | | | |
+| Install Starwind Dialog | Pending | | |
+| Add bridge CSS (--color-overlay) | Pending | | |
+| Rewrite ExitIntentModal.astro | Pending | | Preserve exit-intent JS + session storage |
+
+### Starwind Integration Notes
+- **Config issue:** `npx starwind add` installs to nested `starwind/starwind/` dir — must manually move to `starwind/` after each install
+- **Bridge CSS pattern:** `src/styles/starwind-bridge.css` maps Starwind semantic tokens (--color-foreground, --color-card, etc.) to our design system (--color-text, --color-surface, etc.)
+- **bg-border:** Separator uses Tailwind `bg-border` which auto-resolves from our `@theme { --color-border }` — no bridge needed
+- **Execution order:** Phases 0-3 (low risk) → 4-5 (medium) → 6-7 (high risk, test individually)
