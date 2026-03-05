@@ -207,3 +207,22 @@
 | Hero: video opacity increased to 0.8 | Done | 2026-03-05 | .hero-video.is-playing in global.css |
 | Hero: directional gradient overlay | Done | 2026-03-05 | Left-to-right (solid dark left, 30% right) + top/bottom edge darkening |
 | HeroTextReveal: descender fix | Done | 2026-03-05 | Added pb-1 to .hero-word spans, prevents y/g clipping |
+
+## Phase 10: Site-Wide Design Polish (COMPLETED)
+> Consistency pass across all inner pages to match homepage design language
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Footer: increase text contrast (text-white/30 to /50) | Done | 2026-03-05 | Hours, disclaimer, copyright all improved |
+| Case results: replace gray fallback colors with design system | Done | 2026-03-05 | bg-gray-100 to --color-accent-subtle, --color-surface-alt |
+| Case results: accent border on disclaimer box | Done | 2026-03-05 | border-l-2 border-l-accent for visual emphasis |
+| About: heading font-family on features h3 | Done | 2026-03-05 | var(--font-heading) on "What sets us apart" items |
+| Contact: heading font-family on sidebar h3/h4 | Done | 2026-03-05 | "Contact information" + "Urgent matter?" |
+| FAQ: standardize section padding (py-14 lg:py-18 to py-16 lg:py-20) | Done | 2026-03-05 | Matches site-wide rhythm |
+| CTA: standardize warm/default padding (py-14 lg:py-18 to py-16 lg:py-20) | Done | 2026-03-05 | Consistent across all CTA variants |
+| News: wider container (max-w-5xl to max-w-[90rem]) | Done | 2026-03-05 | Matches site-wide layout, gap-6 to gap-8 |
+| Services index: grid gap standardized (gap-5 to gap-6) | Done | 2026-03-05 | Consistent card spacing |
+| Testimonials: grid gap standardized (gap-5 to gap-6) | Done | 2026-03-05 | Consistent card spacing |
+| Location pages: key facts visual upgrade | Done | 2026-03-05 | Bordered cards with info icon (matches service detail page) |
+| Location pages: key facts border-y for section separation | Done | 2026-03-05 | bg-surface-alt + border-y |
+| Build verification: 88 pages, zero errors | Done | 2026-03-05 | Playwright screenshots verified |

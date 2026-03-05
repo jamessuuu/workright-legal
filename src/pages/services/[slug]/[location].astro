@@ -115,19 +115,21 @@ const relatedAreas = practiceAreasList.filter((a) => a.slug !== data.slug).slice
   </section>
 
   <!-- Key facts -->
-  <section class="py-14 bg-[var(--color-surface-alt)]">
+  <section class="py-14 bg-[var(--color-surface-alt)] border-y border-[var(--color-border)]">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
       <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">
         Key Facts
       </h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
         {data.keyFacts.map((fact: string) => (
-          <li class="flex items-start gap-3 text-base text-[var(--color-text-secondary)]">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 shrink-0"></span>
-            {fact}
-          </li>
+          <div class="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-border)] bg-white">
+            <svg class="w-4 h-4 text-[var(--color-accent)] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{fact}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 

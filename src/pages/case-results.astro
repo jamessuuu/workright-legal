@@ -12,11 +12,11 @@ const sorted = caseResults.sort((a, b) => a.data.order - b.data.order);
 
 const practiceAreaColors: Record<string, string> = {
   "Unfair Dismissal": "bg-[var(--color-accent)]/10 text-[var(--color-accent)]",
-  "Workplace Discrimination": "bg-emerald-50 text-emerald-700",
-  "Workplace Bullying": "bg-amber-50 text-amber-700",
-  "Redundancy & Severance": "bg-sky-50 text-sky-700",
-  "General Protections": "bg-violet-50 text-violet-700",
-  "Employment Contracts": "bg-rose-50 text-rose-700",
+  "Workplace Discrimination": "bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]",
+  "Workplace Bullying": "bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]",
+  "Redundancy & Severance": "bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]",
+  "General Protections": "bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]",
+  "Employment Contracts": "bg-[var(--color-accent-subtle)] text-[var(--color-accent-text)]",
 };
 ---
 
@@ -47,7 +47,7 @@ const practiceAreaColors: Record<string, string> = {
   <section class="py-20 lg:py-28">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
       <!-- ASCR Disclaimer -->
-      <div class="mb-12 p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+      <div class="mb-12 p-5 rounded-xl border border-[var(--color-border)] border-l-2 border-l-[var(--color-accent)] bg-[var(--color-surface-alt)]">
         <p class="text-sm text-[var(--color-text-tertiary)] leading-relaxed">
           <strong class="text-[var(--color-text-secondary)]">Important:</strong> Past results do not guarantee future outcomes. Every case is unique, and results depend on the specific facts and circumstances involved. Settlement amounts shown are approximate ranges. Client details have been anonymised to protect confidentiality.
         </p>
@@ -57,7 +57,7 @@ const practiceAreaColors: Record<string, string> = {
         {sorted.map((result) => (
           <article class="border border-[var(--color-border)] rounded-xl p-6 lg:p-8 reveal">
             <div class="flex flex-wrap items-center gap-3 mb-4">
-              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium ${practiceAreaColors[result.data.practiceArea] || "bg-gray-100 text-gray-700"}`}>
+              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium ${practiceAreaColors[result.data.practiceArea] || "bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)]"}`}>
                 {result.data.practiceArea}
               </span>
               <span class="text-xs text-[var(--color-text-tertiary)]">{result.data.year}</span>
