@@ -157,8 +157,11 @@ export function initJourneyMap(): (() => void) {
     return () => {};
   }
 
-  // Initial state: path fully hidden
+  // Initial state: path hidden, cards ready for animation
   gsap.set(activePath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+  cards.forEach((card) => {
+    gsap.set(card, { scale: 0.97, y: 4 });
+  });
 
   // Build scroll-driven timeline
   const tl = gsap.timeline();
@@ -172,60 +175,98 @@ export function initJourneyMap(): (() => void) {
     const circle = stop.querySelector(".journey-stop-circle") as SVGCircleElement;
     const glow = stop.querySelector(".journey-stop-glow") as SVGCircleElement;
     const num = stop.querySelector(".journey-stop-number") as SVGTextElement;
+    const cardNumber = card?.querySelector(".journey-card-number") as HTMLElement | null;
 
     // Draw path to this stop
     const targetOffset = pathLength * (1 - (i + 1) / stageCount);
     tl.to(activePath, {
       strokeDashoffset: targetOffset,
-      duration: segmentDuration * 0.6,
+      duration: segmentDuration * 0.5,
       ease: "none",
     });
 
-    // Light up stop circle
+    // Light up stop circle with scale pop
     if (circle) {
       tl.to(circle, {
-        attr: { fill: "var(--color-accent)", stroke: "var(--color-accent)" },
-        duration: segmentDuration * 0.2,
-        ease: "power2.out",
+        attr: { fill: "var(--color-accent)", stroke: "var(--color-accent)", r: 10 },
+        duration: segmentDuration * 0.15,
+        ease: "back.out(2)",
       }, "<0.02");
     }
+    // Glow ring expands and fades in
     if (glow) {
-      tl.to(glow, { opacity: 0.15, duration: segmentDuration * 0.2, ease: "power2.out" }, "<");
+      tl.to(glow, {
+        opacity: 0.2,
+        attr: { r: 22 },
+        duration: segmentDuration * 0.2,
+        ease: "power2.out",
+      }, "<");
     }
     if (num) {
       tl.to(num, { attr: { fill: "white" }, duration: segmentDuration * 0.1 }, "<");
     }
 
-    // Highlight active card, dim others
+    // Highlight active card — lift, scale, glow, background tint
     if (card) {
-      tl.to(card, { opacity: 1, duration: segmentDuration * 0.2, ease: "power2.out" }, "<");
       tl.to(card, {
-        borderColor: "var(--color-accent)",
-        boxShadow: "0 0 0 1px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.08)",
+        opacity: 1,
+        scale: 1,
+        y: 0,
         duration: segmentDuration * 0.2,
         ease: "power2.out",
       }, "<");
+      tl.to(card, {
+        borderColor: "var(--color-accent)",
+        boxShadow: "0 0 0 1px rgba(184,134,11,0.12), 0 8px 24px rgba(184,134,11,0.10), 0 2px 8px rgba(0,0,0,0.06)",
+        backgroundColor: "var(--color-accent-subtle)",
+        duration: segmentDuration * 0.2,
+        ease: "power2.out",
+      }, "<");
+      // Card number brightens
+      if (cardNumber) {
+        tl.to(cardNumber, { opacity: 0.5, duration: segmentDuration * 0.15, ease: "power2.out" }, "<");
+      }
     }
 
-    // Dim previous card (if exists)
+    // Dim previous card
     if (i > 0 && cards[i - 1]) {
-      tl.to(cards[i - 1], { opacity: 0.3, duration: segmentDuration * 0.15, ease: "power2.out" }, "<");
+      const prevNumber = cards[i - 1].querySelector(".journey-card-number") as HTMLElement | null;
+      tl.to(cards[i - 1], {
+        opacity: 0.3,
+        scale: 0.97,
+        y: 4,
+        duration: segmentDuration * 0.15,
+        ease: "power2.out",
+      }, "<");
       tl.to(cards[i - 1], {
         borderColor: "var(--color-border)",
         boxShadow: "none",
+        backgroundColor: "transparent",
         duration: segmentDuration * 0.15,
       }, "<");
+      if (prevNumber) {
+        tl.to(prevNumber, { opacity: 0.25, duration: segmentDuration * 0.1 }, "<");
+      }
+      // Shrink previous stop back to default size
+      const prevCircle = stops[i - 1]?.querySelector(".journey-stop-circle") as SVGCircleElement;
+      if (prevCircle) {
+        tl.to(prevCircle, { attr: { r: 8 }, duration: segmentDuration * 0.1, ease: "power2.out" }, "<");
+      }
+      const prevGlow = stops[i - 1]?.querySelector(".journey-stop-glow") as SVGCircleElement;
+      if (prevGlow) {
+        tl.to(prevGlow, { attr: { r: 16 }, opacity: 0.1, duration: segmentDuration * 0.1 }, "<");
+      }
     }
 
-    // Hold at this stage briefly
-    tl.to({}, { duration: segmentDuration * 0.2 });
+    // Hold at this stage
+    tl.to({}, { duration: segmentDuration * 0.25 });
   }
 
   const st = ScrollTrigger.create({
     trigger: mapEl,
-    start: "top 30%",
-    end: "bottom 40%",
-    scrub: 0.8,
+    start: "top 60%",
+    end: "bottom 50%",
+    scrub: 0.6,
     animation: tl,
   });
   triggers.push(st);
