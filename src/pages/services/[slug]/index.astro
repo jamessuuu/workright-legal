@@ -12,6 +12,7 @@ import BreadcrumbSchema from "../../../components/schema/BreadcrumbSchema.astro"
 import LegalServiceSchema from "../../../components/schema/LegalServiceSchema.astro";
 import FAQSchema from "../../../components/schema/FAQSchema.astro";
 import HowToSchema from "../../../components/schema/HowToSchema.astro";
+import { Prose } from "@/components/starwind/prose";
 import { firmData, practiceAreasList } from "../../../data/firm";
 import { getCollection, render } from "astro:content";
 
@@ -111,10 +112,9 @@ const urgency = urgencyData[data.slug];
   <!-- Content -->
   <section class="py-16 lg:py-20">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
-      <div class="prose max-w-none reveal"
-      >
+      <Prose class="max-w-none reveal site-prose">
         <Content />
-      </div>
+      </Prose>
     </div>
   </section>
 

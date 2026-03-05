@@ -1,0 +1,13 @@
+/* ==========================================================================
+ * Starwind UI Bridge
+ * Maps Starwind semantic tokens to our existing design system variables.
+ * Only the tokens actually used by installed Starwind components.
+ * ========================================================================== */
+
+:root {
+  --color-foreground: var(--color-text);
+  --color-primary-accent: var(--color-accent);
+  --color-muted-foreground: var(--color-text-tertiary);
+  --color-muted: var(--color-surface-muted);
+  --color-warning: #f59e0b;
+}

@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 import CTASection from "../../components/CTASection.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/schema/ArticleSchema.astro";
+import { Prose } from "@/components/starwind/prose";
 import { firmData } from "../../data/firm";
 import { getCollection, render } from "astro:content";
 
@@ -126,10 +127,9 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   <section class="py-16 lg:py-20">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
-      <div class="prose max-w-none"
-      >
+      <Prose class="max-w-none site-prose">
         <Content />
-      </div>
+      </Prose>
     </div>
   </section>
 
