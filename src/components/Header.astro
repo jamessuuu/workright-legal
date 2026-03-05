@@ -3,7 +3,8 @@ import { firmData, practiceAreasList } from "../data/firm";
 ---
 
 <header
-  class="glass fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border-subtle)]"
+  id="site-header"
+  class="glass fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-[border-color] duration-300"
   transition:persist
 >
   <nav class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16" aria-label="Main navigation">
@@ -45,7 +46,7 @@ import { firmData, practiceAreasList } from "../data/firm";
           </a>
           <div
             id="services-panel"
-            class="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300"
+            class="absolute top-full left-1/2 -translate-x-1/2 pt-5 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-300"
             role="menu"
           >
             <div class="bg-white rounded-xl shadow-lg border border-[var(--color-border)] py-2 w-64">
@@ -186,4 +187,19 @@ import { firmData, practiceAreasList } from "../data/firm";
 
   initHeader();
   document.addEventListener("astro:after-swap", initHeader);
+</script>
+
+<script>
+  const header = document.getElementById('site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('border-[var(--color-border)]');
+        header.classList.remove('border-transparent');
+      } else {
+        header.classList.remove('border-[var(--color-border)]');
+        header.classList.add('border-transparent');
+      }
+    }, { passive: true });
+  }
 </script>

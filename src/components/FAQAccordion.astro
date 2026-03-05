@@ -6,9 +6,9 @@ interface Props {
 const { faqs } = Astro.props;
 ---
 
-<div class="divide-y divide-[var(--color-border)]" role="list">
+<div class="divide-y divide-[var(--color-border)]">
   {faqs.map((faq, index) => (
-    <details class="group" role="listitem">
+    <details class="group">
       <summary
         class="flex items-center justify-between py-6 text-[var(--color-text)] text-base lg:text-lg font-medium cursor-pointer select-none hover:text-[var(--color-accent)] transition-colors duration-300"
         aria-controls={`faq-content-${index}`}

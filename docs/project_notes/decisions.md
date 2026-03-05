@@ -73,7 +73,23 @@
 - **Options:** Formspree, Resend email API, Vercel serverless function, Netlify Forms
 - **Priority:** CRITICAL - must be resolved in Phase 4
 
-## ADR-010: Documentation Structure Modeled on llm-agent Plugin
+## ADR-010: ClientJourney SVG Path Map over Pinned Scroll
+- **Date:** 2026-03-05
+- **Status:** Accepted (supersedes pinned scroll from Phase 6b)
+- **Context:** Pinned full-screen card cross-fade consumed 500vh of scroll distance, felt jarring, and broke natural page flow
+- **Decision:** Replace with a non-pinned SVG path map — winding trail on left, content cards on right, drawn by GSAP ScrollTrigger scrub
+- **Rationale:** Normal scroll section preserves flow, visual path metaphor matches "journey" narrative, scroll-driven drawing is satisfying without being intrusive
+- **Consequences:** `initJourneyPinned()` replaced with `initJourneyMap()` in scroll-animations.ts; mobile layout unchanged (stacked timeline)
+
+## ADR-011: Hero Background Video at 0.8 Opacity with Directional Gradient
+- **Date:** 2026-03-05
+- **Status:** Accepted
+- **Context:** Hero video was invisible (CSS set opacity:0 but no script added is-playing class); once fixed, needed to balance video visibility with text readability
+- **Decision:** Video at 0.8 opacity with left-to-right gradient overlay (solid dark left for text, 30% opacity right for video)
+- **Rationale:** Shows video clearly on right side while maintaining text contrast on left; top/bottom edge darkening keeps section boundaries clean
+- **Consequences:** Text area always readable regardless of video content; video becomes an atmospheric visual element
+
+## ADR-012: Documentation Structure Modeled on llm-agent Plugin
 - **Date:** 2026-02-26
 - **Status:** Accepted
 - **Context:** Need persistent documentation for project progress, bugs, decisions, issues

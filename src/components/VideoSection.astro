@@ -45,7 +45,7 @@ const isSelfHosted = !!videoSrc;
 
     <div class:list={[
       "relative group cursor-pointer overflow-hidden bg-[var(--color-surface-muted)]",
-      isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl max-h-[70vh]",
+      isFullwidth ? "aspect-[21/9]" : "aspect-video rounded-xl max-h-[50vh]",
     ]}
       id="video-container"
       data-video-id={videoId || ""}
@@ -105,6 +105,7 @@ const isSelfHosted = !!videoSrc;
         autoplay
         controls
         playsinline
+        aria-label="WorkRight Legal introduction video"
       ></video>`;
     } else if (videoId) {
       // YouTube embed

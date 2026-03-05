@@ -1,11 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import DeadlineUrgency from "../components/DeadlineUrgency.astro";
 import AnimatedCounter from "../components/AnimatedCounter.astro";
 import SituationSelector from "../components/SituationSelector.astro";
-import ImageSection from "../components/ImageSection.astro";
 import ClaimChecker from "../components/ClaimChecker.tsx";
 import ClientJourney from "../components/ClientJourney.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
@@ -28,20 +26,12 @@ const homeFaqs = [
     answer: "Take a breath. You likely have 21 days to lodge an unfair dismissal claim with the Fair Work Commission. Do not sign any documents your employer gives you without legal advice. Write down everything you remember about the dismissal while it is fresh. Then call us for a free consultation so we can assess your situation and explain your options."
   },
   {
-    question: "I'm scared to make a complaint. Will my employer find out?",
-    answer: "We understand this fear completely. Your initial consultation with us is confidential. If we proceed with a claim, your employer will eventually be notified, but it is unlawful for them to retaliate against you for exercising your workplace rights. General protections claims exist specifically to prevent this kind of retaliation."
-  },
-  {
     question: "Do I need an employment lawyer, or can I handle my case myself?",
     answer: "While you can represent yourself at the Fair Work Commission, employment law is complex and employers almost always have legal representation. Having a specialist employment lawyer significantly improves your chances of a favourable outcome. At WorkRight Legal, we offer a free initial consultation so you can understand your options before deciding."
   },
   {
     question: "How much does it cost to hire an employment lawyer in Sydney?",
     answer: "At WorkRight Legal, your initial consultation is always free. For eligible unfair dismissal and general protections cases, we offer no win, no fee arrangements. For other matters such as contract review, we offer transparent fixed fees. We'll always discuss costs upfront so there are no surprises."
-  },
-  {
-    question: "What is the most common type of employment law case in Australia?",
-    answer: "Unfair dismissal is the most common employment law claim in Australia, with over 15,000 applications lodged with the Fair Work Commission each year. Other common cases include workplace bullying, discrimination, general protections claims, and disputes over redundancy and severance pay."
   },
   {
     question: "How long does an employment law case typically take?",
@@ -52,13 +42,17 @@ const homeFaqs = [
     answer: "Yes, in some circumstances. If you were forced to resign due to intolerable working conditions, known as constructive dismissal, you may still be able to lodge an unfair dismissal claim. You may also have grounds for a general protections claim if your workplace rights were violated. Contact us within 21 days of your resignation for the best chance of success."
   },
 ];
+
+// Split testimonials: first is featured, next 2 are standard companions
+const featuredTestimonial = testimonialData[0];
+const companionTestimonials = testimonialData.slice(1, 3);
 ---
 
 <BaseLayout
   title="WorkRight Legal | Sydney Employment Lawyers | Free Consultation"
   description="Sydney's specialist employment lawyers. Unfair dismissal, workplace discrimination, contract review. Free initial consultation. No win, no fee options. Call (02) 9555 1234."
 >
-  <!-- 1. Hero with rotating empathetic questions -->
+  <!-- 1. Hero -->
   <Hero
     heading="Protecting employee rights across Greater Sydney"
     subheading="We only represent workers. Never employers. Free initial consultation, always."
@@ -72,80 +66,71 @@ const homeFaqs = [
   <!-- 2. Deadline urgency banner -->
   <DeadlineUrgency />
 
-  <!-- 3. Animated stats -->
-  <section class="py-8 lg:py-12 border-b border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+  <!-- 3. Trust & Credibility Bar (merged stats + badges) -->
+  <section class="py-10 lg:py-14 section-dark">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-        <AnimatedCounter value="15+" label="Years Experience" />
-        <AnimatedCounter value="95%" label="Success Rate" />
-        <AnimatedCounter value="500+" label="Clients Helped" />
-        <AnimatedCounter value="$0" label="Initial Consultation" />
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Situation selector — "Which sounds like you?" -->
-  <SituationSelector />
-
-  <!-- 5. Hero video with parallax + static fallback -->
-  <section class="py-10 lg:py-14">
-    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="reveal-scale">
-        <div class="overflow-hidden rounded-2xl aspect-[21/9] bg-[var(--color-surface-muted)] shadow-xl parallax-container relative">
-          <!-- Static image fallback (visible until video loads + for reduced-motion) -->
-          <Image
-            src="/images/generated/hero-office-wide.png"
-            alt="Premium modern law office corridor with warm timber and teal accents"
-            class="absolute inset-0 w-full h-full object-cover parallax-image"
-            width={1400}
-            height={600}
-            loading="lazy"
-            format="webp"
-          />
-          <!-- Ambient video loop (hidden for prefers-reduced-motion) -->
-          <video
-            class="absolute inset-0 w-full h-full object-cover hero-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="/images/generated/hero-office-wide.png"
-          >
-            <source src="/videos/hero-office-loop.mp4" type="video/mp4" />
-          </video>
+      <!-- Animated counters row -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
+        <div class="lg:border-r lg:border-white/10 lg:px-8 first:lg:pl-0 last:lg:pr-0 last:lg:border-r-0">
+          <AnimatedCounter value="15+" label="Years Experience" />
+        </div>
+        <div class="lg:border-r lg:border-white/10 lg:px-8 last:lg:border-r-0">
+          <AnimatedCounter value="95%" label="Success Rate" />
+        </div>
+        <div class="lg:border-r lg:border-white/10 lg:px-8 last:lg:border-r-0">
+          <AnimatedCounter value="500+" label="Clients Helped" />
+        </div>
+        <div class="lg:px-8 last:lg:pr-0">
+          <AnimatedCounter value="$0" label="Initial Consultation" />
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 6. Credibility badges -->
-  <section class="py-6 lg:py-8 border-y border-[var(--color-border-subtle)]">
-    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)] text-center mb-6">Memberships & Recognition</p>
-      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-sm text-[var(--color-text-secondary)] font-medium">
-        <span class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]"></span>
+      <!-- Divider -->
+      <div class="my-8 border-t border-white/10"></div>
+
+      <!-- Credibility badges row -->
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+        <span class="flex items-center gap-3 text-sm text-[var(--color-text-on-dark-secondary)] font-medium">
+          <svg class="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
           Law Society of NSW
         </span>
-        <span class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]"></span>
+        <span class="flex items-center gap-3 text-sm text-[var(--color-text-on-dark-secondary)] font-medium">
+          <svg class="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14" />
+            <path d="M9 21v-6h6v6" />
+          </svg>
           NSW Bar Association
         </span>
-        <span class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]"></span>
+        <span class="flex items-center gap-3 text-sm text-[var(--color-text-on-dark-secondary)] font-medium">
+          <svg class="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
           Industrial Relations Society of NSW
         </span>
-        <span class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]"></span>
+        <span class="flex items-center gap-3 text-sm text-[var(--color-text-on-dark-secondary)] font-medium">
+          <svg class="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
           Australian Lawyers Alliance
         </span>
       </div>
     </div>
   </section>
 
-  <!-- 7. ClaimChecker mini-embed -->
-  <section class="py-14 lg:py-20 section-warm">
+  <!-- 4. Situation selector -->
+  <SituationSelector />
+
+  <!-- 5. Client journey scroll story -->
+  <ClientJourney />
+
+  <!-- 6. ClaimChecker (elevated card) -->
+  <section class="py-14 lg:py-20">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div class="reveal">
@@ -164,64 +149,102 @@ const homeFaqs = [
           </p>
         </div>
         <div class="reveal-delay-1">
-          <ClaimChecker client:visible mini={true} />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Client journey scroll story -->
-  <ClientJourney />
-
-  <!-- 9. Why Us -->
-  <section class="py-14 lg:py-20 section-warm">
-    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <div class="reveal">
-          <div class="overflow-hidden rounded-xl aspect-[4/3] bg-[var(--color-surface-muted)] shadow-lg parallax-container">
-            <Image
-              src="/images/generated/consultation-scene.png"
-              alt="Lawyer and client in a warm consultation moment at a modern Sydney office"
-              class="w-full h-full object-cover parallax-image"
-              width={800}
-              height={600}
-              loading="lazy"
-              format="webp"
-            />
-          </div>
-        </div>
-        <div class="reveal-delay-1">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="h-[1.5px] w-8 accent-line"></div>
-            <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">On your side</span>
-          </div>
-          <h2
-            class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
-            style="font-family: var(--font-heading);"
-          >
-            We never represent employers. Only you.
-          </h2>
-          <p class="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed">
-            Most firms play both sides. We don't. No conflicts of interest, no divided loyalties. Just a team that's fully in your corner.
-          </p>
-          <div class="mt-6 space-y-3">
-            {["15+ years focused on employment law", "Hundreds of successful cases", "Direct access to your lawyer", "No win, no fee for eligible cases"].map((item) => (
-              <div class="flex items-center gap-4">
-                <div class="w-6 h-6 rounded-full bg-[var(--color-accent)] flex items-center justify-center shrink-0">
-                  <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <span class="text-[var(--color-text)] font-medium">{item}</span>
-              </div>
-            ))}
+          <div class="border border-[var(--color-border)] rounded-xl shadow-lg overflow-hidden">
+            <div class="border-l-4 border-l-[var(--color-accent)] p-6 lg:p-10">
+              <p class="text-sm text-[var(--color-text-tertiary)] mb-2">3 questions, 60 seconds</p>
+              <ClaimChecker client:visible mini={true} />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 10. Video Section -->
+  <!-- 7. Why Choose Us (redesigned, no image) -->
+  <section class="py-14 lg:py-20 section-warm relative overflow-hidden">
+    <!-- Subtle texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23000%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); background-repeat: repeat;"></div>
+    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 relative">
+      <!-- Bold typographic statement -->
+      <div class="text-center mb-12 lg:mb-16 reveal">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-[1.5px] w-8 accent-line"></div>
+          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">On your side</span>
+          <div class="h-[1.5px] w-8 accent-line"></div>
+        </div>
+        <h2
+          class="text-3xl md:text-4xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.08] max-w-3xl mx-auto"
+          style="font-family: var(--font-heading);"
+        >
+          We never represent employers. <span class="text-[var(--color-accent)]">Only you.</span>
+        </h2>
+        <p class="mt-4 text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
+          Most firms play both sides. We don't. No conflicts of interest, no divided loyalties.
+        </p>
+      </div>
+
+      <!-- 4-column benefit grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 stagger-children">
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3 class="text-sm lg:text-base font-bold mb-1" style="font-family: var(--font-heading);">Employee-Only Focus</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">15+ years exclusively representing workers</p>
+        </div>
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
+          <h3 class="text-sm lg:text-base font-bold mb-1" style="font-family: var(--font-heading);">Proven Track Record</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">95% success rate across hundreds of cases</p>
+        </div>
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <h3 class="text-sm lg:text-base font-bold mb-1" style="font-family: var(--font-heading);">Direct Lawyer Access</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">Speak directly with your lawyer, always</p>
+        </div>
+        <div class="text-center reveal">
+          <div class="w-12 h-12 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+            </svg>
+          </div>
+          <h3 class="text-sm lg:text-base font-bold mb-1" style="font-family: var(--font-heading);">No Win, No Fee</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">For eligible unfair dismissal cases</p>
+        </div>
+      </div>
+
+      <!-- Inline testimonial pull-quote -->
+      {featuredTestimonial && (
+        <div class="mt-12 lg:mt-16 max-w-3xl mx-auto text-center reveal">
+          <div class="border-t border-[var(--color-border)] pt-8">
+            <svg class="w-8 h-8 text-[var(--color-accent)] opacity-30 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <blockquote class="text-lg lg:text-xl italic text-[var(--color-text-secondary)] leading-relaxed">
+              "{featuredTestimonial.renderedBody}"
+            </blockquote>
+            <cite class="mt-4 block text-sm font-semibold not-italic text-[var(--color-text)]">
+              {featuredTestimonial.data.name} &mdash; {featuredTestimonial.data.practiceArea}
+            </cite>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 8. Proof (video + testimonials merged) -->
   <VideoSection
     heading="See how we work"
     subheading="A brief introduction to WorkRight Legal and our approach to employment law."
@@ -229,10 +252,10 @@ const homeFaqs = [
     posterUrl="/images/generated/video-thumbnail.png"
   />
 
-  <!-- 11. Testimonials -->
-  <section class="py-14 lg:py-20 section-warm">
+  <section class="pb-14 lg:pb-20 pt-4 lg:pt-6">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-      <div class="max-w-2xl mb-10 reveal">
+      <!-- Testimonial cards: 1 featured + 2 standard -->
+      <div class="mb-10 reveal">
         <div class="flex items-center gap-3 mb-4">
           <div class="h-[1.5px] w-8 accent-line"></div>
           <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">Real stories</span>
@@ -243,26 +266,46 @@ const homeFaqs = [
         >
           People like you, who took the first step
         </h2>
-        <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
-          Hear from clients who've been exactly where you are right now.
-        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-        {testimonialData.map((t, i) => (
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 stagger-children">
+        <!-- Featured (larger) testimonial -->
+        <div class="lg:row-span-1">
+          <TestimonialCard
+            name={testimonialData[1]?.data.name || "Client"}
+            rating={testimonialData[1]?.data.rating || 5}
+            practiceArea={testimonialData[1]?.data.practiceArea || ""}
+            content={testimonialData[1]?.renderedBody || ""}
+            featured={true}
+          />
+        </div>
+        <!-- 2 standard cards -->
+        {testimonialData.slice(2, 4).map((t) => (
           <TestimonialCard
             name={t.data.name}
             rating={t.data.rating}
             practiceArea={t.data.practiceArea}
             content={t.renderedBody}
-            featured={i === 0}
           />
         ))}
+      </div>
+
+      <!-- Read more link -->
+      <div class="mt-8 text-center">
+        <a
+          href="/testimonials"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors"
+        >
+          Read more reviews
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 12. FAQs -->
+  <!-- 9. FAQ + CTA -->
   <FAQSchema faqs={homeFaqs} />
   <section class="py-14 lg:py-20">
     <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12">
@@ -282,16 +325,5 @@ const homeFaqs = [
     </div>
   </section>
 
-  <!-- 13. CTA with empathetic copy -->
   <CTASection emotion="home" />
-
-  <!-- Hero video fade-in -->
-  <script>
-    const heroVideo = document.querySelector<HTMLVideoElement>('.hero-video');
-    if (heroVideo) {
-      heroVideo.addEventListener('playing', () => {
-        heroVideo.classList.add('is-playing');
-      }, { once: true });
-    }
-  </script>
 </BaseLayout>

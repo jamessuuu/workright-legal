@@ -180,8 +180,8 @@
 | Video: pulsing ring on play button | Done | 2026-03-04 | animate-ping with 2s duration |
 | Verified build (88 pages) + mobile/desktop viewports | Done | 2026-03-04 | Playwright screenshots at 375px + 1440px |
 
-## Phase 8: Future Enhancements (PLANNED)
-> Stretch goals and upcoming features
+## Phase 8: Expansion & Analytics (COMPLETED)
+> Location pages, analytics, production features
 
 | Task | Status | Date | Notes |
 |------|--------|------|-------|
@@ -189,3 +189,21 @@
 | Vercel Analytics + Speed Insights | Done | 2026-03-04 | Privacy-friendly, no cookies needed |
 | Cookie consent banner | Not needed | 2026-03-04 | Vercel Analytics is cookie-free |
 | V3 practice areas ambient video | Deferred | | No Veo MCP available; revisit when video gen tool configured |
+
+## Phase 9: ClientJourney Redesign & Hero Polish (COMPLETED)
+> SVG path map for ClientJourney, hero UX improvements, video fixes
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| ClientJourney: SVG path map replaces pinned scroll | Done | 2026-03-05 | Desktop: winding SVG trail (40%) + content cards (60%), GSAP scrub draws path |
+| ClientJourney: stop circles light up with accent color | Done | 2026-03-05 | Glow rings + card highlight/dim based on active stop |
+| ClientJourney: mobile unchanged stacked timeline | Done | 2026-03-05 | Mobile layout preserved |
+| scroll-animations.ts: initJourneyPinned replaced with initJourneyMap | Done | 2026-03-05 | stroke-dasharray/dashoffset animation via ScrollTrigger scrub |
+| BaseLayout: updated import to initJourneyMap | Done | 2026-03-05 | Was initJourneyPinned |
+| Hero: bouncing chevron replaces scroll-line-draw SVG | Done | 2026-03-05 | animate-bounce-gentle CSS (2s ease-in-out, 4px travel) |
+| global.css: removed scroll-line-draw keyframes, added bounce-gentle | Done | 2026-03-05 | Updated prefers-reduced-motion references |
+| VideoSection: max-h-[70vh] to max-h-[50vh] for inline variant | Done | 2026-03-05 | Constrains video height in viewport |
+| Hero: background video fix (is-playing class) | Done | 2026-03-05 | Script sets class on play, removed conflicting opacity-20 |
+| Hero: video opacity increased to 0.8 | Done | 2026-03-05 | .hero-video.is-playing in global.css |
+| Hero: directional gradient overlay | Done | 2026-03-05 | Left-to-right (solid dark left, 30% right) + top/bottom edge darkening |
+| HeroTextReveal: descender fix | Done | 2026-03-05 | Added pb-1 to .hero-word spans, prevents y/g clipping |

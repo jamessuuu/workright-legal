@@ -69,7 +69,7 @@ export default function HeroTextReveal({ segments, subheading }: Props) {
         {segments.map((seg, i) => (
           <span key={i}>
             <span
-              className={`hero-word inline-block ${seg.className || ""}`}
+              className={`hero-word inline-block pb-1 ${seg.className || ""}`}
               aria-hidden="true"
               style={{ opacity: 0 }}
             >

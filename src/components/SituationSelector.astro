@@ -1,7 +1,7 @@
 ---
 /**
- * SituationSelector — "Which sounds like you?" empathetic scenario cards.
- * Replaces generic practice area cards with first-person client language.
+ * SituationSelector — "What happened to you?" empathetic scenario cards.
+ * 2-column staggered layout with alternating amber/teal accents.
  * Each card mirrors what clients are actually feeling, not legal jargon.
  */
 
@@ -49,6 +49,9 @@ const situations = [
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
   },
 ];
+
+const amberAccent = "var(--color-accent)"; // #B8860B
+const tealAccent = "oklch(0.45 0.08 195)"; // var(--color-secondary)
 ---
 
 <section class="py-14 lg:py-20">
@@ -62,47 +65,62 @@ const situations = [
         class="text-2xl lg:text-[2.25rem] font-bold tracking-tight leading-[1.08]"
         style="font-family: var(--font-heading);"
       >
-        Tell us what you're going through
+        What happened to you?
       </h2>
       <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
         Pick the one that fits. We've helped hundreds of people in exactly your situation.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children">
-      {situations.map((s) => (
-        <a
-          href={`/services/${s.slug}`}
-          class="group situation-card block p-6 rounded-xl border border-[var(--color-border)] bg-white"
-        >
-          <div class="w-9 h-9 rounded-lg bg-[var(--color-accent-subtle)] flex items-center justify-center text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-white transition-all duration-500 mb-4">
-            <div class="w-4.5 h-4.5" set:html={s.icon} />
-          </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5 stagger-children">
+      {situations.map((s, i) => {
+        const isOdd = i % 2 !== 0;
+        const accentColor = isOdd ? tealAccent : amberAccent;
+        const iconBg = isOdd
+          ? "color-mix(in oklch, oklch(0.45 0.08 195) 12%, transparent)"
+          : "color-mix(in oklch, var(--color-accent) 12%, transparent)";
 
-          <p
-            class="text-base lg:text-lg font-semibold tracking-tight leading-snug"
-            style="font-family: var(--font-heading);"
+        return (
+          <a
+            href={`/services/${s.slug}`}
+            class:list={[
+              "group situation-card block p-6 rounded-xl border border-[var(--color-border)] bg-white focus-within:bg-[var(--color-surface-warm)] transition-colors",
+              isOdd && "lg:translate-y-6",
+            ]}
+            style={`border-left: 3px solid ${accentColor}`}
           >
-            "{s.feeling}"
-          </p>
-
-          <div class="situation-reveal">
-            <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
-              {s.response}
-            </p>
-          </div>
-
-          <div class="mt-4 flex items-center gap-2 text-[var(--color-accent)] font-semibold">
-            <span class="text-sm">{s.area}</span>
-            <svg
-              class="w-4 h-4 transform translate-x-0 group-hover:translate-x-2 transition-transform duration-300"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-500 mb-4"
+              style={`background: ${iconBg}; color: ${accentColor}`}
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
-            </svg>
-          </div>
-        </a>
-      ))}
+              <div class="w-4.5 h-4.5" set:html={s.icon} />
+            </div>
+
+            <p
+              class="text-base lg:text-lg font-semibold tracking-tight leading-snug"
+              style="font-family: var(--font-heading);"
+            >
+              &ldquo;{s.feeling}&rdquo;
+            </p>
+
+            <div class="situation-reveal">
+              <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                {s.response}
+              </p>
+            </div>
+
+            <div class="mt-4 flex items-center gap-2 font-semibold" style={`color: ${accentColor}`}>
+              <span class="text-sm">{s.area}</span>
+              <svg
+                class="w-4 h-4 transform translate-x-0 group-hover:translate-x-2 transition-transform duration-300"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

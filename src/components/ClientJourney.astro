@@ -1,9 +1,9 @@
 ---
 /**
- * ClientJourney — Immersive pinned scroll storytelling section.
- * Each stage pins and cross-fades as the user scrolls, creating
- * a narrative journey from crisis to resolution.
- * Uses GSAP ScrollTrigger pin + scrub.
+ * ClientJourney — SVG path map with scroll-driven animation.
+ * Desktop: winding SVG trail on the left, content cards on the right.
+ * As the user scrolls, the path draws and stops light up.
+ * Mobile: stacked timeline (no SVG path).
  */
 
 const stages = [
@@ -12,40 +12,46 @@ const stages = [
     text: "The call ends. Your role is gone. Twenty-one days to act — and the clock is already ticking.",
     accent: "var(--color-accent)",
     number: "01",
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="24" cy="24" r="20"/><path d="M24 14v10l7 7"/></svg>`,
   },
   {
     label: "You find us",
     text: "Hundreds face this every week. Most don't know their rights. You searched, you found us — that changes everything.",
     accent: "var(--color-accent-light)",
     number: "02",
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="20" cy="20" r="14"/><path d="M30 30l12 12"/><path d="M15 20h10M20 15v10"/></svg>`,
   },
   {
     label: "Sarah listens",
     text: "Not just the facts — what this means for your family, your future. She's handled hundreds of these. She knows exactly what to do.",
     accent: "var(--color-accent)",
     number: "03",
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M8 24c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M8 24v4a4 4 0 004 4h2v-12h-2a4 4 0 00-4 4zM40 24v4a4 4 0 01-4 4h-2v-12h2a4 4 0 014 4z"/><path d="M36 32v2a4 4 0 01-4 4h-6"/></svg>`,
   },
   {
     label: "We build your case",
     text: "While you're at home with your family, we're gathering evidence, negotiating, and preparing your Fair Work application.",
     accent: "var(--color-accent-light)",
     number: "04",
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect x="6" y="10" width="36" height="28" rx="3"/><path d="M6 18h36"/><path d="M14 26h8M14 32h12"/></svg>`,
   },
   {
     label: "You move forward",
     text: "A fair settlement. Acknowledgment. You can breathe again, plan again. Your story didn't end with their decision.",
     accent: "var(--color-accent)",
     number: "05",
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M12 36l8-8 6 6 10-14"/><circle cx="24" cy="24" r="20"/></svg>`,
   },
 ];
+
+// SVG path stop Y positions (evenly spaced in a 0-800 viewBox)
+const stopPositions = [
+  { cx: 100, cy: 60 },
+  { cx: 50, cy: 240 },
+  { cx: 150, cy: 400 },
+  { cx: 50, cy: 560 },
+  { cx: 100, cy: 740 },
+];
+
+const pathD = "M100,60 C100,140 50,160 50,240 C50,320 150,320 150,400 C150,480 50,480 50,560 C50,640 100,660 100,740";
 ---
 
-<!-- Mobile: stacked cards | Desktop: pinned scroll -->
+<!-- Mobile: stacked timeline | Desktop: SVG path map -->
 <section class="overflow-hidden" id="client-journey">
   <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-14 lg:py-20">
     <div class="max-w-2xl mb-12 reveal">
@@ -65,61 +71,107 @@ const stages = [
     </div>
   </div>
 
-  <!-- Desktop: Pinned scroll container -->
-  <div class="hidden lg:block journey-pinned" id="journey-pinned">
-    <div class="journey-pinned-inner relative" style="height: 100vh;">
-      <!-- Progress bar -->
-      <div class="absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 h-48 w-[2px] bg-[var(--color-border)]" aria-hidden="true">
-        <div class="journey-progress-bar w-full bg-[var(--color-accent)] origin-top" style="height: 0%;"></div>
-      </div>
+  <!-- Desktop: SVG path map + content cards -->
+  <div class="hidden lg:block" id="journey-map">
+    <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 pb-10">
+      <div class="grid grid-cols-[160px_1fr] gap-12 xl:gap-16">
+        <!-- Left: SVG winding path -->
+        <div class="relative" aria-hidden="true">
+          <svg class="journey-map-svg w-full" viewBox="0 0 200 800" preserveAspectRatio="xMidYMid meet">
+            <!-- Background path (dotted gray) -->
+            <path
+              class="journey-path-bg"
+              d={pathD}
+              stroke="var(--color-border)"
+              stroke-width="2"
+              fill="none"
+              stroke-dasharray="4 8"
+            />
+            <!-- Animated path (accent, drawn by scroll) -->
+            <path
+              class="journey-path-active"
+              d={pathD}
+              stroke="var(--color-accent)"
+              stroke-width="2.5"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <!-- Stop circles -->
+            {stopPositions.map((pos, i) => (
+              <g class="journey-stop" data-index={i}>
+                <!-- Outer glow ring -->
+                <circle
+                  cx={pos.cx}
+                  cy={pos.cy}
+                  r="16"
+                  fill="var(--color-accent)"
+                  opacity="0"
+                  class="journey-stop-glow"
+                />
+                <!-- Stop circle -->
+                <circle
+                  cx={pos.cx}
+                  cy={pos.cy}
+                  r="8"
+                  fill="var(--color-surface)"
+                  stroke="var(--color-border)"
+                  stroke-width="2"
+                  class="journey-stop-circle"
+                />
+                <!-- Step number -->
+                <text
+                  x={pos.cx}
+                  y={pos.cy + 1}
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  class="journey-stop-number"
+                  fill="var(--color-text-tertiary)"
+                  font-size="9"
+                  font-weight="700"
+                  font-family="var(--font-body)"
+                >
+                  {i + 1}
+                </text>
+              </g>
+            ))}
+          </svg>
+        </div>
 
-      <!-- Stage cards (stacked, cross-faded via GSAP) -->
-      {stages.map((stage, i) => (
-        <div
-          class="journey-card absolute inset-0 flex items-center"
-          data-index={i}
-          style={i === 0 ? "" : "opacity: 0;"}
-        >
-          <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 w-full">
-            <div class="grid grid-cols-2 gap-20 items-center">
-              <!-- Text -->
-              <div class:list={[i % 2 === 1 ? "order-2" : "order-1"]}>
+        <!-- Right: Content cards -->
+        <div class="space-y-6">
+          {stages.map((stage, i) => (
+            <div
+              class="journey-map-card rounded-xl border border-[var(--color-border)] p-6 lg:p-8 transition-all duration-500"
+              data-index={i}
+              style={i === 0 ? "opacity: 1;" : "opacity: 0.3;"}
+            >
+              <div class="flex items-start gap-4">
                 <span
-                  class="inline-block text-7xl font-bold opacity-20 mb-2"
+                  class="inline-block text-4xl font-bold opacity-25 shrink-0 leading-none"
                   style={`color: ${stage.accent}; font-family: var(--font-heading);`}
                 >
                   {stage.number}
                 </span>
-                <h3
-                  class="journey-card-heading text-2xl lg:text-3xl font-bold tracking-tight leading-tight"
-                  style="font-family: var(--font-heading);"
-                >
-                  {stage.label}
-                </h3>
-                <p class="journey-card-text mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
-                  {stage.text}
-                </p>
-              </div>
-
-              <!-- Visual: Icon -->
-              <div class:list={[
-                "flex items-center justify-center",
-                i % 2 === 1 ? "order-1" : "order-2",
-              ]}>
-                <div class="journey-card-icon relative w-32 h-32 text-[var(--color-accent)]" style={`color: ${stage.accent};`}>
-                  <!-- Ambient glow ring -->
-                  <div class="absolute inset-[-1rem] rounded-full opacity-10" style={`background: radial-gradient(circle, ${stage.accent} 0%, transparent 70%);`}></div>
-                  <div set:html={stage.icon} />
+                <div>
+                  <h3
+                    class="text-xl lg:text-2xl font-bold tracking-tight leading-tight"
+                    style="font-family: var(--font-heading);"
+                  >
+                    {stage.label}
+                  </h3>
+                  <p class="mt-2 text-base text-[var(--color-text-secondary)] leading-relaxed">
+                    {stage.text}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   </div>
 
-  <!-- Mobile: Stacked cards (no pin) -->
+  <!-- Mobile: Stacked cards (no SVG path) -->
   <div class="lg:hidden">
     <div class="max-w-[90rem] mx-auto px-5 sm:px-8">
       <div class="relative">

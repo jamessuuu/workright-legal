@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Hero from "../../../components/Hero.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
@@ -14,7 +13,6 @@ import LegalServiceSchema from "../../../components/schema/LegalServiceSchema.as
 import FAQSchema from "../../../components/schema/FAQSchema.astro";
 import HowToSchema from "../../../components/schema/HowToSchema.astro";
 import { firmData, practiceAreasList } from "../../../data/firm";
-import { practiceAreaImages, defaultImage } from "../../../lib/images";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -93,35 +91,20 @@ const urgency = urgencyData[data.slug];
     ]}
   />
 
-  <!-- Practice area image -->
-  <section class="py-10 lg:py-14">
-    <div class="max-w-5xl mx-auto px-5 sm:px-8 lg:px-10">
-      <div class="reveal-scale overflow-hidden rounded-xl aspect-[21/9] bg-[var(--color-surface-muted)]">
-        <Image
-          src={(practiceAreaImages[data.slug] || defaultImage).src}
-          alt={(practiceAreaImages[data.slug] || defaultImage).alt}
-          class="w-full h-full object-cover"
-          width={1200}
-          height={500}
-          loading="eager"
-          format="webp"
-        />
-      </div>
-    </div>
-  </section>
-
   <!-- Key Facts -->
   <section class="py-14 border-b border-[var(--color-border)]">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
       <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">Key Facts</h2>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
         {data.keyFacts.map((fact: string) => (
-          <li class="flex items-start gap-3 text-base text-[var(--color-text-secondary)]">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-1.5 shrink-0"></span>
-            {fact}
-          </li>
+          <div class="flex items-start gap-3 p-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+            <svg class="w-4 h-4 text-[var(--color-accent)] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{fact}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
@@ -215,19 +198,23 @@ const urgency = urgencyData[data.slug];
   <section class="py-16 lg:py-20 border-t border-[var(--color-border)]">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
       <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6">Related Services</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {practiceAreasList
           .filter((a) => a.slug !== data.slug)
           .slice(0, 4)
           .map((area) => (
             <a
               href={`/services/${area.slug}`}
-              class="flex items-center gap-3 p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors group"
+              class="block p-5 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-sm transition-all group"
             >
-              <span class="text-sm font-medium group-hover:text-[var(--color-accent)] transition-colors">{area.name}</span>
-              <svg class="w-3.5 h-3.5 ml-auto text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+              <span class="text-sm font-semibold group-hover:text-[var(--color-accent)] transition-colors">{area.name}</span>
+              <p class="mt-1.5 text-xs text-[var(--color-text-tertiary)] leading-relaxed line-clamp-2">{area.shortDescription}</p>
+              <span class="inline-flex items-center gap-1 mt-3 text-xs font-medium text-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity">
+                Learn more
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </a>
           ))}
       </div>

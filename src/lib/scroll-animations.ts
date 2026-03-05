@@ -122,85 +122,111 @@ export function initReveals(): (() => void) {
   return () => { triggers.forEach((st) => st.kill()); };
 }
 
-/** ClientJourney pinned scroll — timeline-based cross-fade on desktop */
-export function initJourneyPinned(): (() => void) {
+/** ClientJourney SVG path map — scroll-driven path draw + card highlights */
+export function initJourneyMap(): (() => void) {
   const reduced = prefersReducedMotion();
   const triggers: ScrollTrigger[] = [];
-  const pinnedEl = document.getElementById("journey-pinned");
+  const mapEl = document.getElementById("journey-map");
 
-  if (!pinnedEl || reduced || window.innerWidth < 1024) {
+  if (!mapEl || window.innerWidth < 1024) {
     return () => {};
   }
 
-  const cards = pinnedEl.querySelectorAll<HTMLElement>(".journey-card");
-  const progressBar = pinnedEl.querySelector<HTMLElement>(".journey-progress-bar");
-  const stageCount = cards.length;
+  const activePath = mapEl.querySelector<SVGPathElement>(".journey-path-active");
+  const stops = mapEl.querySelectorAll<SVGGElement>(".journey-stop");
+  const cards = mapEl.querySelectorAll<HTMLElement>(".journey-map-card");
+  const stageCount = stops.length;
 
-  if (stageCount < 2) return () => {};
+  if (!activePath || stageCount < 2) return () => {};
 
-  // Set initial state: first card visible, rest hidden
-  cards.forEach((card, i) => {
-    const heading = card.querySelector<HTMLElement>(".journey-card-heading");
-    const text = card.querySelector<HTMLElement>(".journey-card-text");
-    const icon = card.querySelector<HTMLElement>(".journey-card-icon");
-    if (i === 0) {
-      gsap.set(card, { opacity: 1 });
-      if (heading) gsap.set(heading, { opacity: 1, y: 0 });
-      if (text) gsap.set(text, { opacity: 1, y: 0 });
-      if (icon) gsap.set(icon, { opacity: 1, scale: 1 });
-    } else {
-      gsap.set(card, { opacity: 0 });
-      if (heading) gsap.set(heading, { opacity: 0, y: 20 });
-      if (text) gsap.set(text, { opacity: 0, y: 20 });
-      if (icon) gsap.set(icon, { opacity: 0, scale: 0.85 });
-    }
-  });
+  // Measure path length for stroke-dashoffset animation
+  const pathLength = activePath.getTotalLength();
 
-  // Build a proper GSAP timeline for frame-perfect scrub
-  const tl = gsap.timeline();
-
-  for (let i = 0; i < stageCount - 1; i++) {
-    const outCard = cards[i];
-    const inCard = cards[i + 1];
-    const inHeading = inCard.querySelector<HTMLElement>(".journey-card-heading");
-    const inText = inCard.querySelector<HTMLElement>(".journey-card-text");
-    const inIcon = inCard.querySelector<HTMLElement>(".journey-card-icon");
-
-    // Hold the current card visible for a beat
-    tl.to({}, { duration: 0.4 });
-
-    // Cross-fade: out old, in new
-    tl.to(outCard, { opacity: 0, duration: 0.3, ease: "power2.inOut" });
-    tl.to(inCard, { opacity: 1, duration: 0.3, ease: "power2.inOut" }, "<");
-    if (inIcon) {
-      tl.fromTo(inIcon, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }, "<");
-    }
-    if (inHeading) {
-      tl.fromTo(inHeading, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<0.05");
-    }
-    if (inText) {
-      tl.fromTo(inText, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<0.05");
-    }
-
-    // Hold the new card visible
-    if (i < stageCount - 2) {
-      tl.to({}, { duration: 0.4 });
-    }
+  if (reduced) {
+    // Show everything immediately
+    gsap.set(activePath, { strokeDasharray: pathLength, strokeDashoffset: 0 });
+    stops.forEach((stop) => {
+      const circle = stop.querySelector(".journey-stop-circle") as SVGCircleElement;
+      const glow = stop.querySelector(".journey-stop-glow") as SVGCircleElement;
+      const num = stop.querySelector(".journey-stop-number") as SVGTextElement;
+      if (circle) { circle.setAttribute("fill", "var(--color-accent)"); circle.setAttribute("stroke", "var(--color-accent)"); }
+      if (glow) gsap.set(glow, { opacity: 0.15 });
+      if (num) num.setAttribute("fill", "white");
+    });
+    cards.forEach((card) => gsap.set(card, { opacity: 1 }));
+    return () => {};
   }
 
-  // Progress bar: sync with ScrollTrigger progress directly
+  // Initial state: path fully hidden
+  gsap.set(activePath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+
+  // Build scroll-driven timeline
+  const tl = gsap.timeline();
+
+  // Each stage gets equal portion of timeline
+  const segmentDuration = 1 / stageCount;
+
+  for (let i = 0; i < stageCount; i++) {
+    const stop = stops[i];
+    const card = cards[i];
+    const circle = stop.querySelector(".journey-stop-circle") as SVGCircleElement;
+    const glow = stop.querySelector(".journey-stop-glow") as SVGCircleElement;
+    const num = stop.querySelector(".journey-stop-number") as SVGTextElement;
+
+    // Draw path to this stop
+    const targetOffset = pathLength * (1 - (i + 1) / stageCount);
+    tl.to(activePath, {
+      strokeDashoffset: targetOffset,
+      duration: segmentDuration * 0.6,
+      ease: "none",
+    });
+
+    // Light up stop circle
+    if (circle) {
+      tl.to(circle, {
+        attr: { fill: "var(--color-accent)", stroke: "var(--color-accent)" },
+        duration: segmentDuration * 0.2,
+        ease: "power2.out",
+      }, "<0.02");
+    }
+    if (glow) {
+      tl.to(glow, { opacity: 0.15, duration: segmentDuration * 0.2, ease: "power2.out" }, "<");
+    }
+    if (num) {
+      tl.to(num, { attr: { fill: "white" }, duration: segmentDuration * 0.1 }, "<");
+    }
+
+    // Highlight active card, dim others
+    if (card) {
+      tl.to(card, { opacity: 1, duration: segmentDuration * 0.2, ease: "power2.out" }, "<");
+      tl.to(card, {
+        borderColor: "var(--color-accent)",
+        boxShadow: "0 0 0 1px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.08)",
+        duration: segmentDuration * 0.2,
+        ease: "power2.out",
+      }, "<");
+    }
+
+    // Dim previous card (if exists)
+    if (i > 0 && cards[i - 1]) {
+      tl.to(cards[i - 1], { opacity: 0.3, duration: segmentDuration * 0.15, ease: "power2.out" }, "<");
+      tl.to(cards[i - 1], {
+        borderColor: "var(--color-border)",
+        boxShadow: "none",
+        duration: segmentDuration * 0.15,
+      }, "<");
+    }
+
+    // Hold at this stage briefly
+    tl.to({}, { duration: segmentDuration * 0.2 });
+  }
+
   const st = ScrollTrigger.create({
-    trigger: pinnedEl,
-    start: "top top",
-    end: `+=${stageCount * 100}vh`,
-    pin: true,
-    scrub: true,
+    trigger: mapEl,
+    start: "top 30%",
+    end: "bottom 40%",
+    scrub: 0.8,
     animation: tl,
-    onUpdate: (self) => {
-      if (progressBar) {
-        gsap.set(progressBar, { height: `${self.progress * 100}%` });
-      }
-    },
   });
   triggers.push(st);
 

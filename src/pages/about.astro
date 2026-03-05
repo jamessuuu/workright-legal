@@ -49,7 +49,7 @@ const sarah = attorneys[0];
             { title: "Results-Driven", desc: "Committed to optimal outcomes through strategic, thorough advocacy." },
             { title: "Accessible", desc: "Free consultations, no win no fee, evening and weekend appointments." },
           ].map((v) => (
-            <div class="p-6 rounded-xl border border-[var(--color-border)]">
+            <div class="card-lift p-6 rounded-xl border border-[var(--color-border)]">
               <h3 class="font-semibold text-base" style="font-family: var(--font-heading);">{v.title}</h3>
               <p class="mt-2 text-base text-[var(--color-text-secondary)] leading-relaxed">{v.desc}</p>
             </div>
@@ -73,12 +73,12 @@ const sarah = attorneys[0];
         />
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
-          <div class="reveal">
+          <div class="reveal parallax-container">
             <div class="aspect-[3/4] rounded-xl overflow-hidden bg-[var(--color-surface-muted)]">
               <Image
                 src={sarah.data.image}
                 alt={`${sarah.data.name}, ${sarah.data.title} at WorkRight Legal`}
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover parallax-image"
                 width={600}
                 height={800}
                 loading="lazy"
@@ -140,7 +140,7 @@ const sarah = attorneys[0];
           { title: "CBD location", desc: "Level 12, 123 Pitt Street - easy access via public transport." },
           { title: "Direct lawyer access", desc: "You work directly with your lawyer throughout your case." },
         ].map((f) => (
-          <div>
+          <div class="pl-4 border-l-2 border-[var(--color-accent)]">
             <h3 class="font-semibold text-base tracking-tight">{f.title}</h3>
             <p class="mt-1.5 text-base text-[var(--color-text-secondary)] leading-relaxed">{f.desc}</p>
           </div>
