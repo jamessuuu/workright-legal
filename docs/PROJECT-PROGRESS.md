@@ -237,50 +237,50 @@
 | Team profile: top padding on hero | Done | 2026-03-05 | Spacing fix |
 | Service detail: key facts py-14 → py-16 lg:py-20 | Done | 2026-03-05 | Matches site-wide rhythm |
 
-## Phase 12: Starwind UI Site-Wide Integration (IN PROGRESS)
+## Phase 12: Starwind UI Site-Wide Integration (COMPLETED)
 > Extend Starwind UI component library beyond Prose — Separator, Badge, Breadcrumb, Card, Alert, Accordion, Dialog
 
-**Constraint:** NO visual changes — must look identical before and after. React islands (ContactForm, ClaimChecker) stay as-is.
+**Constraint:** NO visual changes — identical before and after. React islands (ContactForm, ClaimChecker) stay as-is.
 
-**NOT replacing:** Buttons (elaborate ::before sweep animations), React form inputs, Navigation header, PracticeAreaCard, TestimonialCard.
+**NOT replaced:** Buttons (elaborate ::before sweep animations), React form inputs, Navigation header, PracticeAreaCard, TestimonialCard.
 
 | Task | Status | Date | Notes |
 |------|--------|------|-------|
 | **Phase 0: Foundation** | | | |
-| Create `src/lib/utils/cn.ts` (tailwind-merge utility) | Done | 2026-03-05 | Required by Starwind components |
-| Verify starwind.config.json paths | Done | 2026-03-05 | componentDir + utilsDir correct |
-| Build verification (88 pages) | Done | 2026-03-05 | Zero errors |
+| Create `src/lib/utils/cn.ts` (tailwind-merge utility) | Done | 2026-03-06 | Required by Starwind components |
+| Verify starwind.config.json paths | Done | 2026-03-06 | componentDir + utilsDir correct |
 | **Phase 1: Separator** | | | |
-| Install Starwind Separator component | Done | 2026-03-05 | Moved from nested dir to src/components/starwind/separator/ |
-| Replace border-t/border-b dividers (~8 files) | Pending | | team/[slug], news/[slug], services/[slug], faq, testimonials, case-results |
+| Install Starwind Separator component | Done | 2026-03-06 | Available for future use |
+| Section border-t/border-b — kept as-is | Skipped | 2026-03-06 | Structural borders on sections, not standalone dividers |
 | **Phase 2: Badge** | | | |
-| Install Starwind Badge | Pending | | |
-| Replace category labels (~3 files) | Pending | | case-results, news/index, news/[slug] |
+| Install Starwind Badge, replace category labels | Done | 2026-03-06 | case-results, news/index, news/[slug] (4 instances) |
 | **Phase 3: Breadcrumb** | | | |
-| Install Starwind Breadcrumb | Pending | | |
-| Create SiteBreadcrumb.astro wrapper | Pending | | Same API as current Breadcrumb.astro |
-| Update ~15 consumer pages | Pending | | |
-| Delete old Breadcrumb.astro | Pending | | After verification |
+| Install Starwind Breadcrumb, create SiteBreadcrumb wrapper | Done | 2026-03-06 | Same items[] API, 9 consumer pages updated |
+| Delete old Breadcrumb.astro | Done | 2026-03-06 | Replaced by SiteBreadcrumb.astro |
+| Fix tabler icon imports (Separator + Ellipsis) | Done | 2026-03-06 | Inline SVGs replace @tabler/icons |
 | **Phase 4: Card** | | | |
-| Install Starwind Card | Pending | | |
-| Add bridge CSS (--color-card, --color-card-foreground) | Pending | | |
-| Replace simple card patterns (~3 files) | Pending | | case-results, news/index only |
+| Install Starwind Card, add bridge CSS | Done | 2026-03-06 | --color-card, --color-card-foreground |
+| Replace case-results article cards | Done | 2026-03-06 | Card + CardContent with class overrides |
+| News index cards — kept as-is | Skipped | 2026-03-06 | Complex card-hover + group hover + image zoom |
 | **Phase 5: Alert** | | | |
-| Install Starwind Alert | Pending | | |
-| Add bridge CSS (--color-error, --color-error-foreground) | Pending | | |
-| Rewrite UrgencyBanner.astro internals | Pending | | Preserve dark bg + CTA |
+| Install Starwind Alert, add bridge CSS | Done | 2026-03-06 | --color-error, --color-error-foreground |
+| Rewrite UrgencyBanner.astro with Alert | Done | 2026-03-06 | role="alert" added, dark bg preserved via class overrides |
 | **Phase 6: Accordion** | | | |
-| Install Starwind Accordion | Pending | | |
-| Create SiteFAQAccordion.astro wrapper | Pending | | Same faqs[] API |
-| Replace FAQAccordion in service + FAQ pages | Pending | | Test View Transitions reinit |
-| Delete old FAQAccordion.astro | Pending | | After verification |
+| Install Starwind Accordion, create SiteFAQAccordion wrapper | Done | 2026-03-06 | Same faqs[] API, numbered styling preserved |
+| Replace FAQAccordion in 4 pages | Done | 2026-03-06 | index, faq, services/[slug], services/[slug]/[location] |
+| Delete old FAQAccordion.astro | Done | 2026-03-06 | Replaced by SiteFAQAccordion.astro |
+| Fix tabler icon import (AccordionTrigger) | Done | 2026-03-06 | Inline SVG chevron |
+| Add accordion keyframe animations | Done | 2026-03-06 | --animate-accordion-down/up in @theme |
 | **Phase 7: Dialog** | | | |
-| Install Starwind Dialog | Pending | | |
-| Add bridge CSS (--color-overlay) | Pending | | |
-| Rewrite ExitIntentModal.astro | Pending | | Preserve exit-intent JS + session storage |
+| Install Starwind Dialog, add bridge CSS | Done | 2026-03-06 | --color-background, --color-overlay |
+| Fix tabler icon import (DialogContent) | Done | 2026-03-06 | Inline SVG X icon |
+| Add animate-in/animate-out CSS utilities | Done | 2026-03-06 | Replaces tailwindcss-animate dependency |
+| Rewrite ExitIntentModal with Dialog | Done | 2026-03-06 | Programmatic open via dialog:open event |
+| Build verification (88 pages, zero errors) | Done | 2026-03-06 | After each phase |
 
 ### Starwind Integration Notes
-- **Config issue:** `npx starwind add` installs to nested `starwind/starwind/` dir — must manually move to `starwind/` after each install
-- **Bridge CSS pattern:** `src/styles/starwind-bridge.css` maps Starwind semantic tokens (--color-foreground, --color-card, etc.) to our design system (--color-text, --color-surface, etc.)
-- **bg-border:** Separator uses Tailwind `bg-border` which auto-resolves from our `@theme { --color-border }` — no bridge needed
-- **Execution order:** Phases 0-3 (low risk) → 4-5 (medium) → 6-7 (high risk, test individually)
+- **Config gotcha:** `npx starwind add` installs to nested `starwind/starwind/` dir — must `mv` to `starwind/` after each install
+- **Tabler icons:** All Starwind components import from `@tabler/icons` which is not installed — replaced with inline SVGs in Separator, Breadcrumb, Accordion, Dialog
+- **Bridge CSS:** `src/styles/starwind-bridge.css` maps Starwind semantic tokens to our design system variables
+- **Animation CSS:** Added `animate-in`/`animate-out` utility classes + keyframes to global.css (replaces `tailwindcss-animate` dependency)
+- **8 components installed:** Prose, Separator, Badge, Breadcrumb, Card, Alert, Accordion, Dialog

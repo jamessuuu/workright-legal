@@ -3,7 +3,18 @@
  * ExitIntentModal - Shows when user moves cursor toward browser chrome
  * on pages with time-sensitive deadlines (unfair dismissal, general protections).
  * Non-intrusive, dismissible, shown only once per session.
+ *
+ * Uses Starwind Dialog with programmatic opening via dialog:open custom event.
  */
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/starwind/dialog";
+
 interface Props {
   days: number;
   practiceArea: string;
@@ -12,98 +23,43 @@ interface Props {
 const { days, practiceArea } = Astro.props;
 ---
 
-<div id="exit-intent-overlay" class="exit-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-intent-heading" hidden>
-  <div class="exit-modal">
-    <button
-      id="exit-intent-close"
-      class="absolute top-4 right-4 p-1 text-[var(--color-text-tertiary)] hover:text-[var(--color-text)] transition-colors"
-      aria-label="Close"
-      type="button"
-    >
-      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-
-    <div class="flex items-center gap-3 mb-4">
-      <div class="w-10 h-10 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center shrink-0">
-        <svg class="w-5 h-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
-        </svg>
+<Dialog id="exit-intent-dialog">
+  <DialogContent class="bg-[var(--color-surface)] border-[var(--color-border)] max-w-lg rounded-xl">
+    <DialogHeader class="text-left">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--color-accent-subtle)] flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </div>
+        <p class="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">Time-sensitive</p>
       </div>
-      <p class="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">Time-sensitive</p>
-    </div>
 
-    <h2
-      id="exit-intent-heading"
-      class="text-2xl lg:text-3xl font-bold tracking-tight"
-      style="font-family: var(--font-heading);"
-    >
-      You have {days} days to file your {practiceArea.toLowerCase()} claim.
-    </h2>
+      <DialogTitle class="text-2xl lg:text-3xl font-bold tracking-tight text-[var(--color-text)]" style="font-family: var(--font-heading);">
+        You have {days} days to file your {practiceArea.toLowerCase()} claim.
+      </DialogTitle>
 
-    <p class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
-      The Fair Work Commission enforces a strict {days}-day deadline from the date of dismissal. Missing this deadline could mean losing your right to compensation entirely. A free consultation takes just 15 minutes.
-    </p>
+      <DialogDescription class="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+        The Fair Work Commission enforces a strict {days}-day deadline from the date of dismissal. Missing this deadline could mean losing your right to compensation entirely. A free consultation takes just 15 minutes.
+      </DialogDescription>
+    </DialogHeader>
 
-    <div class="mt-6 flex flex-wrap gap-3">
+    <DialogFooter class="mt-6 flex-row justify-start gap-3">
       <a href="/contact" class="btn btn-primary text-sm">
         Free consultation
       </a>
       <a href="tel:0295551234" class="btn btn-outline text-sm">
         Call (02) 9555 1234
       </a>
-    </div>
-  </div>
-</div>
-
-<style>
-  .exit-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .exit-overlay[hidden] {
-    display: none;
-  }
-
-  .exit-overlay.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .exit-modal {
-    position: relative;
-    max-width: 32rem;
-    width: calc(100% - 2rem);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    padding: 2rem;
-    transform: translateY(1rem);
-    transition: transform 0.3s ease;
-  }
-
-  .exit-overlay.is-visible .exit-modal {
-    transform: translateY(0);
-  }
-</style>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
 
 <script>
   function initExitIntent() {
-    const overlay = document.getElementById('exit-intent-overlay');
-    const closeBtn = document.getElementById('exit-intent-close');
-    if (!overlay) return;
+    const dialogWrapper = document.getElementById('exit-intent-dialog');
+    if (!dialogWrapper) return;
 
     const SESSION_KEY = 'exit-intent-shown';
 
@@ -112,16 +68,8 @@ const { days, practiceArea } = Astro.props;
 
     function showModal() {
       sessionStorage.setItem(SESSION_KEY, '1');
-      overlay.hidden = false;
-      // Force reflow before adding class for transition
-      void overlay.offsetHeight;
-      overlay.classList.add('is-visible');
+      dialogWrapper.dispatchEvent(new CustomEvent('dialog:open'));
       document.removeEventListener('mouseout', handleMouseOut);
-    }
-
-    function hideModal() {
-      overlay.classList.remove('is-visible');
-      setTimeout(() => { overlay.hidden = true; }, 300);
     }
 
     function handleMouseOut(e: MouseEvent) {
@@ -135,22 +83,13 @@ const { days, practiceArea } = Astro.props;
     document.addEventListener('mouseout', handleMouseOut);
 
     // Mobile: trigger on back button / visibility change after 30s
-    let mobileTimer: ReturnType<typeof setTimeout> | null = null;
-    mobileTimer = setTimeout(() => {
+    setTimeout(() => {
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'hidden' && !sessionStorage.getItem(SESSION_KEY)) {
           sessionStorage.setItem(SESSION_KEY, '1');
         }
       }, { once: true });
     }, 30000);
-
-    closeBtn?.addEventListener('click', hideModal);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) hideModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !overlay.hidden) hideModal();
-    });
   }
 
   initExitIntent();

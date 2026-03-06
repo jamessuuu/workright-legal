@@ -10,4 +10,16 @@
   --color-muted-foreground: var(--color-text-tertiary);
   --color-muted: var(--color-surface-muted);
   --color-warning: #f59e0b;
+
+  /* Phase 4: Card */
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+
+  /* Phase 5: Alert */
+  --color-error: #dc2626;
+  --color-error-foreground: #ffffff;
+
+  /* Phase 7: Dialog */
+  --color-background: var(--color-surface);
+  --color-overlay: rgba(0, 0, 0, 0.5);
 }

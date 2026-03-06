@@ -3,8 +3,9 @@ import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Hero from "../../components/Hero.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
-import Breadcrumb from "../../components/Breadcrumb.astro";
+import Breadcrumb from "../../components/SiteBreadcrumb.astro";
 import CTASection from "../../components/CTASection.astro";
+import { Badge } from "@/components/starwind/badge";
 import { firmData } from "../../data/firm";
 import { getCollection } from "astro:content";
 
@@ -61,9 +62,9 @@ const sortedPosts = posts.sort(
             )}
             <div class="p-5 lg:p-6">
               <div class="flex items-center gap-3 mb-3">
-                <span class="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider">
+                <Badge variant="ghost" size="sm" class="bg-transparent text-[var(--color-accent)] uppercase tracking-wider">
                   {post.data.category}
-                </span>
+                </Badge>
                 <span class="text-xs text-[var(--color-text-tertiary)]">
                   {new Date(post.data.date).toLocaleDateString("en-AU", {
                     day: "numeric",

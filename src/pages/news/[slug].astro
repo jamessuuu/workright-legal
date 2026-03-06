@@ -1,11 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Breadcrumb from "../../components/Breadcrumb.astro";
+import Breadcrumb from "../../components/SiteBreadcrumb.astro";
 import CTASection from "../../components/CTASection.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/schema/ArticleSchema.astro";
 import { Prose } from "@/components/starwind/prose";
+import { Badge } from "@/components/starwind/badge";
 import { firmData } from "../../data/firm";
 import { getCollection, render } from "astro:content";
 
@@ -75,9 +76,9 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
       <div class="mt-6">
         <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider">
+          <Badge variant="ghost" size="sm" class="bg-transparent text-[var(--color-accent)] uppercase tracking-wider">
             {data.category}
-          </span>
+          </Badge>
           <span class="text-xs text-[var(--color-text-tertiary)]">{formattedDate}</span>
           <span class="text-xs text-[var(--color-text-tertiary)]">&middot; {readingTime} min read</span>
         </div>
@@ -166,7 +167,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
                   </div>
                 )}
                 <div class="p-4">
-                  <span class="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider">{related.data.category}</span>
+                  <Badge variant="ghost" size="sm" class="bg-transparent text-[var(--color-accent)] uppercase tracking-wider">{related.data.category}</Badge>
                   <h3 class="mt-1.5 text-base font-semibold tracking-tight group-hover:text-[var(--color-accent)] transition-colors leading-snug" style="font-family: var(--font-heading);">
                     {related.data.title}
                   </h3>

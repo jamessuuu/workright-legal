@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "tailwind-variants";
+
+type Props = HTMLAttributes<"button">;
+
+export const accordionTrigger = tv({
+  base: [
+    "starwind-accordion-trigger",
+    "flex w-full items-center justify-between gap-4 rounded-md py-4",
+    "hover:text-muted-foreground text-left font-medium transition-all",
+    "[&[data-state=open]>svg]:rotate-180",
+    "focus-visible:border-outline focus-visible:ring-outline/50 outline-none focus-visible:ring-3",
+  ],
+});
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<button
+  type="button"
+  class={accordionTrigger({ class: className })}
+  aria-expanded="false"
+  {...rest}
+  data-slot="accordion-trigger"
+>
+  <slot />
+  <slot name="icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 shrink-0 transition-transform duration-200"><path d="M6 9l6 6 6-6" /></svg>
+  </slot>
+</button>

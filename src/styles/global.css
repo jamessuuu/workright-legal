@@ -73,6 +73,65 @@
   --radius-xl: 1.25rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
+
+  /* Starwind Accordion animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+/* Starwind animate-in/animate-out utilities (replaces tailwindcss-animate) */
+@keyframes sw-enter {
+  from {
+    opacity: var(--sw-enter-opacity, 1);
+    transform: translate3d(var(--sw-enter-translate-x, 0), var(--sw-enter-translate-y, 0), 0)
+      scale3d(var(--sw-enter-scale, 1), var(--sw-enter-scale, 1), var(--sw-enter-scale, 1));
+  }
+}
+
+@keyframes sw-exit {
+  to {
+    opacity: var(--sw-exit-opacity, 1);
+    transform: translate3d(var(--sw-exit-translate-x, 0), var(--sw-exit-translate-y, 0), 0)
+      scale3d(var(--sw-exit-scale, 1), var(--sw-exit-scale, 1), var(--sw-exit-scale, 1));
+  }
+}
+
+.animate-in {
+  animation-name: sw-enter;
+  animation-duration: inherit;
+  animation-timing-function: ease-out;
+  --sw-enter-opacity: initial;
+  --sw-enter-scale: initial;
+  --sw-enter-translate-x: initial;
+  --sw-enter-translate-y: initial;
+}
+
+.animate-out {
+  animation-name: sw-exit;
+  animation-duration: inherit;
+  animation-timing-function: ease-out;
+  --sw-exit-opacity: initial;
+  --sw-exit-scale: initial;
+  --sw-exit-translate-x: initial;
+  --sw-exit-translate-y: initial;
+}
+
+.fade-in { --sw-enter-opacity: 0; }
+.fade-out { --sw-exit-opacity: 0; }
+.zoom-in-95 { --sw-enter-scale: 0.95; }
+.zoom-out-95 { --sw-exit-scale: 0.95; }
+.slide-in-from-bottom-2 { --sw-enter-translate-y: 0.5rem; }
+.slide-out-to-bottom-2 { --sw-exit-translate-y: 0.5rem; }
+.fill-mode-forwards { animation-fill-mode: forwards; }
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--starwind-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--starwind-accordion-content-height); }
+  to { height: 0; }
 }
 
 /* ==================

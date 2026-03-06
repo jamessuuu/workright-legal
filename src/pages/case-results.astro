@@ -2,8 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import CTASection from "../components/CTASection.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
+import Breadcrumb from "../components/SiteBreadcrumb.astro";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import { Badge } from "@/components/starwind/badge";
+import { Card, CardContent } from "@/components/starwind/card";
 import { firmData } from "../data/firm";
 import { getCollection } from "astro:content";
 
@@ -55,38 +57,40 @@ const practiceAreaColors: Record<string, string> = {
 
       <div class="space-y-8 stagger-children">
         {sorted.map((result) => (
-          <article class="border border-[var(--color-border)] rounded-xl p-6 lg:p-8 reveal">
-            <div class="flex flex-wrap items-center gap-3 mb-4">
-              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium ${practiceAreaColors[result.data.practiceArea] || "bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)]"}`}>
-                {result.data.practiceArea}
-              </span>
-              <span class="text-xs text-[var(--color-text-tertiary)]">{result.data.year}</span>
-            </div>
-
-            <h2
-              class="text-xl lg:text-2xl font-semibold tracking-tight mb-3"
-              style="font-family: var(--font-heading);"
-            >
-              {result.data.title}
-            </h2>
-
-            <p class="text-base text-[var(--color-text-secondary)] leading-relaxed mb-5">
-              {result.data.summary}
-            </p>
-
-            <div class="flex flex-wrap gap-6 pt-4 border-t border-[var(--color-border)]">
-              <div>
-                <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Outcome</p>
-                <p class="text-base font-semibold text-[var(--color-text)]">{result.data.outcome}</p>
+          <Card class="gap-0 py-0 reveal">
+            <CardContent class="p-6 lg:p-8">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <Badge variant="ghost" size="sm" class={practiceAreaColors[result.data.practiceArea] || "bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)]"}>
+                  {result.data.practiceArea}
+                </Badge>
+                <span class="text-xs text-[var(--color-text-tertiary)]">{result.data.year}</span>
               </div>
-              {result.data.settlementRange && (
+
+              <h2
+                class="text-xl lg:text-2xl font-semibold tracking-tight mb-3"
+                style="font-family: var(--font-heading);"
+              >
+                {result.data.title}
+              </h2>
+
+              <p class="text-base text-[var(--color-text-secondary)] leading-relaxed mb-5">
+                {result.data.summary}
+              </p>
+
+              <div class="flex flex-wrap gap-6 pt-4 border-t border-[var(--color-border)]">
                 <div>
-                  <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Settlement range</p>
-                  <p class="text-base font-semibold text-[var(--color-accent-text)]">{result.data.settlementRange}</p>
+                  <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Outcome</p>
+                  <p class="text-base font-semibold text-[var(--color-text)]">{result.data.outcome}</p>
                 </div>
-              )}
-            </div>
-          </article>
+                {result.data.settlementRange && (
+                  <div>
+                    <p class="text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)] mb-1">Settlement range</p>
+                    <p class="text-base font-semibold text-[var(--color-accent-text)]">{result.data.settlementRange}</p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
