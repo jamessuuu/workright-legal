@@ -208,6 +208,8 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
               onClick={() => { setAnswers({ ...answers, situation: key }); }}
               className={`claim-option ${answers.situation === key ? "selected" : ""}`}
               style={{ textAlign: "left", fontFamily: "var(--font-body)", fontSize: "0.9375rem" }}
+              aria-pressed={answers.situation === key}
+              aria-label={`Select situation: ${label}`}
             >
               {label}
             </button>
@@ -221,7 +223,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
               style={{ fontSize: "0.875rem" }}
             >
               Continue your assessment
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
@@ -261,6 +263,8 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                 onClick={() => setAnswers({ ...answers, situation: key })}
                 className={`claim-option ${answers.situation === key ? "selected" : ""}`}
                 style={{ textAlign: "left", fontFamily: "var(--font-body)", fontSize: "0.9375rem" }}
+                aria-pressed={answers.situation === key}
+                aria-label={`Select situation: ${label}`}
               >
                 {label}
               </button>
@@ -330,21 +334,27 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                 onClick={() => toggleDetail(opt)}
                 className={`claim-option ${answers.details.includes(opt) ? "selected" : ""}`}
                 style={{ textAlign: "left", fontFamily: "var(--font-body)", fontSize: "0.9375rem" }}
+                role="checkbox"
+                aria-checked={answers.details.includes(opt)}
+                aria-label={opt}
               >
                 <span style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <span style={{
-                    width: "1.125rem",
-                    height: "1.125rem",
-                    borderRadius: "0.25rem",
-                    border: answers.details.includes(opt) ? "none" : "1.5px solid var(--color-border)",
-                    background: answers.details.includes(opt) ? "var(--color-accent)" : "transparent",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "1.125rem",
+                      height: "1.125rem",
+                      borderRadius: "0.25rem",
+                      border: answers.details.includes(opt) ? "none" : "1.5px solid var(--color-border)",
+                      background: answers.details.includes(opt) ? "var(--color-accent)" : "transparent",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
                     {answers.details.includes(opt) && (
-                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="3">
+                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="3" aria-hidden="true">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     )}
@@ -378,6 +388,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                     onClick={() => setAnswers({ ...answers, duration: opt })}
                     className={`claim-option ${answers.duration === opt ? "selected" : ""}`}
                     style={{ textAlign: "center", fontFamily: "var(--font-body)", fontSize: "0.8125rem", padding: "0.75rem 0.5rem" }}
+                    aria-pressed={answers.duration === opt}
                   >
                     {opt}
                   </button>
@@ -395,6 +406,8 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                     onClick={() => setAnswers({ ...answers, state: s })}
                     className={`claim-option ${answers.state === s ? "selected" : ""}`}
                     style={{ textAlign: "center", fontFamily: "var(--font-body)", fontSize: "0.8125rem", padding: "0.5rem 1rem", minWidth: "3.5rem" }}
+                    aria-pressed={answers.state === s}
+                    aria-label={`Select state: ${s}`}
                   >
                     {s}
                   </button>
@@ -412,6 +425,8 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                     onClick={() => setAnswers({ ...answers, employerSize: opt })}
                     className={`claim-option ${answers.employerSize === opt ? "selected" : ""}`}
                     style={{ textAlign: "center", fontFamily: "var(--font-body)", fontSize: "0.8125rem", padding: "0.75rem 0.5rem" }}
+                    aria-pressed={answers.employerSize === opt}
+                    aria-label={`Select employer size: ${opt} employees`}
                   >
                     {opt}
                   </button>
@@ -438,7 +453,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                 background: "var(--color-accent)", display: "flex",
                 alignItems: "center", justifyContent: "center",
               }}>
-                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2.5">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2.5" aria-hidden="true">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
@@ -511,6 +526,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
           {step > 0 ? (
             <button
               onClick={back}
+              aria-label="Back to previous step"
               style={{
                 fontSize: "0.875rem",
                 color: "var(--color-text-secondary)",
@@ -524,7 +540,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
                 gap: "0.5rem",
               }}
             >
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m7-7-7 7 7 7" />
               </svg>
               Back

@@ -346,3 +346,40 @@
 | **Batch 9: Cleanup** | | | |
 | Delete public/images/generated/chatbot-avatar.png | Done | 2026-03-06 | No component references (only NANO-BANANA-PROMPTS.md) |
 | Build verification: 88 pages, zero errors | Done | 2026-03-06 | All batches verified |
+
+## Phase 15: Audit & Cleanup (COMPLETED)
+> Performance, accessibility, and SEO audits with remediation
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| **Performance Audit** | | | |
+| Bundle analysis | Pass | 2026-03-06 | 17 lean dependencies, zero bloat |
+| Image optimization (9/11 pages) | Pass | 2026-03-06 | Astro Image + WebP across site |
+| VideoSection.astro poster | Pass | 2026-03-06 | Has width/height/loading; public path = can't use Astro Image |
+| Font loading (@fontsource) | Pass | 2026-03-06 | Self-hosted, font-display:swap built in |
+| CSS organization | Pass | 2026-03-06 | Well-structured, no orphaned blocks |
+| Third-party scripts | Pass | 2026-03-06 | Vercel Analytics + GSAP properly integrated |
+| Astro config (prefetch, compress, SSG) | Pass | 2026-03-06 | Production-optimized |
+| HTML output (charset, viewport, lang) | Pass | 2026-03-06 | All meta tags present |
+| **Accessibility Audit** | | | |
+| Navigation ARIA (Header.astro) | Pass | 2026-03-06 | aria-expanded, aria-controls, Escape key |
+| Skip-to-content link | Pass | 2026-03-06 | Already exists in BaseLayout line 77 |
+| ContactForm ARIA | Pass | 2026-03-06 | Exemplary — labels, aria-required, aria-invalid, role="alert" |
+| ClaimChecker ARIA remediation | Done | 2026-03-06 | Added aria-pressed, aria-label, role="checkbox", aria-checked |
+| ExitIntentModal SVG aria-hidden | Done | 2026-03-06 | Added aria-hidden="true" to decorative clock icon |
+| Color contrast | Pass | 2026-03-06 | Meets WCAG AA across all token pairs |
+| Focus styles (:focus-visible) | Pass | 2026-03-06 | 2px solid accent, 3px offset |
+| Reduced motion (@media prefers-reduced-motion) | Pass | 2026-03-06 | Comprehensive coverage |
+| Heading hierarchy | Pass | 2026-03-06 | Single h1 per page, sequential h2→h3→h4 |
+| **SEO Audit** | | | |
+| Meta tags (title, desc, OG, Twitter, canonical) | Pass | 2026-03-06 | All 10/10 items passing |
+| Structured data (9 JSON-LD types) | Pass | 2026-03-06 | Organization, LegalService, Person, FAQ, etc. |
+| robots.txt + AI crawler directives | Pass | 2026-03-06 | 17 user-agents configured |
+| Sitemap (@astrojs/sitemap) | Pass | 2026-03-06 | 88 pages, proper filtering |
+| Internal linking (zero orphaned pages) | Pass | 2026-03-06 | All pages linked from Header or Footer |
+| llms.txt | Pass | 2026-03-06 | Up to date |
+| noindex on policy + 404 pages | Pass | 2026-03-06 | Correct implementation |
+| Canonical URLs (self-referential) | Pass | 2026-03-06 | Dynamic from Astro.url.pathname |
+| **Cleanup** | | | |
+| Delete unused ImageSection.astro | Done | 2026-03-06 | No references in codebase |
+| Build verification: 88 pages, zero errors | Done | 2026-03-06 | All fixes verified |
