@@ -84,11 +84,12 @@ const categories: FaqCategory[] = [
   <!-- Quick nav -->
   <section class="py-8 border-b border-[var(--color-border)]">
     <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2" id="faq-nav">
         {categories.map((cat) => (
           <a
             href={`#${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
-            class="text-xs font-medium px-3 py-1.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+            class="faq-pill text-xs font-medium px-3 py-1.5 rounded-full border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+            data-pill={cat.name.toLowerCase().replace(/\s+/g, "-")}
           >
             {cat.name}
           </a>
@@ -129,4 +130,40 @@ const categories: FaqCategory[] = [
     heading="Still have questions?"
     subheading="Contact us for a free, confidential consultation."
   />
+
+  <style>
+    .faq-pill.is-active {
+      border-color: var(--color-accent);
+      background-color: var(--color-accent-subtle);
+      color: var(--color-accent);
+    }
+  </style>
+
+  <script>
+    function initFaqScrollSpy() {
+      const sections = document.querySelectorAll<HTMLElement>("section[id]");
+      const pills = document.querySelectorAll<HTMLElement>(".faq-pill[data-pill]");
+      if (!sections.length || !pills.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              pills.forEach((pill) => {
+                pill.classList.toggle("is-active", pill.dataset.pill === id);
+              });
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px" }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    // Run on initial load and after view transitions
+    initFaqScrollSpy();
+    document.addEventListener("astro:after-swap", initFaqScrollSpy);
+  </script>
 </BaseLayout>

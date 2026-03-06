@@ -284,3 +284,65 @@
 - **Bridge CSS:** `src/styles/starwind-bridge.css` maps Starwind semantic tokens to our design system variables
 - **Animation CSS:** Added `animate-in`/`animate-out` utility classes + keyframes to global.css (replaces `tailwindcss-animate` dependency)
 - **8 components installed:** Prose, Separator, Badge, Breadcrumb, Card, Alert, Accordion, Dialog
+
+## Phase 13: Card Hover Fix (COMPLETED)
+> Fix SituationSelector hover bug and improve card hover patterns site-wide
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| Fix SituationSelector both-cards-in-row hover bug | Done | 2026-03-06 | `transition: all` caused grid reflow to animate adjacent cards |
+| Remove expand/reveal animation from situation cards | Done | 2026-03-06 | Response text now always visible — better UX |
+| Replace situation card hover with subtle effect | Done | 2026-03-06 | Background tint + shadow, no translateY lift |
+| Fix `.card-hover` transition: all → specific properties | Done | 2026-03-06 | news cards, team cards — reduced lift to -4px |
+| Fix `.card-lift` transition: all → specific properties | Done | 2026-03-06 | PracticeAreaCard, about page — reduced lift to -4px |
+| Build verification (88 pages, zero errors) | Done | 2026-03-06 | All pages pass |
+
+### Hover Fix Notes
+- **Root cause:** `transition: all` on cards in a CSS Grid caused adjacent cards to animate when one card's `translateY(-6px)` lift triggered grid reflow
+- **Fix:** Scoped transitions to specific properties (`transform`, `box-shadow`, `background-color`, `border-color`)
+- **Situation cards:** Removed `translateY` lift entirely + removed hidden/reveal content expansion; replaced with subtle `background-color` shift + `box-shadow` enhancement
+- **card-hover / card-lift:** Kept `translateY` lift but reduced from -6px/-8px to -4px and scoped transitions
+
+## Phase 14: Site-Wide Visual Polish (COMPLETED)
+> Consistency fixes, micro-interactions, editorial layout improvements, CSS cleanup — no design language changes
+
+| Task | Status | Date | Notes |
+|------|--------|------|-------|
+| **Batch 1: Testimonial Consistency** | | | |
+| Replace inline blockquotes with TestimonialCard on services/[slug] | Done | 2026-03-06 | Grid layout md:grid-cols-2 |
+| Replace inline blockquotes with TestimonialCard on team/[slug] | Done | 2026-03-06 | Grid layout md:grid-cols-2 |
+| Replace featured section with TestimonialCard featured on testimonials | Done | 2026-03-06 | featured={true} prop |
+| ProcessSteps: step circle border/text from --color-text to --color-accent | Done | 2026-03-06 | Warm accent on timeline numbers |
+| **Batch 2: UrgencyBanner + CTA Emotion** | | | |
+| UrgencyBanner: remove reveal, add urgency-enter CSS animation | Done | 2026-03-06 | Immediate slide-down on page load |
+| global.css: add @keyframes urgency-slide-down + .urgency-enter | Done | 2026-03-06 | 0.4s translateY(-100%) → 0 |
+| Services/[slug]: add slugToEmotion map, pass emotion to CTASection | Done | 2026-03-06 | Empathy-led CTA copy per practice area |
+| **Batch 3: 404 + About Breadcrumb** | | | |
+| 404: decorative giant "404" background text | Done | 2026-03-06 | opacity-[0.03], text-[20rem], aria-hidden |
+| 404: eyebrow pattern on section headings | Done | 2026-03-06 | Accent line dividers flanking headings |
+| 404: reveal + stagger-children classes | Done | 2026-03-06 | Scroll animations on link grids |
+| About: add SiteBreadcrumb after Hero | Done | 2026-03-06 | Matching all other inner pages |
+| **Batch 4: News Index Featured Article** | | | |
+| Split sortedPosts[0] as featured with lg:grid-cols-5 layout | Done | 2026-03-06 | 3-col image + 2-col content horizontal |
+| Remaining posts in sortedPosts.slice(1) 3-col grid | Done | 2026-03-06 | Standard card layout |
+| Badge bg-transparent → bg-accent-subtle on all news cards | Done | 2026-03-06 | Index + [slug] pages |
+| **Batch 5: Contact + Testimonials + Case Results** | | | |
+| Contact: urgent box border-l-4 accent + bg-accent-subtle + icon | Done | 2026-03-06 | Warning triangle SVG |
+| Testimonials: aggregate rating strip with large text-5xl numeric | Done | 2026-03-06 | Big number + stars + review count |
+| Case results: settlement text-base → text-lg font-bold | Done | 2026-03-06 | More visual weight |
+| **Batch 6: News Article Progress Bar** | | | |
+| Add .article-progress-bar CSS (scroll-driven) | Done | 2026-03-06 | animation-timeline: scroll() with @supports fallback |
+| Add progress bar div to news/[slug].astro | Done | 2026-03-06 | aria-hidden, positioned below header |
+| **Batch 7: CSS System Polish** | | | |
+| Warm shadows: rgba(0,0,0) → rgba(23,20,18) | Done | 2026-03-06 | All --shadow-* tokens |
+| Dark section separator: .section-dark + .section-dark border | Done | 2026-03-06 | Amber 20% opacity border-top |
+| Consolidate duplicate .card-lift rules | Done | 2026-03-06 | Merged into single block |
+| Remove unused keyframes: slide-in-right, slide-in-left, gradient-shift | Done | 2026-03-06 | Dead code cleanup |
+| TestimonialCard: hover:-translate-y-1 → hover:-translate-y-[4px] | Done | 2026-03-06 | Matches .card-lift convention |
+| **Batch 8: FAQ Scroll-Spy** | | | |
+| FAQ nav pills: data-pill attributes + .faq-pill class | Done | 2026-03-06 | Scroll-spy anchor links |
+| IntersectionObserver scroll-spy with rootMargin -20%/-70% | Done | 2026-03-06 | Active pill highlights on scroll |
+| .faq-pill.is-active style: accent border + bg + text | Done | 2026-03-06 | Color + border + background (accessible) |
+| **Batch 9: Cleanup** | | | |
+| Delete public/images/generated/chatbot-avatar.png | Done | 2026-03-06 | No component references (only NANO-BANANA-PROMPTS.md) |
+| Build verification: 88 pages, zero errors | Done | 2026-03-06 | All batches verified |

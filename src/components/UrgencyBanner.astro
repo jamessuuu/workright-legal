@@ -11,7 +11,7 @@ interface Props {
 const { days, message, ctaText = "Get Free Case Assessment", ctaLink = "/contact" } = Astro.props;
 ---
 
-<Alert variant="warning" class="bg-[var(--color-primary)] text-white border-none rounded-none py-4 px-5 sm:px-8 reveal">
+<Alert variant="warning" class="bg-[var(--color-primary)] text-white border-none rounded-none py-4 px-5 sm:px-8 urgency-enter">
   <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
     <div class="flex items-center gap-3 text-center sm:text-left">
       <span class="hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-lg font-bold shrink-0" style="font-family: var(--font-heading);">

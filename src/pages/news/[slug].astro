@@ -47,6 +47,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 ---
 
 <BaseLayout title={data.metaTitle} description={data.metaDescription} ogType="article">
+  <div class="article-progress-bar" aria-hidden="true"></div>
   <BreadcrumbSchema
     items={[
       { name: "Home", url: firmData.url },
@@ -76,7 +77,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
       <div class="mt-6">
         <div class="flex items-center gap-3 mb-4">
-          <Badge variant="ghost" size="sm" class="bg-transparent text-[var(--color-accent)] uppercase tracking-wider">
+          <Badge variant="ghost" size="sm" class="bg-[var(--color-accent-subtle)] text-[var(--color-accent)] uppercase tracking-wider">
             {data.category}
           </Badge>
           <span class="text-xs text-[var(--color-text-tertiary)]">{formattedDate}</span>
@@ -167,7 +168,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
                   </div>
                 )}
                 <div class="p-4">
-                  <Badge variant="ghost" size="sm" class="bg-transparent text-[var(--color-accent)] uppercase tracking-wider">{related.data.category}</Badge>
+                  <Badge variant="ghost" size="sm" class="bg-[var(--color-accent-subtle)] text-[var(--color-accent)] uppercase tracking-wider">{related.data.category}</Badge>
                   <h3 class="mt-1.5 text-base font-semibold tracking-tight group-hover:text-[var(--color-accent)] transition-colors leading-snug" style="font-family: var(--font-heading);">
                     {related.data.title}
                   </h3>

@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import CTASection from "../components/CTASection.astro";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema.astro";
+import Breadcrumb from "../components/SiteBreadcrumb.astro";
 import PersonSchema from "../components/schema/PersonSchema.astro";
 import { firmData } from "../data/firm";
 import { getCollection } from "astro:content";
@@ -27,6 +28,13 @@ const sarah = attorneys[0];
     heading="A firm built on principle"
     subheading="Founded to level the playing field between employees and employers."
     variant="page"
+  />
+
+  <Breadcrumb
+    items={[
+      { name: "Home", url: firmData.url },
+      { name: "About", url: `${firmData.url}/about` },
+    ]}
   />
 
   <!-- Mission -->

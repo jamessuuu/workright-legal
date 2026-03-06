@@ -16,7 +16,7 @@ const { steps } = Astro.props;
     <div class="relative flex gap-6 lg:gap-8">
       <!-- Timeline -->
       <div class="flex flex-col items-center">
-        <div class="w-9 h-9 rounded-full border-2 border-[var(--color-text)] text-[var(--color-text)] flex items-center justify-center text-xs font-semibold shrink-0">
+        <div class="w-9 h-9 rounded-full border-2 border-[var(--color-accent)] text-[var(--color-accent)] flex items-center justify-center text-xs font-semibold shrink-0">
           {String(step.step).padStart(2, "0")}
         </div>
         {i < steps.length - 1 && (

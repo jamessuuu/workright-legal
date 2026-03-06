@@ -61,10 +61,10 @@
   --duration-dramatic: 1400ms;
 
   /* Shadows — refined depth */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 3px rgba(23, 20, 18, 0.06);
+  --shadow-md: 0 4px 12px rgba(23, 20, 18, 0.08);
+  --shadow-lg: 0 8px 30px rgba(23, 20, 18, 0.1);
+  --shadow-xl: 0 16px 48px rgba(23, 20, 18, 0.12);
   --shadow-glow: 0 0 40px var(--color-accent-glow);
 
   --radius-sm: 0.25rem;
@@ -250,6 +250,25 @@ a {
 }
 
 /* ==================
+   Urgency banner entrance
+   ================== */
+
+@keyframes urgency-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.urgency-enter {
+  animation: urgency-slide-down 0.4s var(--ease-out-expo) forwards;
+}
+
+/* ==================
    Scroll-reveal animations
    ================== */
 
@@ -285,28 +304,6 @@ a {
   to { width: 100%; }
 }
 
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
@@ -315,12 +312,6 @@ a {
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* Scroll-reveal classes — powered by GSAP ScrollTrigger (see BaseLayout)
@@ -564,23 +555,29 @@ details[open] .accordion-content {
    ================== */
 
 .card-hover {
-  transition: all var(--duration-normal) var(--ease-out-expo);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-out-expo);
   border-left: 3px solid transparent;
 }
 
 .card-hover:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-left-color: var(--color-accent);
 }
 
 .card-lift {
-  transition: all var(--duration-normal) var(--ease-out-expo);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-out-expo);
+  border: 1.5px solid transparent;
 }
 
 .card-lift:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
+  border-color: var(--color-border-hover);
 }
 
 /* ==================
@@ -625,6 +622,10 @@ details[open] .accordion-content {
 
 .section-dark p {
   color: var(--color-text-on-dark-secondary);
+}
+
+.section-dark + .section-dark {
+  border-top: 1px solid rgba(184, 134, 11, 0.2);
 }
 
 .section-warm {
@@ -684,6 +685,25 @@ details[open] .accordion-content {
 
 @supports not (animation-timeline: scroll()) {
   .scroll-progress { display: none; }
+  .article-progress-bar { display: none; }
+}
+
+.article-progress-bar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 49;
+  animation: scroll-progress 1s linear forwards;
+  animation-timeline: scroll();
+}
+
+@media (min-width: 1024px) {
+  .article-progress-bar { top: 72px; }
 }
 
 @keyframes bounce-gentle {
@@ -759,33 +779,15 @@ input:focus, textarea:focus, select:focus {
 
 .situation-card {
   position: relative;
-  transition: all var(--duration-normal) var(--ease-out-expo);
+  transition: box-shadow var(--duration-normal) var(--ease-out-expo),
+              background-color var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-out-expo);
 }
 
-.situation-card:hover {
-  transform: translateY(-6px);
+.situation-card:hover,
+.situation-card:focus-within {
   box-shadow: var(--shadow-lg);
-}
-
-.situation-card .situation-reveal {
-  max-height: 120px;
-  opacity: 1;
-  overflow: hidden;
-  transition: max-height var(--duration-normal) var(--ease-out-expo),
-              opacity var(--duration-normal) var(--ease-out-expo);
-}
-
-@media (min-width: 1024px) {
-  .situation-card .situation-reveal {
-    max-height: 0;
-    opacity: 0;
-  }
-
-  .situation-card:hover .situation-reveal,
-  .situation-card:focus-within .situation-reveal {
-    max-height: 120px;
-    opacity: 1;
-  }
+  background-color: var(--color-surface-warm);
 }
 
 /* ==================
@@ -922,6 +924,7 @@ input:focus, textarea:focus, select:focus {
   .hero-video { display: none !important; }
   .animate-bounce-gentle { animation: none !important; }
   .section-glow-top::before { opacity: 0 !important; }
+  .urgency-enter { animation: none !important; }
   .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-fade, .reveal-scale,
   .reveal-left, .reveal-right, .hero-reveal, .hero-badge, .stagger-children > *,
   .journey-stage, .journey-stage .journey-visual,
@@ -950,13 +953,6 @@ input:focus, textarea:focus, select:focus {
   transform: translateY(-1px) scale(0.98);
 }
 
-.card-lift {
-  border: 1.5px solid transparent;
-}
-
-.card-lift:hover {
-  border-color: var(--color-border-hover);
-}
 
 /* ==================
    View Transitions — subtle vertical shift

@@ -8,9 +8,20 @@ import { firmData, practiceAreasList } from "../data/firm";
   description="The page you're looking for doesn't exist. Find employment law services, contact information, and more at WorkRight Legal."
   noindex={true}
 >
-  <section class="py-20 lg:py-28">
-    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 text-center">
-      <p class="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)] mb-4">404</p>
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <!-- Giant decorative 404 -->
+    <span
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-bold opacity-[0.03] select-none pointer-events-none leading-none"
+      style="font-family: var(--font-heading);"
+      aria-hidden="true"
+    >404</span>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 text-center reveal">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text-tertiary)]">404</p>
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+      </div>
       <h1
         class="text-4xl lg:text-5xl font-bold tracking-tight"
         style="font-family: var(--font-heading);"
@@ -38,14 +49,18 @@ import { firmData, practiceAreasList } from "../data/firm";
 
   <!-- Quick Links -->
   <section class="py-16 lg:py-20 border-t border-[var(--color-border)]">
-    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
-      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-4 text-center">
-        Looking for something?
-      </h2>
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
+          Looking for something?
+        </h2>
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+      </div>
       <p class="text-base text-[var(--color-text-secondary)] text-center mb-8">
         Try one of the pages below, or call us directly and we'll point you in the right direction.
       </p>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 stagger-children">
         <a
           href="/about"
           class="p-4 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors text-center"
@@ -88,11 +103,15 @@ import { firmData, practiceAreasList } from "../data/firm";
 
   <!-- Practice Areas -->
   <section class="py-16 lg:py-20 border-t border-[var(--color-border)]">
-    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10">
-      <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)] mb-6 text-center">
-        Our Services
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-10 reveal">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+        <h2 class="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
+          Our Services
+        </h2>
+        <div class="h-px w-8 bg-[var(--color-accent)]"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 stagger-children">
         {practiceAreasList.map((area) => (
           <a
             href={`/services/${area.slug}`}
