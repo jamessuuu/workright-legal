@@ -4,6 +4,7 @@ import Hero from "../../components/Hero.astro";
 import PracticeAreaCard from "../../components/PracticeAreaCard.astro";
 import CTASection from "../../components/CTASection.astro";
 import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
+import SiteButton from "../../components/SiteButton.astro";
 import { firmData, practiceAreasList } from "../../data/firm";
 ---
 
@@ -42,7 +43,7 @@ import { firmData, practiceAreasList } from "../../data/firm";
         <p class="text-[var(--color-text-secondary)] max-w-lg mx-auto">
           Not sure which service applies? Contact us for a free, confidential assessment.
         </p>
-        <a href="/contact" class="btn btn-primary mt-6">Get Free Assessment</a>
+        <SiteButton href="/contact" class="mt-6">Get Free Assessment</SiteButton>
       </div>
     </div>
   </section>

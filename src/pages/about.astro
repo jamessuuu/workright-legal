@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import SiteButton from "../components/SiteButton.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import CTASection from "../components/CTASection.astro";
@@ -122,8 +123,8 @@ const sarah = attorneys[0];
             </div>
 
             <div class="mt-8 flex flex-wrap gap-3">
-              <a href="/contact" class="btn btn-primary text-sm">Book Consultation</a>
-              <a href={`mailto:${firmData.email}`} class="btn btn-outline text-sm">Email</a>
+              <SiteButton href="/contact" size="sm">Book Consultation</SiteButton>
+              <SiteButton href={`mailto:${firmData.email}`} variant="outline" size="sm">Email</SiteButton>
             </div>
           </div>
         </div>
@@ -162,3 +163,18 @@ const sarah = attorneys[0];
     subheading="Contact us today for a free, confidential consultation."
   />
 </BaseLayout>
+
+<style>
+  .parallax-container {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .parallax-image {
+    will-change: transform;
+  }
+
+  .parallax-container:hover .parallax-image {
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+</style>

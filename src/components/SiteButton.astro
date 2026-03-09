@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { button, type ButtonVariant, type ButtonSize } from "@/lib/utils/button-variants";
+
+interface Props extends HTMLAttributes<"a"> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+}
+
+const { variant = "primary", size = "default", class: className, href, ...rest } = Astro.props;
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class={button({ variant, size, class: className })}
+  {...(href ? { href } : {})}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  /* Sweep animation pseudo-element for primary variant */
+  .btn-sweep::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-normal) var(--ease-out-expo);
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  .btn-sweep:hover::before {
+    transform: scaleX(1);
+  }
+</style>

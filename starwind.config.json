@@ -39,6 +39,10 @@
     {
       "name": "dialog",
       "version": "1.4.4"
+    },
+    {
+      "name": "button",
+      "version": "custom"
     }
   ]
 }

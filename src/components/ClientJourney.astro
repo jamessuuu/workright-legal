@@ -6,6 +6,8 @@
  * Mobile: stacked timeline (no SVG path).
  */
 
+import SiteButton from "./SiteButton.astro";
+
 const stages = [
   {
     label: "The moment it hits you",
@@ -217,12 +219,12 @@ const pathD = "M100,71 C100,130 50,165 50,236 C50,305 150,335 150,400 C150,468 5
       <p class="text-base text-[var(--color-text-secondary)] mb-5">
         Your story doesn't have to end with your employer's decision.
       </p>
-      <a href="/check-my-case" class="btn btn-primary">
+      <SiteButton href="/check-my-case">
         Start your journey
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
-      </a>
+      </SiteButton>
     </div>
   </div>
 </section>

@@ -103,11 +103,9 @@ const tealAccent = "oklch(0.45 0.08 195)"; // var(--color-secondary)
               &ldquo;{s.feeling}&rdquo;
             </p>
 
-            <div class="situation-reveal">
-              <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                {s.response}
-              </p>
-            </div>
+            <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              {s.response}
+            </p>
 
             <div class="mt-4 flex items-center gap-2 font-semibold" style={`color: ${accentColor}`}>
               <span class="text-sm">{s.area}</span>
@@ -124,3 +122,18 @@ const tealAccent = "oklch(0.45 0.08 195)"; // var(--color-secondary)
     </div>
   </div>
 </section>
+
+<style>
+  .situation-card {
+    position: relative;
+    transition: box-shadow var(--duration-normal) var(--ease-out-expo),
+                background-color var(--duration-normal) var(--ease-out-expo),
+                border-color var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .situation-card:hover,
+  .situation-card:focus-within {
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-surface-warm);
+  }
+</style>

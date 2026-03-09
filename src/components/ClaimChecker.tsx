@@ -1,4 +1,5 @@
 import { useState, type FC } from "react";
+import { button } from "@/lib/utils/button-variants";
 
 /**
  * ClaimChecker — "Do I have a case?" interactive assessment tool.
@@ -219,8 +220,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
           <div style={{ marginTop: "1.25rem" }}>
             <a
               href="/check-my-case"
-              className="btn btn-primary"
-              style={{ fontSize: "0.875rem" }}
+              className={button({ size: "sm" })}
             >
               Continue your assessment
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -480,8 +480,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginBottom: "1.5rem" }}>
             <a
               href="/contact"
-              className="btn btn-primary"
-              style={{ fontSize: "0.9375rem" }}
+              className={button()}
             >
               Talk to Sarah about this
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -490,8 +489,7 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
             </a>
             <a
               href={`/services/${result.slug}`}
-              className="btn btn-outline"
-              style={{ fontSize: "0.9375rem" }}
+              className={button({ variant: "outline" })}
             >
               Learn about {result.practiceArea}
             </a>
@@ -549,9 +547,8 @@ const ClaimChecker: FC<ClaimCheckerProps> = ({ mini = false }) => {
           <button
             onClick={next}
             disabled={!canProceed()}
-            className="btn btn-primary"
+            className={button({ size: "sm" })}
             style={{
-              fontSize: "0.875rem",
               opacity: canProceed() ? 1 : 0.4,
               cursor: canProceed() ? "pointer" : "not-allowed",
             }}

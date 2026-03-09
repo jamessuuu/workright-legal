@@ -304,16 +304,6 @@ a {
   to { width: 100%; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
 /* Scroll-reveal classes — powered by GSAP ScrollTrigger (see BaseLayout)
    Initial state is set via GSAP; these CSS rules serve as no-JS fallback. */
 
@@ -392,110 +382,6 @@ a {
 }
 
 /* ==================
-   Buttons — bold and warm
-   ================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  padding: 1rem 2.25rem;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  letter-spacing: 0.01em;
-  border-radius: var(--radius-full);
-  transition: all var(--duration-normal) var(--ease-out-expo);
-  cursor: pointer;
-  text-decoration: none;
-  border: 1.5px solid transparent;
-  line-height: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: white;
-  border-color: var(--color-accent);
-  box-shadow: 0 2px 8px var(--color-accent-glow);
-}
-
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--color-primary);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration-normal) var(--ease-out-expo);
-  z-index: -1;
-  border-radius: inherit;
-}
-
-.btn-primary:hover::before {
-  transform: scaleX(1);
-}
-
-.btn-primary:hover {
-  background-color: transparent;
-  border-color: var(--color-primary);
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-xl);
-}
-
-.btn-primary-dark {
-  background-color: var(--color-accent);
-  color: white;
-  border-color: var(--color-accent);
-  box-shadow: 0 4px 16px var(--color-accent-glow);
-}
-
-.btn-primary-dark:hover {
-  background-color: var(--color-accent-light);
-  border-color: var(--color-accent-light);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px var(--color-accent-glow);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--color-text);
-  border-color: var(--color-border);
-}
-
-.btn-outline:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: var(--color-accent-subtle);
-  transform: translateY(-3px);
-}
-
-.btn-outline-dark {
-  background: transparent;
-  color: var(--color-text-on-dark);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-outline-dark:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent-light);
-  transform: translateY(-3px);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--color-text-secondary);
-  padding: 0.5rem 1.25rem;
-}
-
-.btn-ghost:hover {
-  color: var(--color-accent);
-}
-
-/* ==================
    Horizontal rule
    ================== */
 
@@ -541,16 +427,6 @@ details[open] .accordion-content {
 }
 
 /* ==================
-   Glass header
-   ================== */
-
-.glass {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px) saturate(1.8);
-  -webkit-backdrop-filter: blur(20px) saturate(1.8);
-}
-
-/* ==================
    Card hover — multiple variants
    ================== */
 
@@ -591,19 +467,8 @@ details[open] .accordion-content {
   background-clip: text;
 }
 
-.text-gradient-warm {
-  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 50%, var(--color-accent-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .accent-line {
   background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-}
-
-.accent-dot {
-  background-color: var(--color-accent);
 }
 
 /* ==================
@@ -727,37 +592,6 @@ input:focus, textarea:focus, select:focus {
    Decorative elements
    ================== */
 
-.floating {
-  animation: float 6s ease-in-out infinite;
-}
-
-.floating-slow {
-  animation: float 8s ease-in-out infinite;
-  animation-delay: -2s;
-}
-
-.glow-pulse {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-/* Diagonal stripe texture (subtle) */
-.texture-diagonal {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 8px,
-    rgba(184, 134, 11, 0.02) 8px,
-    rgba(184, 134, 11, 0.02) 9px
-  );
-}
-
-/* Dot grid texture */
-.texture-dots {
-  background-image: radial-gradient(circle, var(--color-accent-muted) 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.3;
-}
-
 /* ==================
    Number counter
    ================== */
@@ -772,23 +606,6 @@ input:focus, textarea:focus, select:focus {
 
 /* Removed rotating text animation — caused motion sickness.
    Now uses a static empathetic tagline instead. */
-
-/* ==================
-   Situation selector cards
-   ================== */
-
-.situation-card {
-  position: relative;
-  transition: box-shadow var(--duration-normal) var(--ease-out-expo),
-              background-color var(--duration-normal) var(--ease-out-expo),
-              border-color var(--duration-normal) var(--ease-out-expo);
-}
-
-.situation-card:hover,
-.situation-card:focus-within {
-  box-shadow: var(--shadow-lg);
-  background-color: var(--color-surface-warm);
-}
 
 /* ==================
    Client journey scroll story
@@ -883,24 +700,6 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ==================
-   Parallax scrolling
-   ================== */
-
-.parallax-container {
-  overflow: hidden;
-  position: relative;
-}
-
-.parallax-image {
-  will-change: transform;
-}
-
-/* Smooth hover-reveal for images */
-.parallax-container:hover .parallax-image {
-  transition: transform 0.6s var(--ease-out-expo);
-}
-
-/* ==================
    Reduced motion
    ================== */
 
@@ -927,32 +726,12 @@ input:focus, textarea:focus, select:focus {
   .urgency-enter { animation: none !important; }
   .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-fade, .reveal-scale,
   .reveal-left, .reveal-right, .hero-reveal, .hero-badge, .stagger-children > *,
-  .journey-stage, .journey-stage .journey-visual,
-  .floating, .floating-slow {
+  .journey-stage, .journey-stage .journey-visual {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
   }
 }
-
-/* ==================
-   Micro-interactions (CSS-only)
-   ================== */
-
-.btn-primary,
-.btn-primary-dark {
-  transition: all var(--duration-normal) var(--ease-out-expo);
-}
-
-.btn-primary:active,
-.btn-primary-dark:active {
-  transform: translateY(-1px) scale(0.98);
-}
-
-.btn-outline:active {
-  transform: translateY(-1px) scale(0.98);
-}
-
 
 /* ==================
    View Transitions — subtle vertical shift

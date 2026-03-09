@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { button } from "@/lib/utils/button-variants";
 
 const FORMSPREE_URL = "https://formspree.io/f/xpwzgqrz";
 
@@ -138,7 +139,7 @@ export default function ContactForm() {
         </p>
       )}
 
-      <button type="submit" disabled={submitting} className="btn btn-primary w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed">
+      <button type="submit" disabled={submitting} className={button() + " w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"}>
         {submitting ? "Sending..." : "Send Enquiry"}
         {!submitting && (
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

@@ -6,6 +6,7 @@ import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema.astro";
 import Breadcrumb from "../../components/SiteBreadcrumb.astro";
 import PersonSchema from "../../components/schema/PersonSchema.astro";
 import TestimonialCard from "../../components/TestimonialCard.astro";
+import SiteButton from "../../components/SiteButton.astro";
 import { Prose } from "@/components/starwind/prose";
 import { firmData, practiceAreasList } from "../../data/firm";
 import { getCollection, render } from "astro:content";
@@ -104,8 +105,8 @@ const firstName = data.name.split(" ")[0];
           </div>
 
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="/contact" class="btn btn-primary text-sm">Book Consultation</a>
-            <a href={`mailto:${firmData.email}`} class="btn btn-outline text-sm">Email {firstName}</a>
+            <SiteButton href="/contact" size="sm">Book Consultation</SiteButton>
+            <SiteButton href={`mailto:${firmData.email}`} variant="outline" size="sm">Email {firstName}</SiteButton>
           </div>
         </div>
       </div>
@@ -204,7 +205,7 @@ const firstName = data.name.split(" ")[0];
           ))}
         </div>
         <div class="mt-8 text-center">
-          <a href="/testimonials" class="btn btn-outline text-sm">View all testimonials</a>
+          <SiteButton href="/testimonials" variant="outline" size="sm">View all testimonials</SiteButton>
         </div>
       </div>
     </section>

@@ -1,10 +1,11 @@
 ---
 import { firmData, practiceAreasList } from "../data/firm";
+import SiteButton from "./SiteButton.astro";
 ---
 
 <header
   id="site-header"
-  class="glass fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-[border-color] duration-300"
+  class="bg-white/[0.92] backdrop-blur-[20px] backdrop-saturate-[1.8] fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-[border-color] duration-300"
   transition:persist
 >
   <nav class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16" aria-label="Main navigation">
@@ -82,19 +83,19 @@ import { firmData, practiceAreasList } from "../data/firm";
           {firmData.phone}
         </a>
 
-        <a href="/check-my-case" class="btn btn-primary text-xs">
+        <SiteButton href="/check-my-case" size="xs">
           Check my case
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </a>
+        </SiteButton>
       </div>
 
       <!-- Mobile -->
       <div class="lg:hidden flex items-center gap-2">
-        <a href={`tel:${firmData.phoneClean}`} class="btn btn-outline text-xs px-3 py-2">
+        <SiteButton href={`tel:${firmData.phoneClean}`} variant="outline" size="xs">
           Call
-        </a>
+        </SiteButton>
         <button
           id="mobile-menu-btn"
           class="p-2 text-[var(--color-text)] hover:text-[var(--color-text-secondary)] transition-colors"
@@ -127,8 +128,8 @@ import { firmData, practiceAreasList } from "../data/firm";
         <a href="/testimonials" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Testimonials</a>
         <a href="/contact" class="px-3 py-3 text-[var(--color-text)] hover:bg-[var(--color-surface-muted)] rounded-lg font-medium text-sm transition-colors">Contact</a>
         <div class="mt-4 px-3 space-y-2">
-          <a href="/check-my-case" class="btn btn-primary w-full text-center text-sm">Check my case</a>
-          <a href="/contact" class="btn btn-outline w-full text-center text-sm">Free Consultation</a>
+          <SiteButton href="/check-my-case" size="sm" class="w-full text-center">Check my case</SiteButton>
+          <SiteButton href="/contact" variant="outline" size="sm" class="w-full text-center">Free Consultation</SiteButton>
         </div>
       </div>
     </div>

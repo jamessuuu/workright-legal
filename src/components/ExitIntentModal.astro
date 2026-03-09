@@ -14,6 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/starwind/dialog";
+import SiteButton from "@/components/SiteButton.astro";
 
 interface Props {
   days: number;
@@ -46,12 +47,12 @@ const { days, practiceArea } = Astro.props;
     </DialogHeader>
 
     <DialogFooter class="mt-6 flex-row justify-start gap-3">
-      <a href="/contact" class="btn btn-primary text-sm">
+      <SiteButton href="/contact" size="sm">
         Free consultation
-      </a>
-      <a href="tel:0295551234" class="btn btn-outline text-sm">
+      </SiteButton>
+      <SiteButton href="tel:0295551234" variant="outline" size="sm">
         Call (02) 9555 1234
-      </a>
+      </SiteButton>
     </DialogFooter>
   </DialogContent>
 </Dialog>
