@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { button } from "@/lib/utils/button-variants";
 
-const FORMSPREE_URL = "https://formspree.io/f/xpwzgqrz";
+const FORMSPREE_URL = "https://n8n.liftlegal.com/webhook/workright-contact";
 
 const serviceOptions = [
   "Unfair Dismissal Claims",
