@@ -72,6 +72,15 @@ const socialImage = ogImage || `${siteUrl}/og/${ogSlug ? ogSlug + ".png" : "inde
     <ViewTransitions />
     <OrganizationSchema />
     <WebSiteSchema />
+
+    <!-- Google Analytics 4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-EX6C76W5P3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EX6C76W5P3');
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-white focus:text-sm focus:font-medium focus:rounded-lg focus:shadow-lg focus:border focus:border-[var(--color-border)]">
