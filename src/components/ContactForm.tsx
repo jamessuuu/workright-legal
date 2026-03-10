@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { button } from "@/lib/utils/button-variants";
 
-const FORMSPREE_URL = "https://n8n.liftlegal.com/webhook/workright-contact";
+const CONTACT_API = "/api/contact";
 
 const serviceOptions = [
   "Unfair Dismissal Claims",
@@ -49,7 +49,7 @@ export default function ContactForm() {
         service: form.get("service"),
         message: form.get("message"),
       };
-      const res = await fetch(FORMSPREE_URL, {
+      const res = await fetch(CONTACT_API, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
