@@ -41,10 +41,18 @@ export default function ContactForm() {
 
     setSubmitting(true);
     try {
+      const payload = {
+        firstName: form.get("firstName"),
+        lastName: form.get("lastName"),
+        email: form.get("email"),
+        phone: form.get("phone"),
+        service: form.get("service"),
+        message: form.get("message"),
+      };
       const res = await fetch(FORMSPREE_URL, {
         method: "POST",
-        body: form,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
       });
       if (res.ok) {
         setSubmitted(true);
